@@ -4,12 +4,11 @@ import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persis
 
 import { CabinetsCollectionOverview } from '../../domain/cabinet-collection-overview';
 import { GetCabinetsCollectionOverviewService } from './get-cabinets-collection-overview.service';
-import { Cabinet } from '../../domain/cabinet';
-import { CabinetOverview, OwnerOverview, DriverOverview } from '../../domain/cabinet-collection-overview';
-import { Owner } from '../../../../owner/core/domain/owner';
+import { Cabinet, CabinetOverview } from '../../domain/cabinet';
+import { Owner, OwnerOverview } from '../../../../owner/core/domain/owner';
 import { OwnerDoesNotExist } from '../../../../owner/core/domain/errors';
 
-import { Driver } from '../../../../driver/core/domain/driver';
+import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
 import { DriversNotFound } from '../../../../driver/core/domain/errors';
 
 import { CabinetsNotFound } from '../../domain/errors';

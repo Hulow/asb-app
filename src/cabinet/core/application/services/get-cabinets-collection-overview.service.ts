@@ -1,15 +1,11 @@
 import { inject, injectable } from 'inversify';
 
-import { Cabinet } from '../../domain/cabinet';
-import { Driver } from '../../../../driver/core/domain/driver';
+import { Cabinet, CabinetOverview } from '../../domain/cabinet';
+import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
+import { OwnerOverview } from '../../../../owner/core/domain/owner';
+
 import { OwnerDoesNotExist } from '../../../../owner/core/domain/errors';
-import {
-  CabinetCollectionOverview,
-  CabinetsCollectionOverview,
-  CabinetOverview,
-  OwnerOverview,
-  DriverOverview,
-} from '../../domain/cabinet-collection-overview';
+import { CabinetCollectionOverview, CabinetsCollectionOverview } from '../../domain/cabinet-collection-overview';
 import { GetCabinetsCollectionOverviewInputPort } from '../ports/in/get-cabinets-collection-overview.input-port';
 import {
   CabinetRepositoryOutputPort,
