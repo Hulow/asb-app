@@ -37,4 +37,10 @@ export class SqlCabinetRepository implements CabinetRepositoryOutputPort {
     if (!cabinetEntities.length) return;
     return cabinetEntities.map((cabinet) => cabinet.toDomain());
   }
+
+  async getByOwnerUid(ownerUid: string) {
+    const cabinetEntities = await this._repository.find({ where: { ownerUid } });
+    if (!cabinetEntities.length) return;
+    return cabinetEntities.map((cabinet) => cabinet.toDomain());
+  }
 }
