@@ -162,7 +162,9 @@ describe('GetCabinetsCollectionOverviewService', () => {
 
     const firstDriver: Driver = createDriver(1, 1);
     const secondDriver: Driver = createDriver(2, 1);
-    for (const existingDriver of [firstDriver, secondDriver]) {
+    const thirdDriver: Driver = createDriver(3, 2);
+    const fourthDriver: Driver = createDriver(4, 2);
+    for (const existingDriver of [firstDriver, secondDriver, thirdDriver, fourthDriver]) {
       await driverRepoStub.save(existingDriver);
     }
 
@@ -178,7 +180,7 @@ describe('GetCabinetsCollectionOverviewService', () => {
         {
           cabinet: createCabinetOverview(2),
           owner: createOwnerOverview(1),
-          drivers: [createDriverOverview(1), createDriverOverview(2)],
+          drivers: [createDriverOverview(3), createDriverOverview(4)],
         },
       ],
     };
@@ -199,7 +201,10 @@ describe('GetCabinetsCollectionOverviewService', () => {
 
     const firstDriver: Driver = createDriver(1, 1);
     const secondDriver: Driver = createDriver(2, 1);
-    for (const existingDriver of [firstDriver, secondDriver]) {
+    const thirdDriver: Driver = createDriver(3, 2);
+    const fourthDriver: Driver = createDriver(4, 2);
+
+    for (const existingDriver of [firstDriver, secondDriver, thirdDriver, fourthDriver]) {
       await driverRepoStub.save(existingDriver);
     }
 
@@ -215,7 +220,7 @@ describe('GetCabinetsCollectionOverviewService', () => {
         {
           cabinet: createCabinetOverview(2),
           owner: createOwnerOverview(2),
-          drivers: [createDriverOverview(1), createDriverOverview(2)],
+          drivers: [createDriverOverview(3), createDriverOverview(4)],
         },
       ],
     };
