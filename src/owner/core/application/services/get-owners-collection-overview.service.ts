@@ -32,7 +32,8 @@ export class GetOwnersCollectionOverviewService implements GetOwnersCollectionOv
   ) {}
 
   async handler(): Promise<OwnersCollectionOverview> {
-    return await this.mapOwnersCollectionOverview();
+    const response = await this.mapOwnersCollectionOverview();
+    return response;
   }
 
   private async mapOwnersCollectionOverview(): Promise<OwnersCollectionOverview> {
