@@ -11,3 +11,9 @@ export class OwnerDoesNotExist extends DomainError {
     super(`Owner ${ownerUid} does not exist`);
   }
 }
+
+export class OwnersNotFound extends DomainError {
+  constructor() {
+    super(`Unable to find any owner`);
+  }
+}

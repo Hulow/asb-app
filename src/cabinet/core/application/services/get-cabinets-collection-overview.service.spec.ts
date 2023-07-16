@@ -4,12 +4,11 @@ import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persis
 
 import { CabinetsCollectionOverview } from '../../domain/cabinet-collection-overview';
 import { GetCabinetsCollectionOverviewService } from './get-cabinets-collection-overview.service';
-import { Cabinet } from '../../domain/cabinet';
-import { CabinetOverview, OwnerOverview, DriverOverview } from '../../domain/cabinet-collection-overview';
-import { Owner } from '../../../../owner/core/domain/owner';
+import { Cabinet, CabinetOverview } from '../../domain/cabinet';
+import { Owner, OwnerOverview } from '../../../../owner/core/domain/owner';
 import { OwnerDoesNotExist } from '../../../../owner/core/domain/errors';
 
-import { Driver } from '../../../../driver/core/domain/driver';
+import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
 import { DriversNotFound } from '../../../../driver/core/domain/errors';
 
 import { CabinetsNotFound } from '../../domain/errors';
@@ -163,7 +162,9 @@ describe('GetCabinetsCollectionOverviewService', () => {
 
     const firstDriver: Driver = createDriver(1, 1);
     const secondDriver: Driver = createDriver(2, 1);
-    for (const existingDriver of [firstDriver, secondDriver]) {
+    const thirdDriver: Driver = createDriver(3, 2);
+    const fourthDriver: Driver = createDriver(4, 2);
+    for (const existingDriver of [firstDriver, secondDriver, thirdDriver, fourthDriver]) {
       await driverRepoStub.save(existingDriver);
     }
 
@@ -179,7 +180,7 @@ describe('GetCabinetsCollectionOverviewService', () => {
         {
           cabinet: createCabinetOverview(2),
           owner: createOwnerOverview(1),
-          drivers: [createDriverOverview(1), createDriverOverview(2)],
+          drivers: [createDriverOverview(3), createDriverOverview(4)],
         },
       ],
     };
@@ -200,7 +201,10 @@ describe('GetCabinetsCollectionOverviewService', () => {
 
     const firstDriver: Driver = createDriver(1, 1);
     const secondDriver: Driver = createDriver(2, 1);
-    for (const existingDriver of [firstDriver, secondDriver]) {
+    const thirdDriver: Driver = createDriver(3, 2);
+    const fourthDriver: Driver = createDriver(4, 2);
+
+    for (const existingDriver of [firstDriver, secondDriver, thirdDriver, fourthDriver]) {
       await driverRepoStub.save(existingDriver);
     }
 
@@ -216,7 +220,7 @@ describe('GetCabinetsCollectionOverviewService', () => {
         {
           cabinet: createCabinetOverview(2),
           owner: createOwnerOverview(2),
-          drivers: [createDriverOverview(1), createDriverOverview(2)],
+          drivers: [createDriverOverview(3), createDriverOverview(4)],
         },
       ],
     };

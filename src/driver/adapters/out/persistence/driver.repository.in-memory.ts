@@ -19,8 +19,8 @@ export class InMemoryDriverRepository implements DriverRepositoryOutputPort {
   }
 
   async getByCabinetUid(cabinetUid: string) {
-    this.drivers.filter((driver) => driver.cabinetUid === cabinetUid);
-    if (!this.drivers.length) return;
-    return Promise.resolve(this.drivers);
+    const drivers = this.drivers.filter((driver) => driver.cabinetUid === cabinetUid);
+    if (!drivers.length) return;
+    return Promise.resolve(drivers);
   }
 }

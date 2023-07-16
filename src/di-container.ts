@@ -77,6 +77,13 @@ import {
 import { RegisterImpulseService } from './impulse/core/application/services/register-impulse.service';
 import { RegisterImpulseController } from './impulse/adapters/in/web/register-impulse.controller';
 
+import {
+  GetOwnersCollectionOverviewInputPort,
+  GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT,
+} from './owner/core/application/ports/in/get-owners-collection-overview.input-port';
+import { GetOwnersCollectionOverviewService } from './owner/core/application/services/get-owners-collection-overview.service';
+import { GetOwnersCollectionOverviewController } from './owner/adapters/in/web/get-owners-collection-overview.controller';
+
 export const container = new Container({
   autoBindInjectable: true,
   defaultScope: 'Singleton',
@@ -94,6 +101,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterFrequencyController),
     container.get(RegisterImpulseController),
     container.get(GetCabinetsCollectionOverviewController),
+    container.get(GetOwnersCollectionOverviewController),
   ];
   return new ExpressWebServer(config.express, container.get(LOGGER_OUTPUT_PORT), controllers);
 });
@@ -109,6 +117,9 @@ container.bind<RegisterImpulseInputPort>(REGISTER_IMPULSE_INPUT_PORT).to(Registe
 container
   .bind<GetCabinetsCollectionOverviewInputPort>(GET_CABINETS_COLLECTION_OVERVIEW_INPUT_PORT)
   .to(GetCabinetsCollectionOverviewService);
+container
+  .bind<GetOwnersCollectionOverviewInputPort>(GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT)
+  .to(GetOwnersCollectionOverviewService);
 
 /**
  *  output/driven/secondary adapters
