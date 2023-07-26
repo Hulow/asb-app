@@ -80,9 +80,9 @@ import { RegisterImpulseController } from './impulse/adapters/in/web/register-im
 import {
   GetOwnersCollectionOverviewInputPort,
   GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT,
-} from './owner/core/application/ports/in/get-owners-collection-overview.input-port';
-import { GetOwnersCollectionOverviewService } from './owner/core/application/services/get-owners-collection-overview.service';
-import { GetOwnersCollectionOverviewController } from './owner/adapters/in/web/get-owners-collection-overview.controller';
+} from './owner/core/application/ports/in/get-owners-overview.input-port';
+import { GetOwnersCollectionOverviewService } from './owner/core/application/services/get-owners-overview.service';
+import { GetOwnersCollectionOverviewController } from './owner/adapters/in/web/get-owners-overview.controller';
 
 export const container = new Container({
   autoBindInjectable: true,

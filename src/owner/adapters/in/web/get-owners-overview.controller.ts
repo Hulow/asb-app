@@ -6,7 +6,7 @@ import { ExpressController } from '../../../../shared/adapters/in/express-web-se
 import {
   GetOwnersCollectionOverviewInputPort,
   GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT,
-} from '../../../core/application/ports/in/get-owners-collection-overview.input-port';
+} from '../../../core/application/ports/in/get-owners-overview.input-port';
 
 import { OwnersNotFound } from '../../../core/domain/errors';
 import { CabinetsNotFound } from '../../../../cabinet/core/domain/errors';

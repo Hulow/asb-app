@@ -2,7 +2,7 @@ import { InMemoryOwnerRepository } from '../../../adapters/out/persistence/owner
 import { InMemoryCabinetRepository } from '../../../../cabinet/adapters/out/persistence/cabinet.repository.in-memory';
 import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persistence/driver.repository.in-memory';
 import { OwnersCollectionOverview } from '../../domain/owner-collection-overview';
-import { GetOwnersCollectionOverviewService } from './get-owners-collection-overview.service';
+import { GetOwnersCollectionOverviewService } from './get-owners-overview.service';
 import { Owner, OwnerOverview } from '../../domain/owner';
 import { Cabinet, CabinetOverview } from '../../../../cabinet/core/domain/cabinet';
 import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';

@@ -6,9 +6,9 @@ import { CabinetAndDriversOverview } from '../../domain/owner-collection-overvie
 import { CabinetOverview } from '../../../../cabinet/core/domain/cabinet';
 import { Cabinet } from '../../../../cabinet/core/domain/cabinet';
 
-import { OwnersNotFound } from '../../../../owner/core/domain/errors';
+import { OwnersNotFound } from '../../domain/errors';
 import { OwnerCollectionOverview, OwnersCollectionOverview } from '../../domain/owner-collection-overview';
-import { GetOwnersCollectionOverviewInputPort } from '../ports/in/get-owners-collection-overview.input-port';
+import { GetOwnersCollectionOverviewInputPort } from '../ports/in/get-owners-overview.input-port';
 import { OwnerRepositoryOutputPort, OWNER_REPOSITORY_OUTPUT_PORT } from '../ports/out/owner-repository.output-port';
 
 import {
