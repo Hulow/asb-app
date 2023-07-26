@@ -1,8 +1,8 @@
 import { InMemoryOwnerRepository } from '../../../adapters/out/persistence/owner.repository.in-memory';
 import { InMemoryCabinetRepository } from '../../../../cabinet/adapters/out/persistence/cabinet.repository.in-memory';
 import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persistence/driver.repository.in-memory';
-import { OwnersCollectionOverview } from '../../domain/owner-collection-overview';
-import { GetOwnersCollectionOverviewService } from './get-owners-overview.service';
+import { OwnersOverview } from '../../domain/owner-overview';
+import { GetOwnersOverviewService } from './get-owners-overview.service';
 import { Owner, OwnerOverview } from '../../domain/owner';
 import { Cabinet, CabinetOverview } from '../../../../cabinet/core/domain/cabinet';
 import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
@@ -82,21 +82,17 @@ function createDriverOverview(driverUid: number): DriverOverview {
   };
 }
 
-describe('GetOwnersCollectionOverviewService', () => {
+describe('GetOwnersOverviewService', () => {
   let cabinetRepoStub: InMemoryCabinetRepository;
   let ownerRepoStub: InMemoryOwnerRepository;
   let driverRepoStub: InMemoryDriverRepository;
-  let getOwnersCollectionOverviewService: GetOwnersCollectionOverviewService;
+  let getOwnersOverviewService: GetOwnersOverviewService;
 
   beforeEach(() => {
     cabinetRepoStub = new InMemoryCabinetRepository();
     ownerRepoStub = new InMemoryOwnerRepository();
     driverRepoStub = new InMemoryDriverRepository();
-    getOwnersCollectionOverviewService = new GetOwnersCollectionOverviewService(
-      cabinetRepoStub,
-      ownerRepoStub,
-      driverRepoStub,
-    );
+    getOwnersOverviewService = new GetOwnersOverviewService(cabinetRepoStub, ownerRepoStub, driverRepoStub);
   });
   it('get an overview of one owner owning one cabinet mounted on one driver', async () => {
     const existingOwner: Owner = createOwner(1);
@@ -108,9 +104,9 @@ describe('GetOwnersCollectionOverviewService', () => {
     const existingDriver: Driver = createDriver(1, 1);
     await driverRepoStub.save(existingDriver);
 
-    const response = await getOwnersCollectionOverviewService.handler();
+    const response = await getOwnersOverviewService.handler();
 
-    const expectedResponse: OwnersCollectionOverview = {
+    const expectedResponse: OwnersOverview = {
       ownersLength: 1,
       owners: [
         {
@@ -163,9 +159,9 @@ describe('GetOwnersCollectionOverviewService', () => {
       await driverRepoStub.save(existingDriver);
     }
 
-    const response = await getOwnersCollectionOverviewService.handler();
+    const response = await getOwnersOverviewService.handler();
 
-    const expectedResponse: OwnersCollectionOverview = {
+    const expectedResponse: OwnersOverview = {
       ownersLength: 2,
       owners: [
         {
@@ -201,7 +197,7 @@ describe('GetOwnersCollectionOverviewService', () => {
 
   it('throws error if owners are not found', async () => {
     try {
-      await getOwnersCollectionOverviewService.handler();
+      await getOwnersOverviewService.handler();
     } catch (err) {
       expect(err).toBeInstanceOf(OwnersNotFound);
     }
@@ -211,7 +207,7 @@ describe('GetOwnersCollectionOverviewService', () => {
     const existingOwner: Owner = createOwner(1);
     await ownerRepoStub.save(existingOwner);
     try {
-      await getOwnersCollectionOverviewService.handler();
+      await getOwnersOverviewService.handler();
     } catch (err) {
       expect(err).toBeInstanceOf(CabinetsNotFound);
     }
@@ -224,7 +220,7 @@ describe('GetOwnersCollectionOverviewService', () => {
     const existingCabinet: Cabinet = createCabinet(1, 1);
     await cabinetRepoStub.save(existingCabinet);
     try {
-      await getOwnersCollectionOverviewService.handler();
+      await getOwnersOverviewService.handler();
     } catch (err) {
       expect(err).toBeInstanceOf(DriversNotFound);
     }

@@ -23,7 +23,7 @@ const cabinetRepository = container.get<CabinetRepositoryOutputPort>(CABINET_REP
 const ownerRepository = container.get<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT);
 const driverRepository = container.get<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT);
 
-describe(`/api/owners-collection`, () => {
+describe(`/api/owners-overview`, () => {
   beforeAll(async () => {
     await database.start();
   });
@@ -81,13 +81,13 @@ describe(`/api/owners-collection`, () => {
     };
     await driverRepository.save(existingDriver);
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/owners-overview')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
       .expect(200);
   });
   it(`throw an error`, async () => {
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/owners-overview')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
       .expect(500);
   });

@@ -2,13 +2,13 @@ import { inject, injectable } from 'inversify';
 
 import { Owner, OwnerOverview } from '../../domain/owner';
 import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
-import { CabinetAndDriversOverview } from '../../domain/owner-collection-overview';
+import { CabinetAndDriversOverview } from '../../domain/owner-overview';
 import { CabinetOverview } from '../../../../cabinet/core/domain/cabinet';
 import { Cabinet } from '../../../../cabinet/core/domain/cabinet';
 
 import { OwnersNotFound } from '../../domain/errors';
-import { OwnerCollectionOverview, OwnersCollectionOverview } from '../../domain/owner-collection-overview';
-import { GetOwnersCollectionOverviewInputPort } from '../ports/in/get-owners-overview.input-port';
+import { OwnerCabinetsOverview, OwnersOverview } from '../../domain/owner-overview';
+import { GetOwnersOverviewInputPort } from '../ports/in/get-owners-overview.input-port';
 import { OwnerRepositoryOutputPort, OWNER_REPOSITORY_OUTPUT_PORT } from '../ports/out/owner-repository.output-port';
 
 import {
@@ -24,32 +24,32 @@ import { CabinetsNotFound } from '../../../../cabinet/core/domain/errors';
 import { DriversNotFound } from '../../../../driver/core/domain/errors';
 
 @injectable()
-export class GetOwnersCollectionOverviewService implements GetOwnersCollectionOverviewInputPort {
+export class GetOwnersOverviewService implements GetOwnersOverviewInputPort {
   constructor(
     @inject(CABINET_REPOSITORY_OUTPUT_PORT) private readonly _cabinetRepository: CabinetRepositoryOutputPort,
     @inject(OWNER_REPOSITORY_OUTPUT_PORT) private readonly _ownerRepository: OwnerRepositoryOutputPort,
     @inject(DRIVER_REPOSITORY_OUTPUT_PORT) private readonly _driverRepository: DriverRepositoryOutputPort,
   ) {}
 
-  async handler(): Promise<OwnersCollectionOverview> {
-    const response = await this.mapOwnersCollectionOverview();
+  async handler(): Promise<OwnersOverview> {
+    const response = await this.mapOwnersOverview();
     return response;
   }
 
-  private async mapOwnersCollectionOverview(): Promise<OwnersCollectionOverview> {
-    const ownersRelationshipOverview: OwnerCollectionOverview[] = [];
+  private async mapOwnersOverview(): Promise<OwnersOverview> {
+    const ownersCabinetsOverview: OwnerCabinetsOverview[] = [];
     const owners = await this._ownerRepository.getAllOwners();
     if (!owners) throw new OwnersNotFound();
     for (const owner of owners) {
-      ownersRelationshipOverview.push(await this.mapOwnerCollectionOverview(owner));
+      ownersCabinetsOverview.push(await this.mapOwnerCabinetsOverview(owner));
     }
     return {
       ownersLength: owners.length,
-      owners: ownersRelationshipOverview,
+      owners: ownersCabinetsOverview,
     };
   }
 
-  private async mapOwnerCollectionOverview(owner: Owner): Promise<OwnerCollectionOverview> {
+  private async mapOwnerCabinetsOverview(owner: Owner): Promise<OwnerCabinetsOverview> {
     const ownerOverview: OwnerOverview = this.mapOwnerOverview(owner);
     const cabinetAndDriversOverview: CabinetAndDriversOverview[] = await this.mapCabinetAndDriversOverview(owner.uid);
     return {

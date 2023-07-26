@@ -1,7 +1,7 @@
-import { OwnersCollectionOverview } from '../../../domain/owner-collection-overview';
+import { OwnersOverview } from '../../../domain/owner-overview';
 
-export const GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT = Symbol.for('GetOwnersCollectionOverviewInputPort');
+export const GET_OWNERS_OVERVIEW_INPUT_PORT = Symbol.for('GetOwnersOverviewInputPort');
 
-export interface GetOwnersCollectionOverviewInputPort {
-  handler: () => Promise<OwnersCollectionOverview>;
+export interface GetOwnersOverviewInputPort {
+  handler: () => Promise<OwnersOverview>;
 }

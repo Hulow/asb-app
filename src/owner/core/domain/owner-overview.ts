@@ -2,12 +2,12 @@ import { OwnerOverview } from './owner';
 import { CabinetOverview } from '../../../cabinet/core/domain/cabinet';
 import { DriverOverview } from '../../../driver/core/domain/driver';
 
-export interface OwnersCollectionOverview {
+export interface OwnersOverview {
   ownersLength: number;
-  owners: OwnerCollectionOverview[];
+  owners: OwnerCabinetsOverview[];
 }
 
-export interface OwnerCollectionOverview {
+export interface OwnerCabinetsOverview {
   owner: OwnerOverview;
   cabinets: CabinetAndDriversOverview[];
 }
