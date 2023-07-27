@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
-import { Impedance } from '../../../core/domain/impedance';
+import { Impedance, ImpedanceMeasurement } from '../../../core/domain/impedance';
 
 @Entity({ name: 'impedance' })
 export class ImpedanceTypeormEntity {
@@ -60,6 +60,12 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'xi', type: 'float' })
   xI!: number;
 
+  @Column({ name: 'cabinet_uid', type: 'string' })
+  cabinetUid!: string;
+
+  @Column({ name: 'impedance_curve', type: 'string' })
+  impedanceCurve!: ImpedanceMeasurement[];
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt!: Date;
 
@@ -87,6 +93,8 @@ export class ImpedanceTypeormEntity {
       xR: this.xR,
       kI: this.kI,
       xI: this.xI,
+      cabinetUid: this.cabinetUid,
+      impedanceCurve: this.impedanceCurve,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     });
@@ -112,6 +120,8 @@ export class ImpedanceTypeormEntity {
     entity.xR = impedance.xR;
     entity.kI = impedance.kI;
     entity.xI = impedance.xI;
+    entity.cabinetUid = impedance.cabinetUid;
+    entity.impedanceCurve = impedance.impedanceCurve;
     return entity;
   }
 }

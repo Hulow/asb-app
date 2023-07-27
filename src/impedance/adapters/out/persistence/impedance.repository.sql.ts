@@ -14,4 +14,10 @@ export class SqlImpedanceRepository implements ImpedanceRepositoryOutputPort {
     const entity = await this._repository.save(ImpedanceTypeormEntity.fromDomain(impedance));
     return entity.toDomain();
   }
+
+   async getByCabinetUid(cabinetUid: string) {
+    const impedanceEntity = await this._repository.findOne({ where: { cabinetUid } });
+    if (!impedanceEntity) return;
+    return impedanceEntity.toDomain();
+  }
 }

@@ -11,4 +11,11 @@ export class InMemoryImpedanceRepository implements ImpedanceRepositoryOutputPor
     this.impedances.push(new Impedance({ ...impedance }));
     return Promise.resolve(impedance);
   }
+
+  async getByCabinetUid(cabinetUid: string) {
+    const _impedance = this.impedances.find((impedance) => impedance.cabinetUid === cabinetUid);
+    if (!_impedance) return undefined;
+    const impedance = new Impedance({ ..._impedance });
+    return Promise.resolve(impedance);
+  }
 }
