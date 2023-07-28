@@ -6,59 +6,62 @@ export class ImpedanceTypeormEntity {
   @PrimaryColumn({ name: 'impedance_uid', type: 'uuid', update: false })
   uid!: string;
 
-  @Column({ name: 'piston_diameter', type: 'float' })
-  pistonDiameter!: number;
+  @Column({ name: 'source', type: 'varchar' })
+  source!: string;
 
-  @Column({ name: 'resonance_frequency', type: 'float' })
-  resonanceFrequency!: number;
+  @Column({ name: 'piston_diameter', type: 'varchar' })
+  pistonDiameter!: string;
 
-  @Column({ name: 'dc_resistance', type: 'float' })
-  dcResistance!: number;
+  @Column({ name: 'resonance_frequency', type: 'varchar' })
+  resonanceFrequency!: string;
 
-  @Column({ name: 'ac_resistance', type: 'float' })
-  acResistance!: number;
+  @Column({ name: 'dc_resistance', type: 'varchar' })
+  dcResistance!: string;
 
-  @Column({ name: 'mechanical_damping', type: 'float' })
-  mechanicalDamping!: number;
+  @Column({ name: 'ac_resistance', type: 'varchar' })
+  acResistance!: string;
 
-  @Column({ name: 'electrical_damping', type: 'float' })
-  electricalDamping!: number;
+  @Column({ name: 'mechanical_damping', type: 'varchar' })
+  mechanicalDamping!: string;
 
-  @Column({ name: 'total_damping', type: 'float' })
-  totalDamping!: number;
+  @Column({ name: 'electrical_damping', type: 'varchar' })
+  electricalDamping!: string;
 
-  @Column({ name: 'equivalence_compliance', type: 'float' })
-  equivalenceCompliance!: number;
+  @Column({ name: 'total_damping', type: 'varchar' })
+  totalDamping!: string;
 
-  @Column({ name: 'voice_coil_inductance', type: 'float' })
-  voiceCoilInductance!: number;
+  @Column({ name: 'equivalence_compliance', type: 'varchar' })
+  equivalenceCompliance!: string;
 
-  @Column({ name: 'efficiency', type: 'float' })
-  efficiency!: number;
+  @Column({ name: 'voice_coil_inductance', type: 'varchar' })
+  voiceCoilInductance!: string;
 
-  @Column({ name: 'sensitivity', type: 'float' })
-  sensitivity!: number;
+  @Column({ name: 'efficiency', type: 'varchar' })
+  efficiency!: string;
 
-  @Column({ name: 'cone_mass', type: 'float' })
-  coneMass!: number;
+  @Column({ name: 'sensitivity', type: 'varchar' })
+  sensitivity!: string;
 
-  @Column({ name: 'suspension_compliance', type: 'float' })
-  suspensionCompliance!: number;
+  @Column({ name: 'cone_mass', type: 'varchar' })
+  coneMass!: string;
 
-  @Column({ name: 'force_factor', type: 'float' })
-  forceFactor!: number;
+  @Column({ name: 'suspension_compliance', type: 'varchar' })
+  suspensionCompliance!: string;
 
-  @Column({ name: 'kr', type: 'float' })
-  kR!: number;
+  @Column({ name: 'force_factor', type: 'varchar' })
+  forceFactor!: string;
 
-  @Column({ name: 'xr', type: 'float' })
-  xR!: number;
+  @Column({ name: 'kr', type: 'varchar' })
+  kR!: string;
 
-  @Column({ name: 'ki', type: 'float' })
-  kI!: number;
+  @Column({ name: 'xr', type: 'varchar' })
+  xR!: string;
 
-  @Column({ name: 'xi', type: 'float' })
-  xI!: number;
+  @Column({ name: 'ki', type: 'varchar' })
+  kI!: string;
+
+  @Column({ name: 'xi', type: 'varchar' })
+  xI!: string;
 
   @Column({ name: 'cabinet_uid', type: 'string' })
   cabinetUid!: string;
@@ -75,6 +78,7 @@ export class ImpedanceTypeormEntity {
   toDomain(): Impedance {
     return new Impedance({
       uid: this.uid,
+      source: this.source,
       pistonDiameter: this.pistonDiameter,
       resonanceFrequency: this.resonanceFrequency,
       dcResistance: this.dcResistance,
@@ -102,6 +106,7 @@ export class ImpedanceTypeormEntity {
 
   static fromDomain(impedance: Impedance): ImpedanceTypeormEntity {
     const entity = new ImpedanceTypeormEntity();
+    entity.source = impedance.source;
     entity.pistonDiameter = impedance.pistonDiameter;
     entity.resonanceFrequency = impedance.resonanceFrequency;
     entity.dcResistance = impedance.dcResistance;
