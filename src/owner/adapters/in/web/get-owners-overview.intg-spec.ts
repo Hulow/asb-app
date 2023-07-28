@@ -9,10 +9,6 @@ import {
   OWNER_REPOSITORY_OUTPUT_PORT,
 } from '../../../core/application/ports/out/owner-repository.output-port';
 import {
-  DriverRepositoryOutputPort,
-  DRIVER_REPOSITORY_OUTPUT_PORT,
-} from '../../../../driver/core/application/ports/out/driver-repository.output-port';
-import {
   CabinetRepositoryOutputPort,
   CABINET_REPOSITORY_OUTPUT_PORT,
 } from '../../../../cabinet/core/application/ports/out/cabinet-repository.output-port';
@@ -21,9 +17,8 @@ const expressApp = container.get(ExpressWebServer).app;
 const database = container.get(PostgresDataSource);
 const cabinetRepository = container.get<CabinetRepositoryOutputPort>(CABINET_REPOSITORY_OUTPUT_PORT);
 const ownerRepository = container.get<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT);
-const driverRepository = container.get<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT);
 
-describe(`/api/owners-collection`, () => {
+describe(`/api/owners-overview`, () => {
   beforeAll(async () => {
     await database.start();
   });
@@ -66,28 +61,14 @@ describe(`/api/owners-collection`, () => {
     };
     await cabinetRepository.save(existingCabinet);
 
-    const existingDriver = {
-      uid: `4343b2ab-a22e-4d12-ac13-6bb399d4e514`,
-      brandName: 'B&C',
-      productName: '12PE32',
-      driverType: 'Woofer',
-      manufacturingYear: 2015,
-      nominalDiameter: 12,
-      nominalImpedance: 8,
-      continuousPowerHandling: 500,
-      cabinetUid: `4343b2ab-a22e-4d12-ac13-6bb399d4e513`,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    await driverRepository.save(existingDriver);
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/owners-overview')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
       .expect(200);
   });
   it(`throw an error`, async () => {
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/owners-overview')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
       .expect(500);
   });

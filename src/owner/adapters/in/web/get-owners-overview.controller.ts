@@ -4,22 +4,22 @@ import { inject, injectable } from 'inversify';
 
 import { ExpressController } from '../../../../shared/adapters/in/express-web-server';
 import {
-  GetOwnersCollectionOverviewInputPort,
-  GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT,
-} from '../../../core/application/ports/in/get-owners-collection-overview.input-port';
+  GetOwnersOverviewInputPort,
+  GET_OWNERS_OVERVIEW_INPUT_PORT,
+} from '../../../core/application/ports/in/get-owners-overview.input-port';
 
 import { OwnersNotFound } from '../../../core/domain/errors';
 import { CabinetsNotFound } from '../../../../cabinet/core/domain/errors';
 import { DriversNotFound } from '../../../../driver/core/domain/errors';
 
 @injectable()
-export class GetOwnersCollectionOverviewController implements ExpressController {
-  readonly route = '/api/owners-collection';
+export class GetOwnersOverviewController implements ExpressController {
+  readonly route = '/api/owners-overview';
   readonly method = 'get';
 
   constructor(
-    @inject(GET_OWNERS_COLLECTION_OVERVIEW_INPUT_PORT)
-    private readonly getOwnersCollectionOverviewService: GetOwnersCollectionOverviewInputPort,
+    @inject(GET_OWNERS_OVERVIEW_INPUT_PORT)
+    private readonly getOwnersCollectionOverviewService: GetOwnersOverviewInputPort,
   ) {}
   async handler(req: Request<unknown, unknown>, res: Response) {
     try {
