@@ -1,12 +1,9 @@
 import { InMemoryOwnerRepository } from '../../../adapters/out/persistence/owner.repository.in-memory';
 import { InMemoryCabinetRepository } from '../../../../cabinet/adapters/out/persistence/cabinet.repository.in-memory';
-import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persistence/driver.repository.in-memory';
 import { OwnersOverview } from '../../domain/owner-overview';
 import { GetOwnersOverviewService } from './get-owners-overview.service';
 import { Owner, OwnerOverview } from '../../domain/owner';
 import { Cabinet, CabinetOverview } from '../../../../cabinet/core/domain/cabinet';
-import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
-import { DriversNotFound } from '../../../../driver/core/domain/errors';
 import { OwnersNotFound } from '../../domain/errors';
 import { CabinetsNotFound } from '../../../../cabinet/core/domain/errors';
 
@@ -41,22 +38,6 @@ function createCabinet(cabinetUid: number, ownerUid: number): Cabinet {
   };
 }
 
-function createDriver(driverUid: number, cabinetUid: number): Driver {
-  return {
-    uid: `driver-${driverUid}`,
-    brandName: 'B&C',
-    productName: '12PE32',
-    driverType: 'Woofer',
-    manufacturingYear: 2015,
-    nominalDiameter: 12,
-    nominalImpedance: 8,
-    continuousPowerHandling: 500,
-    cabinetUid: `cabinet-${cabinetUid}`,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-}
-
 function createCabinetOverview(cabinetUid: number): CabinetOverview {
   return {
     cabinetUid: `cabinet-${cabinetUid}`,
@@ -73,26 +54,15 @@ function createOwnerOverview(ownerUid: number): OwnerOverview {
   };
 }
 
-function createDriverOverview(driverUid: number): DriverOverview {
-  return {
-    driverUid: `driver-${driverUid}`,
-    brandName: 'B&C',
-    productName: '12PE32',
-    driverType: 'Woofer',
-  };
-}
-
 describe('GetOwnersOverviewService', () => {
   let cabinetRepoStub: InMemoryCabinetRepository;
   let ownerRepoStub: InMemoryOwnerRepository;
-  let driverRepoStub: InMemoryDriverRepository;
   let getOwnersOverviewService: GetOwnersOverviewService;
 
   beforeEach(() => {
     cabinetRepoStub = new InMemoryCabinetRepository();
     ownerRepoStub = new InMemoryOwnerRepository();
-    driverRepoStub = new InMemoryDriverRepository();
-    getOwnersOverviewService = new GetOwnersOverviewService(cabinetRepoStub, ownerRepoStub, driverRepoStub);
+    getOwnersOverviewService = new GetOwnersOverviewService(cabinetRepoStub, ownerRepoStub);
   });
   it('get an overview of one owner owning one cabinet mounted on one driver', async () => {
     const existingOwner: Owner = createOwner(1);
@@ -101,9 +71,6 @@ describe('GetOwnersOverviewService', () => {
     const existingCabinet: Cabinet = createCabinet(1, 1);
     await cabinetRepoStub.save(existingCabinet);
 
-    const existingDriver: Driver = createDriver(1, 1);
-    await driverRepoStub.save(existingDriver);
-
     const response = await getOwnersOverviewService.handler();
 
     const expectedResponse: OwnersOverview = {
@@ -111,18 +78,14 @@ describe('GetOwnersOverviewService', () => {
       owners: [
         {
           owner: createOwnerOverview(1),
-          cabinets: [
-            {
-              cabinet: createCabinetOverview(1),
-              drivers: [createDriverOverview(1)],
-            },
-          ],
+          cabinetsLength: 1,
+          cabinets: [createCabinetOverview(1)],
         },
       ],
     };
     expect(response).toEqual(expectedResponse);
   });
-  it('get an overview of 2 owners owning 2 cabinets mounted by 2 drivers each', async () => {
+  it('get an overview of 2 owners owning 2 cabinets', async () => {
     const firstOwner: Owner = createOwner(1);
     const secondOwner: Owner = createOwner(2);
     for (const owner of [firstOwner, secondOwner]) {
@@ -138,27 +101,6 @@ describe('GetOwnersOverviewService', () => {
       await cabinetRepoStub.save(cabinet);
     }
 
-    const firstDriver: Driver = createDriver(1, 1);
-    const secondDriver: Driver = createDriver(2, 1);
-    const thirdDriver: Driver = createDriver(3, 2);
-    const fourthDriver: Driver = createDriver(4, 2);
-    const fifhtDriver: Driver = createDriver(5, 3);
-    const sixthDriver: Driver = createDriver(6, 3);
-    const seventhDriver: Driver = createDriver(7, 4);
-    const eighthDriver: Driver = createDriver(8, 4);
-    for (const existingDriver of [
-      firstDriver,
-      secondDriver,
-      thirdDriver,
-      fourthDriver,
-      fifhtDriver,
-      sixthDriver,
-      seventhDriver,
-      eighthDriver,
-    ]) {
-      await driverRepoStub.save(existingDriver);
-    }
-
     const response = await getOwnersOverviewService.handler();
 
     const expectedResponse: OwnersOverview = {
@@ -166,29 +108,13 @@ describe('GetOwnersOverviewService', () => {
       owners: [
         {
           owner: createOwnerOverview(1),
-          cabinets: [
-            {
-              cabinet: createCabinetOverview(1),
-              drivers: [createDriverOverview(1), createDriverOverview(2)],
-            },
-            {
-              cabinet: createCabinetOverview(2),
-              drivers: [createDriverOverview(3), createDriverOverview(4)],
-            },
-          ],
+          cabinetsLength: 2,
+          cabinets: [createCabinetOverview(1), createCabinetOverview(2)],
         },
         {
           owner: createOwnerOverview(2),
-          cabinets: [
-            {
-              cabinet: createCabinetOverview(3),
-              drivers: [createDriverOverview(5), createDriverOverview(6)],
-            },
-            {
-              cabinet: createCabinetOverview(4),
-              drivers: [createDriverOverview(7), createDriverOverview(8)],
-            },
-          ],
+          cabinetsLength: 2,
+          cabinets: [createCabinetOverview(3), createCabinetOverview(4)],
         },
       ],
     };
@@ -210,19 +136,6 @@ describe('GetOwnersOverviewService', () => {
       await getOwnersOverviewService.handler();
     } catch (err) {
       expect(err).toBeInstanceOf(CabinetsNotFound);
-    }
-  });
-
-  it('throws error if driver does not exist', async () => {
-    const existingOwner: Owner = createOwner(1);
-    await ownerRepoStub.save(existingOwner);
-
-    const existingCabinet: Cabinet = createCabinet(1, 1);
-    await cabinetRepoStub.save(existingCabinet);
-    try {
-      await getOwnersOverviewService.handler();
-    } catch (err) {
-      expect(err).toBeInstanceOf(DriversNotFound);
     }
   });
 });
