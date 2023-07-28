@@ -23,7 +23,7 @@ const cabinetRepository = container.get<CabinetRepositoryOutputPort>(CABINET_REP
 const ownerRepository = container.get<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT);
 const driverRepository = container.get<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT);
 
-describe(`/api/cabinets-collection`, () => {
+describe(`/api/cabinets-per-owner`, () => {
   beforeAll(async () => {
     await database.start();
   });
@@ -36,7 +36,7 @@ describe(`/api/cabinets-collection`, () => {
     await database.stop();
   });
 
-  it(`get all cabinets`, async () => {
+  it(`gets cabinets from owner`, async () => {
     const existingOwner = {
       uid: '4343b2ab-a22e-4d12-ac13-6bb399d4e512',
       firstName: 'firstName',
@@ -81,14 +81,16 @@ describe(`/api/cabinets-collection`, () => {
     };
     await driverRepository.save(existingDriver);
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/cabinets-per-owner')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
+      .send({ ownername: 'ownername' })
       .expect(200);
   });
-  it(`throw an error`, async () => {
+  it(`throws an error`, async () => {
     await request(expressApp)
-      .get('/api/cabinets-collection')
+      .get('/api/cabinets-per-owner')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
+      .send({ ownername: 'ownername' })
       .expect(500);
   });
 });

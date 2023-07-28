@@ -17,3 +17,9 @@ export class CabinetsNotFound extends DomainError {
     super(`Unable to find any cabinet`);
   }
 }
+
+export class CabinetsFromOwnerNotFound extends DomainError {
+  constructor(ownerUid: string) {
+    super(`Unable to find any cabinet from owner ${ownerUid}`);
+  }
+}

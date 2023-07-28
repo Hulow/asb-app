@@ -2,60 +2,81 @@ import { inject, injectable } from 'inversify';
 
 import { Cabinet, CabinetOverview } from '../../domain/cabinet';
 import { Driver, DriverOverview } from '../../../../driver/core/domain/driver';
-import { OwnerOverview } from '../../../../owner/core/domain/owner';
-
+import { Owner } from '../../../../owner/core/domain/owner';
 import { OwnerDoesNotExist } from '../../../../owner/core/domain/errors';
-import { CabinetCollectionOverview, CabinetsCollectionOverview } from '../../domain/cabinet-collection-overview';
-import { GetCabinetsCollectionOverviewInputPort } from '../ports/in/get-cabinets-collection-overview.input-port';
+import { GetCabinetsPerOwnerInputPort } from '../ports/in/get-cabinets-per-owner.input-port';
 import {
   CabinetRepositoryOutputPort,
   CABINET_REPOSITORY_OUTPUT_PORT,
 } from '../ports/out/cabinet-repository.output-port';
-
 import {
   OWNER_REPOSITORY_OUTPUT_PORT,
   OwnerRepositoryOutputPort,
 } from '../../../../owner/core/application/ports/out/owner-repository.output-port';
-
 import {
   DRIVER_REPOSITORY_OUTPUT_PORT,
   DriverRepositoryOutputPort,
 } from '../../../../driver/core/application/ports/out/driver-repository.output-port';
-import { CabinetsNotFound } from '../../domain/errors';
+import { CabinetsFromOwnerNotFound } from '../../domain/errors';
 import { DriversNotFound } from '../../../../driver/core/domain/errors';
 
+export interface CabinetsPerOwner {
+  owner: OwnerDescription;
+  cabinetsLength: number;
+  cabinets: CabinetCollectionOverview[];
+}
+
+export interface OwnerDescription {
+  ownername: string;
+  description: string;
+}
+
+export interface CabinetCollectionOverview {
+  cabinet: CabinetOverview;
+  driversLength: number;
+  drivers: DriverOverview[];
+}
+
 @injectable()
-export class GetCabinetsCollectionOverviewService implements GetCabinetsCollectionOverviewInputPort {
+export class GetCabinetsPerOwnerService implements GetCabinetsPerOwnerInputPort {
   constructor(
     @inject(CABINET_REPOSITORY_OUTPUT_PORT) private readonly _cabinetRepository: CabinetRepositoryOutputPort,
     @inject(OWNER_REPOSITORY_OUTPUT_PORT) private readonly _ownerRepository: OwnerRepositoryOutputPort,
     @inject(DRIVER_REPOSITORY_OUTPUT_PORT) private readonly _driverRepository: DriverRepositoryOutputPort,
   ) {}
 
-  async handler(): Promise<CabinetsCollectionOverview> {
-    return await this.mapCabinetsCollectionOverview();
+  async handler(ownername: string): Promise<CabinetsPerOwner> {
+    const owner = await this._ownerRepository.getByOwnername(ownername);
+    if (!owner) throw new OwnerDoesNotExist(ownername);
+    const ownerDescription = this.mapOwnerDescription(owner);
+    const cabinetsCollectionOverview = await this.mapCabinetsCollectionOverview(owner.uid);
+    return this.mapCabinetsPerOwner(ownerDescription, cabinetsCollectionOverview);
   }
 
-  private async mapCabinetsCollectionOverview(): Promise<CabinetsCollectionOverview> {
-    const cabinetsRelationshipOverview: CabinetCollectionOverview[] = [];
-    const cabinets = await this._cabinetRepository.getAllCabinets();
-    if (!cabinets) throw new CabinetsNotFound();
-    for (const cabinet of cabinets) {
-      cabinetsRelationshipOverview.push(await this.mapCabinetCollectionOverview(cabinet));
-    }
+  private mapOwnerDescription(owner: Owner): OwnerDescription {
     return {
-      cabinetsLength: cabinets.length,
-      cabinets: cabinetsRelationshipOverview,
+      ownername: owner.ownername,
+      description: owner.description,
     };
+  }
+
+  private async mapCabinetsCollectionOverview(ownerUid: string): Promise<CabinetCollectionOverview[]> {
+    const cabinetsCollectionOverview: CabinetCollectionOverview[] = [];
+    const cabinets = await this._cabinetRepository.getByOwnerUid(ownerUid);
+    if (!cabinets) throw new CabinetsFromOwnerNotFound(ownerUid);
+    for (const cabinet of cabinets) {
+      const cabinetCollectionOverview = await this.mapCabinetCollectionOverview(cabinet);
+      cabinetsCollectionOverview.push(cabinetCollectionOverview);
+    }
+    return cabinetsCollectionOverview;
   }
 
   private async mapCabinetCollectionOverview(cabinet: Cabinet): Promise<CabinetCollectionOverview> {
     const cabinetOverview: CabinetOverview = this.mapCabinetOverview(cabinet);
-    const ownerOverview: OwnerOverview = await this.mapOwnerOverview(cabinet.ownerUid);
     const driversOverview: DriverOverview[] = await this.mapDriversOverview(cabinet.uid);
     return {
       cabinet: cabinetOverview,
-      owner: ownerOverview,
+      driversLength: driversOverview.length,
       drivers: driversOverview,
     };
   }
@@ -68,14 +89,7 @@ export class GetCabinetsCollectionOverviewService implements GetCabinetsCollecti
       enclosureType: cabinet.enclosureType,
     };
   }
-  private async mapOwnerOverview(ownerUid: string): Promise<OwnerOverview> {
-    const owner = await this._ownerRepository.getById(ownerUid);
-    if (!owner) throw new OwnerDoesNotExist(ownerUid);
-    return {
-      ownerUid: owner.uid,
-      ownername: owner.ownername,
-    };
-  }
+
   private async mapDriversOverview(cabinetUid: string): Promise<DriverOverview[]> {
     const drivers: DriverOverview[] = [];
     const existingDrivers = await this._driverRepository.getByCabinetUid(cabinetUid);
@@ -95,6 +109,17 @@ export class GetCabinetsCollectionOverviewService implements GetCabinetsCollecti
       driverType: driver.driverType,
       productName: driver.productName,
       brandName: driver.brandName,
+    };
+  }
+
+  private mapCabinetsPerOwner(
+    ownerDescription: OwnerDescription,
+    cabinetsCollectionOverview: CabinetCollectionOverview[],
+  ): CabinetsPerOwner {
+    return {
+      owner: ownerDescription,
+      cabinetsLength: cabinetsCollectionOverview.length,
+      cabinets: cabinetsCollectionOverview,
     };
   }
 }

@@ -57,11 +57,11 @@ import { RegisterCabinetService } from './cabinet/core/application/services/regi
 import { RegisterCabinetController } from './cabinet/adapters/in/web/register-cabinet.controller';
 
 import {
-  GetCabinetsCollectionOverviewInputPort,
-  GET_CABINETS_COLLECTION_OVERVIEW_INPUT_PORT,
-} from './cabinet/core/application/ports/in/get-cabinets-collection-overview.input-port';
-import { GetCabinetsCollectionOverviewService } from './cabinet/core/application/services/get-cabinets-per-owner.service';
-import { GetCabinetsCollectionOverviewController } from './cabinet/adapters/in/web/get-cabinets-per-owner-overview.controller';
+  GetCabinetsPerOwnerInputPort,
+  GET_CABINETS_PER_OWNER_INPUT_PORT,
+} from './cabinet/core/application/ports/in/get-cabinets-per-owner.input-port';
+import { GetCabinetsPerOwnerService } from './cabinet/core/application/services/get-cabinets-per-owner.service';
+import { GetCabinetsPerOwnerController } from './cabinet/adapters/in/web/get-cabinets-per-owner.controller';
 
 import {
   RegisterFrequencyInputPort,
@@ -100,7 +100,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
     container.get(RegisterImpulseController),
-    container.get(GetCabinetsCollectionOverviewController),
+    container.get(GetCabinetsPerOwnerController),
     container.get(GetOwnersOverviewController),
   ];
   return new ExpressWebServer(config.express, container.get(LOGGER_OUTPUT_PORT), controllers);
@@ -114,9 +114,7 @@ container.bind<RegisterCabinetInputPort>(REGISTER_CABINET_INPUT_PORT).to(Registe
 container.bind<RegisterDriverInputPort>(REGISTER_DRIVER_INPUT_PORT).to(RegisterDriverService);
 container.bind<RegisterFrequencyInputPort>(REGISTER_FREQUENCY_INPUT_PORT).to(RegisterFrequencyService);
 container.bind<RegisterImpulseInputPort>(REGISTER_IMPULSE_INPUT_PORT).to(RegisterImpulseService);
-container
-  .bind<GetCabinetsCollectionOverviewInputPort>(GET_CABINETS_COLLECTION_OVERVIEW_INPUT_PORT)
-  .to(GetCabinetsCollectionOverviewService);
+container.bind<GetCabinetsPerOwnerInputPort>(GET_CABINETS_PER_OWNER_INPUT_PORT).to(GetCabinetsPerOwnerService);
 container.bind<GetOwnersOverviewInputPort>(GET_OWNERS_OVERVIEW_INPUT_PORT).to(GetOwnersOverviewService);
 
 /**
