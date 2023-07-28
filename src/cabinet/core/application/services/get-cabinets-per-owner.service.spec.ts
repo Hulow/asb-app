@@ -3,7 +3,7 @@ import { InMemoryOwnerRepository } from '../../../../owner/adapters/out/persiste
 import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persistence/driver.repository.in-memory';
 
 import { CabinetsCollectionOverview } from '../../domain/cabinet-collection-overview';
-import { GetCabinetsCollectionOverviewService } from './get-cabinets-collection-overview.service';
+import { GetCabinetsCollectionOverviewService } from './get-cabinets-per-owner.service';
 import { Cabinet, CabinetOverview } from '../../domain/cabinet';
 import { Owner, OwnerOverview } from '../../../../owner/core/domain/owner';
 import { OwnerDoesNotExist } from '../../../../owner/core/domain/errors';

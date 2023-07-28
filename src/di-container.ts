@@ -60,8 +60,8 @@ import {
   GetCabinetsCollectionOverviewInputPort,
   GET_CABINETS_COLLECTION_OVERVIEW_INPUT_PORT,
 } from './cabinet/core/application/ports/in/get-cabinets-collection-overview.input-port';
-import { GetCabinetsCollectionOverviewService } from './cabinet/core/application/services/get-cabinets-collection-overview.service';
-import { GetCabinetsCollectionOverviewController } from './cabinet/adapters/in/web/get-cabinets-collection-overview.controller';
+import { GetCabinetsCollectionOverviewService } from './cabinet/core/application/services/get-cabinets-per-owner.service';
+import { GetCabinetsCollectionOverviewController } from './cabinet/adapters/in/web/get-cabinets-per-owner-overview.controller';
 
 import {
   RegisterFrequencyInputPort,
