@@ -31,7 +31,7 @@ describe(`/api/owners-overview`, () => {
     await database.stop();
   });
 
-  it(`get all owners`, async () => {
+  it(`gets all owners`, async () => {
     const existingOwner = {
       uid: '4343b2ab-a22e-4d12-ac13-6bb399d4e512',
       firstName: 'firstName',
@@ -66,7 +66,7 @@ describe(`/api/owners-overview`, () => {
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
       .expect(200);
   });
-  it(`throw an error`, async () => {
+  it(`throws an error`, async () => {
     await request(expressApp)
       .get('/api/owners-overview')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
