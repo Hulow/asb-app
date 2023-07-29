@@ -63,10 +63,10 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'xi', type: 'varchar' })
   xI!: string;
 
-  @Column({ name: 'cabinet_uid', type: 'string' })
+  @Column({ name: 'cabinet_uid', type: 'uuid' })
   cabinetUid!: string;
 
-  @Column({ name: 'impedance_curve', type: 'string' })
+  @Column({ name: 'impedance_curve', type: 'jsonb' })
   impedanceCurve!: ImpedanceMeasurement[];
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
@@ -106,6 +106,7 @@ export class ImpedanceTypeormEntity {
 
   static fromDomain(impedance: Impedance): ImpedanceTypeormEntity {
     const entity = new ImpedanceTypeormEntity();
+    entity.uid = impedance.uid;
     entity.source = impedance.source;
     entity.pistonDiameter = impedance.pistonDiameter;
     entity.resonanceFrequency = impedance.resonanceFrequency;

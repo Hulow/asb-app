@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 
-import { Impedance, ThieleSmallParameters } from '../../domain/impedance';
+import { Impedance, ImpedanceMeasurement, ImpedanceProps, ThieleSmallParameters } from '../../domain/impedance';
 import { RegisterImpedanceInput, RegisterImpedanceInputPort } from '../ports/in/register-impedance.input-port';
 import {
   ImpedanceRepositoryOutputPort,
@@ -12,12 +12,6 @@ import {
 } from '../../../../cabinet/core/application/ports/out/cabinet-repository.output-port';
 import { CabinetDoesNotExist } from '../../../../cabinet/core/domain/errors';
 import { ImpedanceAlreadyExists, ImpedanceParameterNotFound } from '../../../../impedance/core/domain/errors';
-
-// verify if cabinet-uid in the RegisterImpedanceInput exists in the database
-// split the payload between 2 categories of data
-// map TSP and impedance curve separetely
-// group them and create an impedance object
-// store impedance object in database
 
 const ThieleSmallParametersPattern = {
   source: /DATS/,
@@ -106,16 +100,16 @@ export class RegisterImpedanceService implements RegisterImpedanceInputPort {
     const existingImpedance = await this.impedanceRepository.getByCabinetUid(input.cabinetUid);
     if (existingImpedance) throw new ImpedanceAlreadyExists(input.cabinetUid);
 
-    this.mapImpedance(input.measurements);
+    const newImpedance = this.mapImpedance(input)
 
-    return this.createFakePayload();
+    return await this.impedanceRepository.save(new Impedance(newImpedance));
   }
 
-  mapImpedance(measurements: string) {
-    const tSPAndImpedanceCurve = measurements.split(/[*]\r\n[*]\r\nFreq.*\r\n/);
-
-    this.mapThieleSmallParameters(tSPAndImpedanceCurve[0]);
-    return tSPAndImpedanceCurve;
+  mapImpedance(input: RegisterImpedanceInput): ImpedanceProps {
+    const tSPAndImpedanceCurve = input.measurements.split(/[*]\r\n[*]\r\nFreq.*\r\n/);
+    const thieleSmallParameters = this.mapThieleSmallParameters(tSPAndImpedanceCurve[0]);
+    const impedanceCurve = this.mapImpedanceCurve(tSPAndImpedanceCurve[1]);
+    return { ...thieleSmallParameters, ...{ cabinetUid: input.cabinetUid }, ...{ impedanceCurve } };
   }
 
   mapThieleSmallParameters(parameters: string): ThieleSmallParameters {
@@ -147,35 +141,39 @@ export class RegisterImpedanceService implements RegisterImpedanceInputPort {
     return undefined;
   }
 
-  createFakePayload(): Impedance {
-    return new Impedance({
-      source: '',
-      pistonDiameter: '',
-      resonanceFrequency: '1',
-      dcResistance: '1',
-      acResistance: '1',
-      mechanicalDamping: '1',
-      electricalDamping: '1',
-      totalDamping: '1',
-      equivalenceCompliance: '',
-      voiceCoilInductance: '1',
-      efficiency: '',
-      sensitivity: '',
-      coneMass: '',
-      suspensionCompliance: '1',
-      forceFactor: '',
-      kR: '',
-      xR: '',
-      kI: '',
-      xI: '',
-      cabinetUid: '',
-      impedanceCurve: [
-        {
-          frequency: 1,
-          impedance: 1,
-          phase: 1,
-        },
-      ],
-    });
+  mapImpedanceCurve(measurements: string): ImpedanceMeasurement[] {
+    const splitMeasurements: string[] = measurements.split(/\n/);
+    const impedanceCurveInMemory: ImpedanceMeasurement[] = [];
+    for (const measurement of splitMeasurements) {
+      const frequencyPhaseAndImpedance: ImpedanceMeasurement | undefined =
+        this.mapFrequencyPhaseAndImpedance(measurement);
+      if (frequencyPhaseAndImpedance) impedanceCurveInMemory.push(frequencyPhaseAndImpedance);
+    }
+    return impedanceCurveInMemory;
+  }
+
+  mapFrequencyPhaseAndImpedance(measurement: string): ImpedanceMeasurement | undefined {
+    const extractedFrequencyPhaseAndImpedance = measurement.trim().split(/\s+/);
+    if (!this.isValidMeasurement(extractedFrequencyPhaseAndImpedance)) return;
+    return {
+      frequency: Number(extractedFrequencyPhaseAndImpedance[0]),
+      impedance: Number(extractedFrequencyPhaseAndImpedance[1]),
+      phase: Number(extractedFrequencyPhaseAndImpedance[2]),
+    };
+  }
+
+  isValidMeasurement(measurement: string[]): boolean {
+    return this.doPhaseImpedanceAndFrequencyExist(measurement) && this.areValidValues(measurement) ? true : false;
+  }
+
+  doPhaseImpedanceAndFrequencyExist(measurement: string[]): boolean {
+    return measurement.length === 3 ? true : false;
+  }
+
+  areValidValues(measurement: string[]): boolean {
+    for (const value of measurement) {
+      if (value.length === 0) return false;
+    }
+    return true;
   }
 }
