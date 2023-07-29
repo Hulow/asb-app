@@ -76,6 +76,7 @@ import {
 } from './impedance/core/application/ports/in/register-impedance.input-port';
 import { RegisterImpedanceService } from './impedance/core/application/services/register-impedance.service';
 import { RegisterImpedanceController } from './impedance/adapters/in/web/register-impedance.controller';
+import {
   RegisterImpulseInputPort,
   REGISTER_IMPULSE_INPUT_PORT,
 } from './impulse/core/application/ports/in/register-impulse.input-port';
