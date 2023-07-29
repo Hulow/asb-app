@@ -24,9 +24,9 @@ export interface ImpedanceProps {
   impedanceCurve: ImpedanceMeasurement[];
 }
 
-export type ThieleSmallParameters = Omit<ImpedanceProps, 'impedanceCurve'>;
+export type ThieleSmallParameters = Omit<ImpedanceProps, 'impedanceCurve' | 'cabinetUid'>;
 
-export interface ImpedanceMeasurement { 
+export interface ImpedanceMeasurement {
   frequency: number;
   impedance: number;
   phase: number;

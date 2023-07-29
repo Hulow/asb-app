@@ -6,9 +6,9 @@ import { ExpressController } from '../../../../shared/adapters/in/express-web-se
 import {
   RegisterImpedanceInputPort,
   REGISTER_IMPEDANCE_INPUT_PORT,
-  RegisterImpedanceInput
+  RegisterImpedanceInput,
 } from '../../../core/application/ports/in/register-impedance.input-port';
-import { ImpedanceAlreadyExists } from '../../../core/domain/errors';
+import { ImpedanceAlreadyExists, UnableToExtractImpedanceData } from '../../../core/domain/errors';
 import { CabinetDoesNotExist } from '../../../../cabinet/core/domain/errors';
 
 @injectable()
@@ -32,6 +32,7 @@ export class RegisterImpedanceController implements ExpressController {
     } catch (error) {
       if (error instanceof ImpedanceAlreadyExists) throw new httpErrors.NotFound(error.message);
       if (error instanceof CabinetDoesNotExist) throw new httpErrors.NotFound(error.message);
+      if (error instanceof UnableToExtractImpedanceData) throw new httpErrors.NotFound(error.message);
       throw error;
     }
   }

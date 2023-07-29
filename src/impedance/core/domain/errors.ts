@@ -11,3 +11,9 @@ export class ImpedanceParameterNotFound extends DomainError {
     super(`${parameter} parameter from impedance not found`);
   }
 }
+
+export class UnableToExtractImpedanceData extends DomainError {
+  constructor() {
+    super('Unable to extract impedance data');
+  }
+}
