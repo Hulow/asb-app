@@ -57,6 +57,13 @@ import { RegisterCabinetService } from './cabinet/core/application/services/regi
 import { RegisterCabinetController } from './cabinet/adapters/in/web/register-cabinet.controller';
 
 import {
+  GetCabinetsPerOwnerInputPort,
+  GET_CABINETS_PER_OWNER_INPUT_PORT,
+} from './cabinet/core/application/ports/in/get-cabinets-per-owner.input-port';
+import { GetCabinetsPerOwnerService } from './cabinet/core/application/services/get-cabinets-per-owner.service';
+import { GetCabinetsPerOwnerController } from './cabinet/adapters/in/web/get-cabinets-per-owner.controller';
+
+import {
   RegisterFrequencyInputPort,
   REGISTER_FREQUENCY_INPUT_PORT,
 } from './frequency/core/application/ports/in/register-frequency.input-port';
@@ -69,6 +76,18 @@ import {
 } from './impedance/core/application/ports/in/register-impedance.input-port';
 import { RegisterImpedanceService } from './impedance/core/application/services/register-impedance.service';
 import { RegisterImpedanceController } from './impedance/adapters/in/web/register-impedance.controller';
+  RegisterImpulseInputPort,
+  REGISTER_IMPULSE_INPUT_PORT,
+} from './impulse/core/application/ports/in/register-impulse.input-port';
+import { RegisterImpulseService } from './impulse/core/application/services/register-impulse.service';
+import { RegisterImpulseController } from './impulse/adapters/in/web/register-impulse.controller';
+
+import {
+  GetOwnersOverviewInputPort,
+  GET_OWNERS_OVERVIEW_INPUT_PORT,
+} from './owner/core/application/ports/in/get-owners-overview.input-port';
+import { GetOwnersOverviewService } from './owner/core/application/services/get-owners-overview.service';
+import { GetOwnersOverviewController } from './owner/adapters/in/web/get-owners-overview.controller';
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -86,6 +105,9 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
     container.get(RegisterImpedanceController),
+    container.get(RegisterImpulseController),
+    container.get(GetCabinetsPerOwnerController),
+    container.get(GetOwnersOverviewController),
   ];
   return new ExpressWebServer(config.express, container.get(LOGGER_OUTPUT_PORT), controllers);
 });
@@ -98,6 +120,9 @@ container.bind<RegisterCabinetInputPort>(REGISTER_CABINET_INPUT_PORT).to(Registe
 container.bind<RegisterDriverInputPort>(REGISTER_DRIVER_INPUT_PORT).to(RegisterDriverService);
 container.bind<RegisterFrequencyInputPort>(REGISTER_FREQUENCY_INPUT_PORT).to(RegisterFrequencyService);
 container.bind<RegisterImpedanceInputPort>(REGISTER_IMPEDANCE_INPUT_PORT).to(RegisterImpedanceService);
+container.bind<RegisterImpulseInputPort>(REGISTER_IMPULSE_INPUT_PORT).to(RegisterImpulseService);
+container.bind<GetCabinetsPerOwnerInputPort>(GET_CABINETS_PER_OWNER_INPUT_PORT).to(GetCabinetsPerOwnerService);
+container.bind<GetOwnersOverviewInputPort>(GET_OWNERS_OVERVIEW_INPUT_PORT).to(GetOwnersOverviewService);
 
 /**
  *  output/driven/secondary adapters
@@ -110,6 +135,5 @@ container.bind<CabinetRepositoryOutputPort>(CABINET_REPOSITORY_OUTPUT_PORT).to(S
 container.bind<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT).to(SqlDriverRepository);
 container.bind<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT).to(SqlFrequencyRepository);
 container.bind<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT).to(SqlImpulseRepository);
-
 container.bind<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT).to(SqlOwnerRepository);
 container.bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT).to(SqlImpedanceRepository);

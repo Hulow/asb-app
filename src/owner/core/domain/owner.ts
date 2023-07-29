@@ -31,3 +31,8 @@ export class Owner extends DomainEntity {
     this.description = props.description;
   }
 }
+
+export interface OwnerOverview {
+  ownerUid: string;
+  ownername: string;
+}

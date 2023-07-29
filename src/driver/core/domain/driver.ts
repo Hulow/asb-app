@@ -33,3 +33,10 @@ export class Driver extends DomainEntity {
     this.cabinetUid = props.cabinetUid;
   }
 }
+
+export interface DriverOverview {
+  driverUid: string;
+  brandName: string;
+  productName: string;
+  driverType: string;
+}

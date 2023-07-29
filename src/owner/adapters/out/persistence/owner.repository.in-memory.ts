@@ -25,4 +25,9 @@ export class InMemoryOwnerRepository implements OwnerRepositoryOutputPort {
     const owner = new Owner({ ..._owner });
     return Promise.resolve(owner);
   }
+
+  async getAllOwners() {
+    if (!this.owners.length) return;
+    return Promise.resolve(this.owners);
+  }
 }
