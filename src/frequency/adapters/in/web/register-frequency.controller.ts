@@ -33,6 +33,7 @@ export class RegisterFrequencyController implements ExpressController {
       if (error instanceof FrequencyAlreadyExists) throw new httpErrors.NotFound(error.message);
       if (error instanceof FrequencyParameterNotFound) throw new httpErrors.NotFound(error.message);
       if (error instanceof CabinetDoesNotExist) throw new httpErrors.NotFound(error.message);
+      throw error;
     }
   }
 }
