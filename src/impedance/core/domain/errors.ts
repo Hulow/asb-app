@@ -6,6 +6,12 @@ export class ImpedanceAlreadyExists extends DomainError {
   }
 }
 
+export class ImpedanceNotFound extends DomainError {
+  constructor(cabinetUid: string) {
+    super(`Unable to find impedance from cabinet ${cabinetUid}`);
+  }
+}
+
 export class ImpedanceParameterNotFound extends DomainError {
   constructor(parameter: string) {
     super(`${parameter} parameter from impedance not found`);
