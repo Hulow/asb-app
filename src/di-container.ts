@@ -71,6 +71,12 @@ import { RegisterFrequencyService } from './frequency/core/application/services/
 import { RegisterFrequencyController } from './frequency/adapters/in/web/register-frequency.controller';
 
 import {
+  RegisterImpedanceInputPort,
+  REGISTER_IMPEDANCE_INPUT_PORT,
+} from './impedance/core/application/ports/in/register-impedance.input-port';
+import { RegisterImpedanceService } from './impedance/core/application/services/register-impedance.service';
+import { RegisterImpedanceController } from './impedance/adapters/in/web/register-impedance.controller';
+import {
   RegisterImpulseInputPort,
   REGISTER_IMPULSE_INPUT_PORT,
 } from './impulse/core/application/ports/in/register-impulse.input-port';
@@ -99,6 +105,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterCabinetController),
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
+    container.get(RegisterImpedanceController),
     container.get(RegisterImpulseController),
     container.get(GetCabinetsPerOwnerController),
     container.get(GetOwnersOverviewController),
@@ -113,6 +120,7 @@ container.bind<RegisterOwnerInputPort>(REGISTER_OWNER_INPUT_PORT).to(RegisterOwn
 container.bind<RegisterCabinetInputPort>(REGISTER_CABINET_INPUT_PORT).to(RegisterCabinetService);
 container.bind<RegisterDriverInputPort>(REGISTER_DRIVER_INPUT_PORT).to(RegisterDriverService);
 container.bind<RegisterFrequencyInputPort>(REGISTER_FREQUENCY_INPUT_PORT).to(RegisterFrequencyService);
+container.bind<RegisterImpedanceInputPort>(REGISTER_IMPEDANCE_INPUT_PORT).to(RegisterImpedanceService);
 container.bind<RegisterImpulseInputPort>(REGISTER_IMPULSE_INPUT_PORT).to(RegisterImpulseService);
 container.bind<GetCabinetsPerOwnerInputPort>(GET_CABINETS_PER_OWNER_INPUT_PORT).to(GetCabinetsPerOwnerService);
 container.bind<GetOwnersOverviewInputPort>(GET_OWNERS_OVERVIEW_INPUT_PORT).to(GetOwnersOverviewService);

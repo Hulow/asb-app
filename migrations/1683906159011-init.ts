@@ -25,7 +25,10 @@ export class init1683906159011 implements MigrationInterface {
       `ALTER TABLE "frequency" ADD CONSTRAINT "FK_296304c6522d65cca4ee43671db" FOREIGN KEY ("cabinet_uid") REFERENCES "cabinet"("cabinet_uid") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
     await queryRunner.query(
-      `CREATE TABLE "impedance" ("impedance_uid" uuid NOT NULL, CONSTRAINT "PK_197314cb3b86f25abee280469ff" PRIMARY KEY ("impedance_uid"))`,
+      `CREATE TABLE "impedance" ("impedance_uid" uuid NOT NULL, "source" varchar NOT NULL, "piston_diameter" varchar NOT NULL, "resonance_frequency" varchar NOT NULL, "dc_resistance" varchar NOT NULL, "ac_resistance" varchar NOT NULL, "mechanical_damping" varchar NOT NULL, "electrical_damping" varchar NOT NULL, "total_damping" varchar NOT NULL, "equivalence_compliance" varchar NOT NULL, "voice_coil_inductance" varchar NOT NULL, "efficiency" varchar NOT NULL, "sensitivity" varchar NOT NULL, "cone_mass" varchar NOT NULL, "suspension_compliance" varchar NOT NULL, "force_factor" varchar NOT NULL, "kr" varchar NOT NULL, "xr" varchar NOT NULL, "ki" varchar NOT NULL, "xi" varchar NOT NULL, "cabinet_uid" uuid NOT NULL, "impedance_curve" jsonb NOT NULL, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), CONSTRAINT "PK_197314cb3b86f25abee280469ff" PRIMARY KEY ("impedance_uid"))`,
+    );
+    await queryRunner.query(
+      `ALTER TABLE "impedance" ADD CONSTRAINT "FK_296304c6522d65cca4ee43673dc" FOREIGN KEY ("cabinet_uid") REFERENCES "cabinet"("cabinet_uid") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
     await queryRunner.query(
       `CREATE TABLE "impulse" ("impulse_uid" uuid NOT NULL, "measured_by" varchar NOT NULL, "source" varchar NOT NULL, "measured_at" varchar NOT NULL, "sweep_length" varchar NOT NULL, "response_window" varchar NOT NULL, "note" varchar NOT NULL, "peak_value_before_initialization" varchar NOT NULL, "peak_index" varchar NOT NULL, "response_length" varchar NOT NULL, "sample_interval" varchar NOT NULL, "start_time" varchar NOT NULL,  "measurements" jsonb NOT NULL, "cabinet_uid" uuid NOT NULL, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), CONSTRAINT "PK_defcb32ebd8a501832969358f0f" PRIMARY KEY ("impulse_uid"))`,
@@ -39,6 +42,7 @@ export class init1683906159011 implements MigrationInterface {
     await queryRunner.query(`ALTER TABLE "cabinet" DROP CONSTRAINT "FK_296304c6522d65c506b46fbfe4a"`);
     await queryRunner.query(`ALTER TABLE "driver" DROP CONSTRAINT "FK_32bcbf28fad994478cc02ccbefa"`);
     await queryRunner.query(`ALTER TABLE "frequency" DROP CONSTRAINT "FK_296304c6522d65cca4ee43671db"`);
+    await queryRunner.query(`ALTER TABLE "impedance" DROP CONSTRAINT "FK_296304c6522d65cca4ee43673dc"`);
     await queryRunner.query(`ALTER TABLE "impulse" DROP CONSTRAINT "FK_df955cae05f17b2bcf5045cc022"`);
     await queryRunner.query(`DROP TABLE "owner"`);
     await queryRunner.query(`DROP TABLE "cabinet"`);

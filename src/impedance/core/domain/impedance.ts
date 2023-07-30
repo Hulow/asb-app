@@ -1,49 +1,63 @@
 import { DomainEntity, EntityProps } from '../../../shared/domain/entity';
 
 export interface ImpedanceProps {
-  pistonDiameter: number;
-  resonanceFrequency: number;
-  dcResistance: number;
-  acResistance: number;
-  mechanicalDamping: number;
-  electricalDamping: number;
-  totalDamping: number;
-  equivalenceCompliance: number;
-  voiceCoilInductance: number;
-  efficiency: number;
-  sensitivity: number;
-  coneMass: number;
-  suspensionCompliance: number;
-  forceFactor: number;
-  kR: number;
-  xR: number;
-  kI: number;
-  xI: number;
+  source: string;
+  pistonDiameter: string;
+  resonanceFrequency: string;
+  dcResistance: string;
+  acResistance: string;
+  mechanicalDamping: string;
+  electricalDamping: string;
+  totalDamping: string;
+  equivalenceCompliance: string;
+  voiceCoilInductance: string;
+  efficiency: string;
+  sensitivity: string;
+  coneMass: string;
+  suspensionCompliance: string;
+  forceFactor: string;
+  kR: string;
+  xR: string;
+  kI: string;
+  xI: string;
+  cabinetUid: string;
+  impedanceCurve: ImpedanceMeasurement[];
+}
+
+export type ThieleSmallParameters = Omit<ImpedanceProps, 'impedanceCurve' | 'cabinetUid'>;
+
+export interface ImpedanceMeasurement {
+  frequency: number;
+  impedance: number;
+  phase: number;
 }
 
 export class Impedance extends DomainEntity {
-  readonly pistonDiameter: number;
-  readonly resonanceFrequency: number;
-  readonly dcResistance: number;
-  readonly acResistance: number;
-  readonly mechanicalDamping: number;
-  readonly electricalDamping: number;
-  readonly totalDamping: number;
-  readonly equivalenceCompliance: number;
-  readonly voiceCoilInductance: number;
-  readonly efficiency: number;
-  readonly sensitivity: number;
-  readonly coneMass: number;
-  readonly suspensionCompliance: number;
-  readonly forceFactor: number;
-  readonly kR: number;
-  readonly xR: number;
-  readonly kI: number;
-  readonly xI: number;
+  readonly source: string;
+  readonly pistonDiameter: string;
+  readonly resonanceFrequency: string;
+  readonly dcResistance: string;
+  readonly acResistance: string;
+  readonly mechanicalDamping: string;
+  readonly electricalDamping: string;
+  readonly totalDamping: string;
+  readonly equivalenceCompliance: string;
+  readonly voiceCoilInductance: string;
+  readonly efficiency: string;
+  readonly sensitivity: string;
+  readonly coneMass: string;
+  readonly suspensionCompliance: string;
+  readonly forceFactor: string;
+  readonly kR: string;
+  readonly xR: string;
+  readonly kI: string;
+  readonly xI: string;
+  readonly cabinetUid: string;
+  readonly impedanceCurve: ImpedanceMeasurement[];
 
   constructor(props: ImpedanceProps & EntityProps) {
     super(props);
-
+    this.source = props.source;
     this.pistonDiameter = props.pistonDiameter;
     this.resonanceFrequency = props.resonanceFrequency;
     this.dcResistance = props.dcResistance;
@@ -62,5 +76,7 @@ export class Impedance extends DomainEntity {
     this.xR = props.xR;
     this.kI = props.kI;
     this.xI = props.xI;
+    this.cabinetUid = props.cabinetUid;
+    this.impedanceCurve = props.impedanceCurve;
   }
 }
