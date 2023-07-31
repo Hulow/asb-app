@@ -44,6 +44,7 @@ function createCabinetOverview(cabinetUid: number): CabinetOverview {
     brandName: 'Clauz',
     productName: 'die Maschine',
     enclosureType: 'Poccochin',
+    createdAt: expect.any(Date) as Date,
   };
 }
 
@@ -51,6 +52,7 @@ function createOwnerOverview(ownerUid: number): OwnerOverview {
   return {
     ownerUid: `owner-${ownerUid}`,
     ownername: 'ownername',
+    createdAt: expect.any(Date) as Date,
   };
 }
 
