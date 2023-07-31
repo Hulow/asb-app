@@ -15,7 +15,7 @@ import { ImpedanceNotFound } from '../../../../impedance/core/domain/errors';
 
 @injectable()
 export class GetMeasurementPerCabinetController implements ExpressController {
-  readonly route = '/api/measurement-per-cabinet';
+  readonly route = '/api/measurement/measurement-per-cabinet';
   readonly method = 'get';
 
   constructor(
