@@ -68,7 +68,11 @@ export class GetCabinetsPerOwnerService implements GetCabinetsPerOwnerInputPort 
       const cabinetCollectionOverview = await this.mapCabinetCollectionOverview(cabinet);
       cabinetsCollectionOverview.push(cabinetCollectionOverview);
     }
-    return cabinetsCollectionOverview;
+    return this.sortCabinetsByCreatedAt(cabinetsCollectionOverview);
+  }
+
+  private sortCabinetsByCreatedAt(cabinetCollectionOverview: CabinetCollectionOverview[]): CabinetCollectionOverview[] {
+    return cabinetCollectionOverview.sort((a, b) => b.cabinet.createdAt.getTime() - a.cabinet.createdAt.getTime());
   }
 
   private async mapCabinetCollectionOverview(cabinet: Cabinet): Promise<CabinetCollectionOverview> {
@@ -87,6 +91,7 @@ export class GetCabinetsPerOwnerService implements GetCabinetsPerOwnerInputPort 
       brandName: cabinet.brandName,
       productName: cabinet.productName,
       enclosureType: cabinet.enclosureType,
+      createdAt: cabinet.createdAt,
     };
   }
 

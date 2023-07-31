@@ -35,7 +35,6 @@ export class GetCabinetsPerOwnerController implements ExpressController {
       if (error instanceof OwnerDoesNotExist) throw new httpErrors.NotFound(error.message);
       if (error instanceof CabinetsFromOwnerNotFound) throw new httpErrors.NotFound(error.message);
       if (error instanceof DriversNotFound) throw new httpErrors.NotFound(error.message);
-
       throw error;
     }
   }
