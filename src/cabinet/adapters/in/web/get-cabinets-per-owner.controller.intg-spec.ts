@@ -81,16 +81,14 @@ describe(`/api/cabinets-per-owner`, () => {
     };
     await driverRepository.save(existingDriver);
     await request(expressApp)
-      .get('/api/cabinets-per-owner')
+      .get('/api/cabinets-per-owner/ownername')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
-      .send({ ownername: 'ownername' })
       .expect(200);
   });
   it(`throws an error`, async () => {
     await request(expressApp)
-      .get('/api/cabinets-per-owner')
+      .get('/api/cabinets-per-owner/ownername')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
-      .send({ ownername: 'ownername' })
       .expect(500);
   });
 });

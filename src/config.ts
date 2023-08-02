@@ -23,7 +23,7 @@ export const config: Config = {
     asbKeyUrl: process.env.ASB_KEY_URL ?? 'asb',
   },
   express: {
-    port: +(process.env.EXPRESS_SERVER_PORT ?? 3000),
+    port: +(process.env.EXPRESS_SERVER_PORT ?? 5000),
     corsOrigin: process.env.EXPRESS_SERVER_CORS_ORIGIN ?? '*',
     hostname: process.env.EXPRESS_SERVER_HOSTNAME ?? 'localhost',
     asbKeyUrl: process.env.ASB_KEY_URL ?? 'asb',

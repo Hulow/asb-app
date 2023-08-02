@@ -128,7 +128,7 @@ const ownerRepository = container.get<OwnerRepositoryOutputPort>(OWNER_REPOSITOR
 const impedanceRepository = container.get<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT);
 const frequencyeRepository = container.get<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT);
 
-describe(`/api/measurement/measurement-per-cabinet`, () => {
+describe(`/api/measurement/:cabinetUid`, () => {
   beforeAll(async () => {
     await database.start();
   });
@@ -169,9 +169,8 @@ describe(`/api/measurement/measurement-per-cabinet`, () => {
     };
 
     const res: { body: { userUid: string } } = await request(expressApp)
-      .get('/api/measurement/measurement-per-cabinet')
+      .get('/api/measurement/4343b2ab-a22e-4d12-ac13-6bb399d4e513')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
-      .send({ cabinetUid: '4343b2ab-a22e-4d12-ac13-6bb399d4e513' })
       .expect(200);
     expect(await cabinetRepository.getById(res.body.userUid)).toMatchObject(cabinetInput);
   });
@@ -181,9 +180,8 @@ describe(`/api/measurement/measurement-per-cabinet`, () => {
     await ownerRepository.save(existingOwner);
 
     await request(expressApp)
-      .get('/api/measurement/measurement-per-cabinet')
+      .get('/api/measurement/4343b2ab-a22e-4d12-ac13-6bb399d4e513')
       .set({ Authorization: config.express.asbKeyUrl, Accept: 'application/json' })
-      .send({ cabinetUid: '4343b2ab-a22e-4d12-ac13-6bb399d4e513' })
       .expect(500);
   });
 });
