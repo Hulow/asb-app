@@ -2,7 +2,6 @@ import { InMemoryCabinetRepository } from '../../../../cabinet/adapters/out/pers
 import { InMemoryDriverRepository } from '../../../../driver/adapters/out/persistence/driver.repository.in-memory';
 import { InMemoryFrequencyRepository } from '../../../../frequency/adapters/out/persistence/frequency.repository.in-memory';
 import { InMemoryImpedanceRepository } from '../../../../impedance/adapters/out/persistence/impedance.repository.in-memory';
-import { GetMeasurementPerCabinetInput } from '../../application/ports/in/get-measurement-per-cabinet.input-port';
 import { GetMeasurementPerCabinetService } from './get-measurement-per-cabinet.service';
 import { Measurement } from '../../domain/measurement';
 import { Cabinet } from '../../../../cabinet/core/domain/cabinet';
@@ -127,9 +126,8 @@ describe('GetMeasurementPerCabinetService', () => {
     const impedance: Impedance = createImpedance(1, {});
     await impedanceRepoStub.save(impedance);
 
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
+
     const response = await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     const expectedResponse: Measurement = {
       cabinet: createCabinet(1, { createdAt: expect.any(Date) as Date, updatedAt: expect.any(Date) as Date }),
@@ -153,9 +151,7 @@ describe('GetMeasurementPerCabinetService', () => {
     const impedance: Impedance = createImpedance(1, {});
     await impedanceRepoStub.save(impedance);
 
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
     const response = await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     const expectedResponse: Measurement = {
       cabinet: createCabinet(1, { createdAt: expect.any(Date) as Date, updatedAt: expect.any(Date) as Date }),
@@ -170,9 +166,7 @@ describe('GetMeasurementPerCabinetService', () => {
   });
 
   it('Throws an error if the cabinet does not exists', async () => {
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
     try {
       await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     } catch (err) {
@@ -183,9 +177,7 @@ describe('GetMeasurementPerCabinetService', () => {
   it('Throws an error if drivers have not been found', async () => {
     const cabinet: Cabinet = createCabinet(1, {});
     await cabinetRepoStub.save(cabinet);
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
     try {
       await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     } catch (err) {
@@ -198,9 +190,7 @@ describe('GetMeasurementPerCabinetService', () => {
     await cabinetRepoStub.save(cabinet);
     const driver: Driver = createDriver(1, {});
     await driverRepoStub.save(driver);
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
     try {
       await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     } catch (err) {
@@ -215,9 +205,7 @@ describe('GetMeasurementPerCabinetService', () => {
     await driverRepoStub.save(driver);
     const frequency: Frequency = createFrequency(1, {});
     await frequencyRepoStub.save(frequency);
-    const getMeasurementPerCabinetInput: GetMeasurementPerCabinetInput = {
-      cabinetUid: 'cabinet-1',
-    };
+    const getMeasurementPerCabinetInput = 'cabinet-1';
     try {
       await getMeasurementPerCabinetService.handler(getMeasurementPerCabinetInput);
     } catch (err) {

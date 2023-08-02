@@ -1,9 +1,6 @@
 import { inject, injectable } from 'inversify';
 
-import {
-  GetMeasurementPerCabinetInputPort,
-  GetMeasurementPerCabinetInput,
-} from '../ports/in/get-measurement-per-cabinet.input-port';
+import { GetMeasurementPerCabinetInputPort } from '../ports/in/get-measurement-per-cabinet.input-port';
 import {
   CABINET_REPOSITORY_OUTPUT_PORT,
   CabinetRepositoryOutputPort,
@@ -39,8 +36,8 @@ export class GetMeasurementPerCabinetService implements GetMeasurementPerCabinet
     @inject(FREQUENCY_REPOSITORY_OUTPUT_PORT) private readonly frequencyRepository: FrequencyRepositoryOutputPort,
   ) {}
 
-  async handler(input: GetMeasurementPerCabinetInput): Promise<Measurement> {
-    return await this.mapMeasurement(input.cabinetUid);
+  async handler(cabinetUid: string): Promise<Measurement> {
+    return await this.mapMeasurement(cabinetUid);
   }
 
   private async mapMeasurement(cabinetUid: string): Promise<Measurement> {
