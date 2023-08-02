@@ -40,4 +40,5 @@ export interface CabinetOverview {
   brandName: string;
   productName: string;
   enclosureType: string;
+  createdAt: Date;
 }

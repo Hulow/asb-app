@@ -35,4 +35,5 @@ export class Owner extends DomainEntity {
 export interface OwnerOverview {
   ownerUid: string;
   ownername: string;
+  createdAt: Date;
 }

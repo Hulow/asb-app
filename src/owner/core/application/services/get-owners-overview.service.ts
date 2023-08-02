@@ -35,7 +35,7 @@ export class GetOwnersOverviewService implements GetOwnersOverviewInputPort {
     }
     return {
       ownersLength: owners.length,
-      owners: ownersCabinetsOverview,
+      owners: this.sortOwnersByCreatedAt(ownersCabinetsOverview),
     };
   }
 
@@ -53,6 +53,7 @@ export class GetOwnersOverviewService implements GetOwnersOverviewInputPort {
     return {
       ownerUid: owner.uid,
       ownername: owner.ownername,
+      createdAt: owner.createdAt,
     };
   }
 
@@ -64,7 +65,7 @@ export class GetOwnersOverviewService implements GetOwnersOverviewInputPort {
       const cabinetOverview: CabinetOverview = this.mapCabinetOverview(cabinet);
       cabinetsOverview.push(cabinetOverview);
     }
-    return cabinetsOverview;
+    return this.sortCabinetsByCreatedAt(cabinetsOverview);
   }
 
   private mapCabinetOverview(cabinet: Cabinet): CabinetOverview {
@@ -73,6 +74,15 @@ export class GetOwnersOverviewService implements GetOwnersOverviewInputPort {
       brandName: cabinet.brandName,
       productName: cabinet.productName,
       enclosureType: cabinet.enclosureType,
+      createdAt: cabinet.createdAt,
     };
+  }
+
+  private sortCabinetsByCreatedAt(cabinetCollectionOverview: CabinetOverview[]): CabinetOverview[] {
+    return cabinetCollectionOverview.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  private sortOwnersByCreatedAt(ownersOverview: OwnerCabinetsOverview[]): OwnerCabinetsOverview[] {
+    return ownersOverview.sort((a, b) => b.owner.createdAt.getTime() - a.owner.createdAt.getTime());
   }
 }
