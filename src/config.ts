@@ -1,11 +1,9 @@
-import dotenv from 'dotenv';
-
-import { AxiosConfig } from './shared/adapters/in/axios-client';
+import { AxiosConfig } from './shared/adapters/out/axios-client';
 import { ExpressConfig } from './shared/adapters/in/express-web-server';
 import { PostgresConfig } from './shared/adapters/out/postgres-datasource';
 import { LoggerConfig, LogLevel } from './shared/ports/out/logger.output-port';
 
-dotenv.config();
+require('dotenv').config({ path: '../.env' });
 
 interface Config {
   readonly logger: LoggerConfig;
