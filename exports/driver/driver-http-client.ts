@@ -1,4 +1,4 @@
-import { AxiosClient } from '../../src/shared/adapters/in/axios-client';
+import { AxiosClient } from '../../src/shared/adapters/out/axios-client';
 import { Driver } from '../../src/driver/core/domain/driver';
 import { RegisterDriverBody } from './export-driver';
 

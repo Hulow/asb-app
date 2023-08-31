@@ -1,4 +1,4 @@
-import { AxiosClient } from '../../src/shared/adapters/in/axios-client';
+import { AxiosClient } from '../../src/shared/adapters/out/axios-client';
 import { Owner } from '../../src/owner/core/domain/owner';
 import { RegisterOwnerBody } from './export-owner';
 
