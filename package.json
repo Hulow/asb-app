@@ -11,7 +11,6 @@
     "mig:create": "npm run _typeorm migration:create",
     "mig:run": "npm run _typeorm migration:run -d",
     "mig:revert": "npm run _typeorm migration:revert",
-    "mig:test:run": "NODE_ENV=test npm run _typeorm migration:run -d",
     "mig:test:revert": "NODE_ENV=test npm run _typeorm migration:revert"
   },
   "dependencies": {
