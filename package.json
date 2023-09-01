@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "test:unit": "jest --testMatch='**/*.spec.ts' --testPathPattern",
     "test:intg": "jest --testMatch='**/*.intg-spec.ts' --runInBand --testPathPattern",
-    "_typeorm": "ts-node ./node_modules/.bin/typeorm -d ./ormconfig.js",
+    "_typeorm": "ts-node ./node_modules/typeorm/cli.js -d ./ormconfig.js",
     "mig:create": "npm run _typeorm migration:create",
     "mig:run": "npm run _typeorm migration:run -d",
     "mig:revert": "npm run _typeorm migration:revert",
