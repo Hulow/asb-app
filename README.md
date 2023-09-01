@@ -6,7 +6,7 @@
   - Impulse response
   - Frequency response
   - Impedance response
-- The main focus of this project is learning and helping people having a better understanding on the balance between:
+- The main focus of this project is learning and helping people to have a better understanding of the balance between:
   - Loudspeaker driver characteristics choice
   - Loudspeaker enclosure design
 
