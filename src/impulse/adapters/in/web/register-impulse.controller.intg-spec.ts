@@ -32,7 +32,6 @@ describe(`/api/impulse/register`, () => {
   });
 
   afterEach(async () => {
-    jest.setTimeout(60000);
     await database.clear();
   });
 

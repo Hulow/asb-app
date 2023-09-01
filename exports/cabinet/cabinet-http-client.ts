@@ -1,4 +1,4 @@
-import { AxiosClient } from '../../src/shared/adapters/in/axios-client';
+import { AxiosClient } from '../../src/shared/adapters/out/axios-client';
 import { Cabinet } from '../../src/cabinet/core/domain/cabinet';
 import { RegisterCabinetBody } from './export-cabinet';
 

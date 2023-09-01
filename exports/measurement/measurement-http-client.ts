@@ -1,4 +1,4 @@
-import { AxiosClient } from '../../src/shared/adapters/in/axios-client';
+import { AxiosClient } from '../../src/shared/adapters/out/axios-client';
 import { MeasurementEndPoint } from './export-measurement';
 
 import { RegisterMeasurementBody } from './export-measurement';

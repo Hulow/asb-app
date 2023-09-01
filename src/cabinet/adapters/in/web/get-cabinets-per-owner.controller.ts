@@ -25,7 +25,6 @@ export class GetCabinetsPerOwnerController implements ExpressController {
     const { ownername } = req.params;
     if (!ownername) throw new httpErrors.BadRequest('ownername cannot be empty');
     try {
-      console.log(this.sanitizeOwnername(ownername));
       const response = await this.getCabinetsPerOwnerService.handler(this.sanitizeOwnername(ownername));
       res.json(response);
     } catch (error) {
