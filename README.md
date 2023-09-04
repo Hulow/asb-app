@@ -44,11 +44,12 @@ The application is decoupled into 8 hexagones:
 - Owner
 - Shared
 
-# InversifyJS
+# IoC Container from InversifyJS
 
 - InversifyJS is a lightweight library providing a IoC container defined in `./src/di-container.ts`.
 - This is the only place in which there is some coupling.
-- It's where all classes resolve their own dependancies after setting up your intefaces and declaring your dependancies via `@injectable` & `@inject` decorators.
+- It's where all classes associate & resolve their own dependancies.
+- We use `@injectable` & `@inject` decorators to instruct InversifyJS where to inject dependencies.
 - The application then run by executing this container in `./src/index.ts`.
 
 # Getting Started
