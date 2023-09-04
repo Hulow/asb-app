@@ -17,7 +17,7 @@ export const config: Config = {
     level: (process.env.LOG_LEVEL ?? LogLevel.Info) as LogLevel,
   },
   axios: {
-    asbBaseUrl: process.env.ASB_BASE_URL ?? 'http://localhost:3000',
+    asbBaseUrl: process.env.ASB_BASE_URL ?? 'http://localhost:5000',
     asbKeyUrl: process.env.ASB_KEY_URL ?? 'asb',
   },
   express: {
