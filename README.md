@@ -17,7 +17,7 @@ The mechanism of this application is driven by the IoC container provided by Inv
 # Hexagonal Architecture
 
 <p align="center">
-  <img width="597" alt="Screenshot 2023-08-31 at 19 17 54" src="https://github.com/Hulow/asb-server/assets/62727580/38a48467-6961-4020-a210-4fd400da084c">
+  <img width="931" alt="Screenshot 2023-09-04 at 17 51 52" src="https://github.com/Hulow/asb-app/assets/62727580/d1bb0018-5663-48f3-b7ab-1e781e484a83">
 </p>
 
 ## 2 sides of the application
