@@ -27,9 +27,9 @@ The mechanism of this application is driven by the IoC container provided by Inv
 
 ## Components
 
-- `Application`: this is the hexagone where the core logic is
-- `Port`: It's an abstration or a contract, this is the way for the application to interact with an outside system without knowing anything
-- `Adapter`: It's a converter who takes the input or output of your application and converts into something...
+- `Application`: this is the hexagone where the core logic is, receiving commands from the port and sends request out via port as well.
+- `Port`: this is an interface which allows foreign actors to communicate with the Application.
+- `Adapter`: It's a converter who interact with the application through a port.
 
 ## Hexagones
 
