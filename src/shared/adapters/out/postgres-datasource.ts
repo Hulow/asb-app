@@ -40,6 +40,7 @@ export class PostgresDataSource extends DataSource {
     for (const entity of this.entityMetadatas) {
       const repository = this.getRepository(entity.name);
       await repository.query(`TRUNCATE ${entity.tableName} RESTART IDENTITY CASCADE;`);
+      this._logger.info(`Table ${entity.tableName} has been truncated`);
     }
   }
 }
