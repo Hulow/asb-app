@@ -86,6 +86,12 @@ docker-compose up
 npm run mig:run
 ```
 
+## Seed the database
+
+```shell
+npm run seed:db
+```
+
 ### Run the service
 
 ```shell
@@ -128,6 +134,7 @@ npm run test:intg
 | `npm run mig:run`         | Run the database migrations                        |
 | `npm run mig:revert`      | Revert the last database migration                 |
 | `npm run mig:test:revert` | Revert the last database migration for testing env |
+| `npm run seed:db`         | Seed the database for development environment      |
 
 # Notes
 
