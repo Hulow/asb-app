@@ -94,7 +94,7 @@ function generateOwner(uid: string): Owner {
     email: faker.internet.email(),
     phoneNumber: faker.phone.number(),
     city: faker.location.city(),
-    description: faker.person.bio(),
+    description: faker.commerce.productDescription(),
     createdAt: new Date(),
     updatedAt: new Date(),
   };
