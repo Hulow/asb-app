@@ -11,7 +11,8 @@
     "mig:create": "npm run _typeorm migration:create",
     "mig:run": "npm run _typeorm migration:run -d",
     "mig:revert": "npm run _typeorm migration:revert",
-    "mig:test:revert": "NODE_ENV=test npm run _typeorm migration:revert"
+    "mig:test:revert": "NODE_ENV=test npm run _typeorm migration:revert",
+    "seed:db": "npx ts-node ./exports/seed-db/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
