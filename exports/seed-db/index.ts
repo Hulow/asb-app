@@ -23,16 +23,17 @@ import {
   FrequencyRepositoryOutputPort,
   FREQUENCY_REPOSITORY_OUTPUT_PORT,
 } from '../../src/frequency/core/application/ports/out/frequency-repository.output-port';
+
 import {
-  ImpulseRepositoryOutputPort,
-  IMPULSE_REPOSITORY_OUTPUT_PORT,
-} from '../../src/impulse/core/application/ports/out/impulse-repository.output-port';
+  ImpedanceRepositoryOutputPort,
+  IMPEDANCE_REPOSITORY_OUTPUT_PORT,
+} from '../../src/impedance/core/application/ports/out/impedance-repository.output-port';
 
 import { Owner } from '../../src/owner/core/domain/owner';
 import { Driver } from '../../src/driver/core/domain/driver';
 import { Cabinet } from '../../src/cabinet/core/domain/cabinet';
 import { Frequency, FrequencyResponse } from '../../src/frequency/core/domain/frequency';
-import { Impulse, ImpulseGraph } from '../../src/impulse/core/domain/impulse';
+import { Impedance, ImpedanceMeasurement } from '../../src/impedance/core/domain/impedance';
 
 const database = container.get(PostgresDataSource);
 const logger = container.get<LoggerOutputPort>(LOGGER_OUTPUT_PORT);
@@ -40,7 +41,7 @@ const ownerRepository = container.get<OwnerRepositoryOutputPort>(OWNER_REPOSITOR
 const driverRepository = container.get<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT);
 const cabinetRepository = container.get<CabinetRepositoryOutputPort>(CABINET_REPOSITORY_OUTPUT_PORT);
 const frequencyRepository = container.get<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT);
-const impulseRepository = container.get<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT);
+const impedanceRepository = container.get<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT);
 
 async function seedDatabase() {
   await database.start();
@@ -60,9 +61,9 @@ async function seedDatabase() {
       await cabinetRepository.save(newCabinet);
       logger.info(`Cabinet ${CABINETS_PER_OWNER_COUNTER} has been stored into Db`);
 
-      const newImpulse = generateImpulse(cabinetUid);
-      await impulseRepository.save(newImpulse);
-      logger.info(`Impulse ${CABINETS_PER_OWNER_COUNTER} has been stored into Db`);
+      const newImpedance = generateImpedance(cabinetUid);
+      await impedanceRepository.save(newImpedance);
+      logger.info(`Impedance ${CABINETS_PER_OWNER_COUNTER} has been stored into Db`);
 
       const newFrequency = generateFrequency(cabinetUid);
       await frequencyRepository.save(newFrequency);
@@ -132,27 +133,35 @@ function generateDriver(uid: string, cabinetUid: string): Driver {
   };
 }
 
-function generateImpulse(cabinetUid: string): Impulse {
-  const measurements: ImpulseGraph[] = JSON.parse(
-    fs.readFileSync(path.join(__dirname, './data/impulse.json')).toString('utf-8'),
+function generateImpedance(cabinetUid: string): Impedance {
+  const measurements: ImpedanceMeasurement[] = JSON.parse(
+    fs.readFileSync(path.join(__dirname, './data/impedance.json')).toString('utf-8'),
   );
   return {
     uid: faker.string.uuid(),
     createdAt: new Date(),
     updatedAt: new Date(),
-    measuredBy: 'REW V5.20.13',
-    note: 'impulse_response',
-    source: 'Scarlett 2i2 USB',
-    measuredAt: 'Mar 22, 2023 2:53:43 PM',
-    sweepLength: '512k Log Swept Sine',
-    responseWindow: '15.1 to 20,000.0 Hz',
-    measurements: measurements,
-    peakValueBeforeInitialization: '0.1058686152100563',
-    peakIndex: '5513',
-    responseLength: '27564',
-    sampleInterval: '2.2675736961451248E-5',
-    startTime: '-0.12501133786848073',
+    source: 'DATS',
+    pistonDiameter: '393',
+    resonanceFrequency: '40.17',
+    dcResistance: '5.107',
+    acResistance: '151.4',
+    mechanicalDamping: '13.14',
+    electricalDamping: '0.4587',
+    totalDamping: '0.4432',
+    equivalenceCompliance: '173',
+    voiceCoilInductance: '1.473',
+    efficiency: '2.331',
+    sensitivity: '95.78',
+    coneMass: '187.5',
+    suspensionCompliance: '0.084',
+    forceFactor: '22.95',
+    kR: '0.05354',
+    xR: '0.5762',
+    kI: '0.04204',
+    xI: '0.6239',
     cabinetUid: cabinetUid,
+    impedanceCurve: measurements,
   };
 }
 
