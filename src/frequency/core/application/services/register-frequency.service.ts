@@ -12,7 +12,7 @@ import {
 } from '../../../../cabinet/core/application/ports/out/cabinet-repository.output-port';
 import { FrequencyAlreadyExists } from '../../domain/errors';
 import { CabinetDoesNotExist } from '../../../../cabinet/core/domain/errors';
-import { FrequencyMapper } from '../../../adapters/out/persistence/frequency.mapper';
+import { FrequencyMapper } from '../../../adapters/out/frequency.mapper';
 
 @injectable()
 export class RegisterFrequencyService implements RegisterFrequencyInputPort {

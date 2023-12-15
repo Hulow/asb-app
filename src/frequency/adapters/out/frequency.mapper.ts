@@ -1,6 +1,6 @@
-import { RegisterFrequencyInput } from '../../../core/application/ports/in/register-frequency.input-port';
-import { FrequencyParameterNotFound } from '../../../core/domain/errors';
-import { FrequencyProps, FrequencyResponse } from '../../../core/domain/frequency';
+import { RegisterFrequencyInput } from '../../core/application/ports/in/register-frequency.input-port';
+import { FrequencyParameterNotFound } from '../../core/domain/errors';
+import { FrequencyProps, FrequencyResponse } from '../../core/domain/frequency';
 
 export class FrequencyMapper {
   constructor(private _input: RegisterFrequencyInput) {}
