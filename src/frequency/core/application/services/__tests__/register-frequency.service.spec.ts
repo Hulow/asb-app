@@ -11,16 +11,19 @@ import { Frequency } from '../../../domain/frequency';
 import { Cabinet } from '../../../../../cabinet/core/domain/cabinet';
 import { FrequencyAlreadyExists, FrequencyParameterNotFound } from '../../../domain/errors';
 import { CabinetDoesNotExist } from '../../../../../cabinet/core/domain/errors';
+import { FrequencyMapper } from '../../../../adapters/out/frequency.mapper';
 
 describe('RegisterFrequencyService', () => {
   let cabinetRepoStub: InMemoryCabinetRepository;
   let frequencyRepoStub: InMemoryFrequencyRepository;
   let registerfrequencyService: RegisterFrequencyService;
+  let frequencyMapper: FrequencyMapper;
 
   beforeEach(() => {
     cabinetRepoStub = new InMemoryCabinetRepository();
     frequencyRepoStub = new InMemoryFrequencyRepository();
-    registerfrequencyService = new RegisterFrequencyService(frequencyRepoStub, cabinetRepoStub);
+    frequencyMapper = new FrequencyMapper();
+    registerfrequencyService = new RegisterFrequencyService(frequencyRepoStub, cabinetRepoStub, frequencyMapper);
   });
   it('register a frequency', async () => {
     const measurementFile = fs.readFileSync(path.join(__dirname, './inputs/frequency_response.txt'), 'utf8');
