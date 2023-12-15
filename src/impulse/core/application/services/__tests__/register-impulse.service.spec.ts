@@ -11,16 +11,19 @@ import { Impulse } from '../../../domain/impulse';
 import { Cabinet } from '../../../../../cabinet/core/domain/cabinet';
 import { ImpulseSettingNotFound, ImpulseAlreadyExists, MissingImpulseGraphDataFound } from '../../../domain/errors';
 import { CabinetDoesNotExist } from '../../../../../cabinet/core/domain/errors';
+import { ImpulseMapper } from '../../../../adapters/out/impulse.mapper';
 
 describe('RegisterImpulseService', () => {
   let cabinetRepoStub: InMemoryCabinetRepository;
   let impulseRepoStub: InMemoryImpulseRepository;
   let registerimpulseService: RegisterImpulseService;
+  let impulseMapper: ImpulseMapper;
 
   beforeEach(() => {
     cabinetRepoStub = new InMemoryCabinetRepository();
     impulseRepoStub = new InMemoryImpulseRepository();
-    registerimpulseService = new RegisterImpulseService(impulseRepoStub, cabinetRepoStub);
+    impulseMapper = new ImpulseMapper();
+    registerimpulseService = new RegisterImpulseService(impulseRepoStub, cabinetRepoStub, impulseMapper);
   });
   it('register an impulse', async () => {
     const measurementFile = fs.readFileSync(path.join(__dirname, './inputs/impulse_response.txt'), 'utf8');
