@@ -9,21 +9,20 @@ import { UUID_V4_REGEX } from '../../../../../shared/test/utils';
 import { Impedance } from '../../../domain/impedance';
 import { Cabinet } from '../../../../../cabinet/core/domain/cabinet';
 import { CabinetDoesNotExist } from '../../../../../cabinet/core/domain/errors';
-import {
-  ImpedanceAlreadyExists,
-  UnableToExtractImpedanceData,
-  ImpedanceParameterNotFound,
-} from '../../../domain/errors';
+import { ImpedanceAlreadyExists, ImpedanceParameterNotFound } from '../../../domain/errors';
+import { ImpedanceMapper } from '../../../../adapters/out/impedance.mapper';
 
 describe('RegisterImpedanceService', () => {
   let cabinetRepoStub: InMemoryCabinetRepository;
   let impedanceRepoStub: InMemoryImpedanceRepository;
   let registerimpedanceService: RegisterImpedanceService;
+  let impedanceMapper: ImpedanceMapper;
 
   beforeEach(() => {
     cabinetRepoStub = new InMemoryCabinetRepository();
     impedanceRepoStub = new InMemoryImpedanceRepository();
-    registerimpedanceService = new RegisterImpedanceService(impedanceRepoStub, cabinetRepoStub);
+    impedanceMapper = new ImpedanceMapper();
+    registerimpedanceService = new RegisterImpedanceService(impedanceRepoStub, cabinetRepoStub, impedanceMapper);
   });
   it('register an impedance', async () => {
     const measurementFile = fs.readFileSync(path.join(__dirname, './inputs/impedance_response.txt'), 'utf8');
@@ -89,35 +88,6 @@ describe('RegisterImpedanceService', () => {
       await registerimpedanceService.handler(registerImpedanceInput);
     } catch (err) {
       expect(err).toBeInstanceOf(CabinetDoesNotExist);
-    }
-  });
-
-  it('Does not register a impedance because of missing parameters in impedance response txt file', async () => {
-    const existingcabinet: Cabinet = {
-      uid: 'cabinet-uid',
-      brandName: 'string',
-      productName: 'string',
-      enclosureType: 'string',
-      weight: 100,
-      dimension: 'string',
-      manufacturingYear: 2023,
-      description: 'string',
-      ownerUid: 'd63d862b-d056-4488-b592-96e5ddbafe99',
-      updatedAt: new Date(),
-      createdAt: new Date(),
-    };
-    await cabinetRepoStub.save(existingcabinet);
-    const wrongMeasurementFile = fs.readFileSync(path.join(__dirname, './inputs/wrong_impedance_response.txt'), 'utf8');
-    const registerImpedanceInput: RegisterImpedanceInput = {
-      ownerUid: 'owner-uid',
-      cabinetUid: 'cabinet-uid',
-      driverUid: 'driver-uid',
-      measurements: wrongMeasurementFile,
-    };
-    try {
-      await registerimpedanceService.handler(registerImpedanceInput);
-    } catch (err) {
-      expect(err).toBeInstanceOf(UnableToExtractImpedanceData);
     }
   });
 
