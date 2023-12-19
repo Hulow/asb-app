@@ -103,6 +103,7 @@ import {
   FrequencyMapperOutputPort,
 } from './frequency/core/application/ports/out/frequency.mapper.output-port';
 import { FrequencyMapper } from './frequency/adapters/out/frequency.mapper';
+import {
   IMPEDANCE_MAPPER_OUTPUT_PORT,
   ImpedanceMapperOutputPort,
 } from './impedance/core/application/ports/out/impedance.mapper.output-port';
