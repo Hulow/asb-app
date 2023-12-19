@@ -103,6 +103,11 @@ import {
   FrequencyMapperOutputPort,
 } from './frequency/core/application/ports/out/frequency.mapper.output-port';
 import { FrequencyMapper } from './frequency/adapters/out/frequency.mapper';
+import {
+  IMPEDANCE_MAPPER_OUTPUT_PORT,
+  ImpedanceMapperOutputPort,
+} from './impedance/core/application/ports/out/impedance.mapper.output-port';
+import { ImpedanceMapper } from './impedance/adapters/out/impedance.mapper';
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -158,3 +163,4 @@ container.bind<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT).to(SqlOw
 container.bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT).to(SqlImpedanceRepository);
 container.bind<FrequencyMapperOutputPort>(FREQUENCY_MAPPER_OUTPUT_PORT).to(FrequencyMapper);
 container.bind<ImpulseMapperOutputPort>(IMPULSE_MAPPER_OUTPUT_PORT).to(ImpulseMapper);
+container.bind<ImpedanceMapperOutputPort>(IMPEDANCE_MAPPER_OUTPUT_PORT).to(ImpedanceMapper);
