@@ -1,8 +1,10 @@
+import { injectable } from 'inversify';
 import { RegisterFrequencyInput } from '../../core/application/ports/in/register-frequency.input-port';
 import { FrequencyMapperOutputPort } from '../../core/application/ports/out/frequency.mapper.output-port';
 import { FrequencyParameterNotFound } from '../../core/domain/errors';
 import { FrequencyProps, FrequencyResponse } from '../../core/domain/frequency';
 
+@injectable()
 export class FrequencyMapper implements FrequencyMapperOutputPort {
   mapFrequency(input: RegisterFrequencyInput): FrequencyProps {
     const [parameters, data] = input.measurements.split(PATTERN);

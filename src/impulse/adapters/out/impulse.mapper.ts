@@ -1,8 +1,10 @@
+import { injectable } from 'inversify';
 import { RegisterImpulseInput } from '../../core/application/ports/in/register-impulse.input-port';
 import { ImpulseMapperOutputPort } from '../../core/application/ports/out/impulse.mapper.output-port';
 import { ImpulseSettingNotFound } from '../../core/domain/errors';
 import { ImpulseGraph, ImpulseProps } from '../../core/domain/impulse';
 
+@injectable()
 export class ImpulseMapper implements ImpulseMapperOutputPort {
   mapImpulse(input: RegisterImpulseInput): ImpulseProps {
     const [settings, data] = input.measurements.split(PATTERN);
