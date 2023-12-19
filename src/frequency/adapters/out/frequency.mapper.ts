@@ -1,15 +1,16 @@
-import { RegisterFrequencyInput } from '../../../core/application/ports/in/register-frequency.input-port';
-import { FrequencyParameterNotFound } from '../../../core/domain/errors';
-import { FrequencyProps, FrequencyResponse } from '../../../core/domain/frequency';
+import { injectable } from 'inversify';
+import { RegisterFrequencyInput } from '../../core/application/ports/in/register-frequency.input-port';
+import { FrequencyMapperOutputPort } from '../../core/application/ports/out/frequency.mapper.output-port';
+import { FrequencyParameterNotFound } from '../../core/domain/errors';
+import { FrequencyProps, FrequencyResponse } from '../../core/domain/frequency';
 
-export class FrequencyMapper {
-  constructor(private _input: RegisterFrequencyInput) {}
-
-  mapFrequency(): FrequencyProps {
-    const [parameters, data] = this._input.measurements.split(PATTERN);
+@injectable()
+export class FrequencyMapper implements FrequencyMapperOutputPort {
+  mapFrequency(input: RegisterFrequencyInput): FrequencyProps {
+    const [parameters, data] = input.measurements.split(PATTERN);
     const mappedParameters = this.mapParameters(parameters);
     const frequencyResponse = this.mapFrequencyResponse(data);
-    return this.mapFrequencyObject(this._input.cabinetUid, mappedParameters, frequencyResponse);
+    return this.mapFrequencyObject(input.cabinetUid, mappedParameters, frequencyResponse);
   }
 
   private mapParameters(rawParameters: string): FrequencyProps {

@@ -93,6 +93,16 @@ import {
   GET_MEASUREMENT_PER_CABINET_INPUT_PORT,
 } from './measurement/core/application/ports/in/get-measurement-per-cabinet.input-port';
 import { GetMeasurementPerCabinetService } from './measurement/core/application/services/get-measurement-per-cabinet.service';
+import {
+  IMPULSE_MAPPER_OUTPUT_PORT,
+  ImpulseMapperOutputPort,
+} from './impulse/core/application/ports/out/impulse.mapper.output-port';
+import { ImpulseMapper } from './impulse/adapters/out/impulse.mapper';
+import {
+  FREQUENCY_MAPPER_OUTPUT_PORT,
+  FrequencyMapperOutputPort,
+} from './frequency/core/application/ports/out/frequency.mapper.output-port';
+import { FrequencyMapper } from './frequency/adapters/out/frequency.mapper';
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -146,3 +156,5 @@ container.bind<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT).
 container.bind<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT).to(SqlImpulseRepository);
 container.bind<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT).to(SqlOwnerRepository);
 container.bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT).to(SqlImpedanceRepository);
+container.bind<FrequencyMapperOutputPort>(FREQUENCY_MAPPER_OUTPUT_PORT).to(FrequencyMapper);
+container.bind<ImpulseMapperOutputPort>(IMPULSE_MAPPER_OUTPUT_PORT).to(ImpulseMapper);

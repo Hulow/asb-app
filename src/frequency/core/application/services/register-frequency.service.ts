@@ -12,17 +12,17 @@ import {
 } from '../../../../cabinet/core/application/ports/out/cabinet-repository.output-port';
 import { FrequencyAlreadyExists } from '../../domain/errors';
 import { CabinetDoesNotExist } from '../../../../cabinet/core/domain/errors';
-import { FrequencyMapper } from '../../../adapters/out/persistence/frequency.mapper';
+import { FREQUENCY_MAPPER_OUTPUT_PORT, FrequencyMapperOutputPort } from '../ports/out/frequency.mapper.output-port';
 
 @injectable()
 export class RegisterFrequencyService implements RegisterFrequencyInputPort {
   constructor(
     @inject(FREQUENCY_REPOSITORY_OUTPUT_PORT) private readonly frequencyRepository: FrequencyRepositoryOutputPort,
     @inject(CABINET_REPOSITORY_OUTPUT_PORT) private readonly cabinetRepository: CabinetRepositoryOutputPort,
+    @inject(FREQUENCY_MAPPER_OUTPUT_PORT) private readonly frequencyMapper: FrequencyMapperOutputPort,
   ) {}
 
   async handler(input: RegisterFrequencyInput): Promise<Frequency> {
-    new FrequencyMapper(input).mapFrequency();
     const existingCabinet = await this.cabinetRepository.getById(input.cabinetUid);
     if (!existingCabinet) {
       throw new CabinetDoesNotExist(input.cabinetUid);
@@ -31,7 +31,7 @@ export class RegisterFrequencyService implements RegisterFrequencyInputPort {
     if (existingFrequency) {
       throw new FrequencyAlreadyExists(input.cabinetUid);
     }
-    const newFrequency = new FrequencyMapper(input).mapFrequency();
+    const newFrequency = this.frequencyMapper.mapFrequency(input);
     return await this.frequencyRepository.save(new Frequency({ ...newFrequency }));
   }
 }
