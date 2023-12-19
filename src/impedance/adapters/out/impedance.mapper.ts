@@ -1,8 +1,10 @@
+import { injectable } from 'inversify';
 import { RegisterImpedanceInput } from '../../core/application/ports/in/register-impedance.input-port';
 import { ImpedanceMapperOutputPort } from '../../core/application/ports/out/impedance.mapper.output-port';
 import { ImpedanceParameterNotFound } from '../../core/domain/errors';
 import { ImpedanceMeasurement, ImpedanceProps, ThieleSmallParameters } from '../../core/domain/impedance';
 
+@injectable()
 export class ImpedanceMapper implements ImpedanceMapperOutputPort {
   mapImpedance(input: RegisterImpedanceInput): ImpedanceProps {
     const [parameters, data] = input.measurements.split(/Freq.*/);
