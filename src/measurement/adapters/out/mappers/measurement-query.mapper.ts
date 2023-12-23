@@ -90,9 +90,9 @@ export enum ImpedanceColumnNames {
   KI = 'ki',
   XI = 'xi',
   CabinetUid = 'cabinet_uid',
-  Frequencies = 'impedance_frequencies',
-  Impedances = 'impedance_impedances',
-  Phases = 'impedance_phases',
+  Frequencies = 'frequencies',
+  Impedances = 'impedances',
+  Phases = 'phases',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
 }
