@@ -32,8 +32,14 @@ import {
 import { Owner } from '../../src/owner/core/domain/owner';
 import { Driver } from '../../src/driver/core/domain/driver';
 import { Cabinet } from '../../src/cabinet/core/domain/cabinet';
-import { Frequency, FrequencyResponse } from '../../src/frequency/core/domain/frequency';
+import { Frequency } from '../../src/frequency/core/domain/frequency';
 import { Impedance, ImpedanceMeasurement } from '../../src/impedance/core/domain/impedance';
+
+interface FrequencyResponse {
+  frequency: number;
+  spl: number;
+  phase: number;
+}
 
 const database = container.get(PostgresDataSource);
 const logger = container.get<LoggerOutputPort>(LOGGER_OUTPUT_PORT);
@@ -181,7 +187,9 @@ function generateFrequency(cabinetUid: string): Frequency {
     targetLevel: '75.0 dB',
     note: 'second measurement Mic is at 1m and almost align with tweeter',
     smoothing: '1/3 octave',
-    measurements: measurements,
+    frequencies: measurements.map((measurement) => Number(measurement.frequency)),
+    spls: measurements.map((measurement) => Number(measurement.spl)),
+    phases: measurements.map((measurement) => Number(measurement.phase)),
     cabinetUid: cabinetUid,
   };
 }

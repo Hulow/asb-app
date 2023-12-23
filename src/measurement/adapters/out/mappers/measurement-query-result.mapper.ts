@@ -1,11 +1,10 @@
 import { injectable } from 'inversify';
 import { Cabinet } from '../../../../cabinet/core/domain/cabinet';
-// import { Driver } from '../../../../driver/core/domain/driver';
-import { Frequency, FrequencyResponse } from '../../../../frequency/core/domain/frequency';
 import { Impedance, ImpedanceMeasurement } from '../../../../impedance/core/domain/impedance';
 import { MeasurementQueryResultMapperOutputPort } from '../../../core/application/ports/out/measurement-query-result.mapper.output-port';
 import { Driver } from '../../../../driver/core/domain/driver';
 import { Measurement } from '../../../core/domain/measurement';
+import { Frequency } from '../../../../frequency/core/domain/frequency';
 
 export interface MeasurementOutputQuery {
   cabinet_cabinet_uid: string;
@@ -28,7 +27,9 @@ export interface MeasurementOutputQuery {
   frequency_target_level: string;
   frequency_note: string;
   frequency_smoothing: string;
-  frequency_measurements: FrequencyResponse[];
+  frequency_frequencies: number[];
+  frequency_spls: number[];
+  frequency_phases: number[];
   frequency_cabinet_uid: string;
   frequency_created_at: Date;
   frequency_updated_at: Date;
@@ -81,7 +82,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
   readonly frequency_target_level: string;
   readonly frequency_note: string;
   readonly frequency_smoothing: string;
-  readonly frequency_measurements: FrequencyResponse[];
+  readonly frequency_frequencies: number[];
+  readonly frequency_spls: number[];
+  readonly frequency_phases: number[];
   readonly frequency_cabinet_uid: string;
   readonly frequency_created_at: Date;
   readonly frequency_updated_at: Date;
@@ -132,7 +135,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
     this.frequency_target_level = params.frequency_target_level;
     this.frequency_note = params.frequency_note;
     this.frequency_smoothing = params.frequency_smoothing;
-    this.frequency_measurements = params.frequency_measurements;
+    this.frequency_frequencies = params.frequency_frequencies;
+    this.frequency_spls = params.frequency_spls;
+    this.frequency_phases = params.frequency_phases;
     this.frequency_cabinet_uid = params.frequency_cabinet_uid;
     this.frequency_created_at = params.frequency_created_at;
     this.frequency_updated_at = params.frequency_updated_at;
@@ -199,7 +204,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
       targetLevel: this.frequency_target_level,
       note: this.frequency_note,
       smoothing: this.frequency_smoothing,
-      measurements: this.frequency_measurements,
+      frequencies: this.frequency_frequencies,
+      spls: this.frequency_spls,
+      phases: this.frequency_phases,
       cabinetUid: this.frequency_cabinet_uid,
       createdAt: this.frequency_created_at,
       updatedAt: this.frequency_updated_at,

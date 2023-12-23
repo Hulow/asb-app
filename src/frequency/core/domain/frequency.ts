@@ -9,13 +9,10 @@ export interface FrequencyProps {
   targetLevel: string;
   note: string;
   smoothing: string;
-  measurements: FrequencyResponse[];
+  frequencies: number[];
+  spls: number[];
+  phases: number[];
   cabinetUid: string;
-}
-export interface FrequencyResponse {
-  frequency: number;
-  spl: number;
-  phase: number;
 }
 
 export class Frequency extends DomainEntity {
@@ -27,7 +24,9 @@ export class Frequency extends DomainEntity {
   readonly targetLevel: string;
   readonly note: string;
   readonly smoothing: string;
-  readonly measurements: FrequencyResponse[];
+  readonly frequencies: number[];
+  readonly spls: number[];
+  readonly phases: number[];
   readonly cabinetUid: string;
 
   constructor(props: FrequencyProps & EntityProps) {
@@ -41,7 +40,9 @@ export class Frequency extends DomainEntity {
     this.targetLevel = props.targetLevel;
     this.note = props.note;
     this.smoothing = props.smoothing;
-    this.measurements = props.measurements;
+    this.frequencies = props.frequencies;
+    this.spls = props.spls;
+    this.phases = props.phases;
     this.cabinetUid = props.cabinetUid;
   }
 }

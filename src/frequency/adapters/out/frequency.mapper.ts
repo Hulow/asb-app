@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import { RegisterFrequencyInput } from '../../core/application/ports/in/register-frequency.input-port';
 import { FrequencyMapperOutputPort } from '../../core/application/ports/out/frequency.mapper.output-port';
 import { FrequencyParameterNotFound } from '../../core/domain/errors';
-import { FrequencyProps, FrequencyResponse } from '../../core/domain/frequency';
+import { FrequencyProps } from '../../core/domain/frequency';
 
 @injectable()
 export class FrequencyMapper implements FrequencyMapperOutputPort {
@@ -44,30 +44,35 @@ export class FrequencyMapper implements FrequencyMapperOutputPort {
     return match?.length ? match[0] : undefined;
   }
 
-  private mapFrequencyResponse(data: string): FrequencyResponse[] {
+  private mapFrequencyResponse(data: string): {
+    frequencies: number[];
+    spls: number[];
+    phases: number[];
+  } {
     const measurements = data.split('\n');
     measurements.shift();
-    const frequencyResponse: FrequencyResponse[] = [];
+    const frequencies = [];
+    const spls = [];
+    const phases = [];
     for (const measurement of measurements) {
       const frequencyAndSoundPressureAndPhase = measurement.split(' ');
-      if (frequencyAndSoundPressureAndPhase.length === 3)
-        frequencyResponse.push(this.mapFrequencyAndSoundPressureAndPhase(frequencyAndSoundPressureAndPhase));
+      if (frequencyAndSoundPressureAndPhase.length === 3) {
+        const [frequency, SPL, phase] = frequencyAndSoundPressureAndPhase;
+        frequencies.push(Number(frequency));
+        spls.push(Number(SPL));
+        phases.push(Number(phase));
+      }
     }
-    return frequencyResponse;
+    return { frequencies, spls, phases };
   }
-
-  private mapFrequencyAndSoundPressureAndPhase(frequencyAndSoundPressureAndPhase: string[]): FrequencyResponse {
-    return {
-      frequency: Number(frequencyAndSoundPressureAndPhase[0]),
-      spl: Number(frequencyAndSoundPressureAndPhase[1]),
-      phase: Number(frequencyAndSoundPressureAndPhase[2]),
-    };
-  }
-
   private mapFrequencyObject(
     cabinetUid: string,
     mappedParameters: FrequencyProps,
-    frequencyResponse: FrequencyResponse[],
+    frequencyResponse: {
+      frequencies: number[];
+      spls: number[];
+      phases: number[];
+    },
   ): FrequencyProps {
     return {
       measuredBy: mappedParameters.measuredBy,
@@ -78,7 +83,9 @@ export class FrequencyMapper implements FrequencyMapperOutputPort {
       targetLevel: mappedParameters.targetLevel,
       note: mappedParameters.note,
       smoothing: mappedParameters.smoothing,
-      measurements: frequencyResponse,
+      frequencies: frequencyResponse.frequencies,
+      spls: frequencyResponse.spls,
+      phases: frequencyResponse.phases,
       cabinetUid: cabinetUid,
     };
   }
