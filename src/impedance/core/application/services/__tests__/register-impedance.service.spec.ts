@@ -71,7 +71,9 @@ describe('RegisterImpedanceService', () => {
       kI: '0.04204',
       xI: '0.6239',
       cabinetUid: 'cabinet-uid',
-      impedanceCurve: [{ frequency: 1.029, impedance: 5.108, phase: 4.975 }],
+      frequencies: [1.029],
+      impedances: [5.108],
+      phases: [4.975],
     };
     expect(response).toEqual(expectedResponse);
   });
@@ -148,7 +150,9 @@ describe('RegisterImpedanceService', () => {
       kI: '0.04204',
       xI: '0.6239',
       cabinetUid: 'cabinet-uid',
-      impedanceCurve: [{ frequency: 1.029, impedance: 5.108, phase: 4.975 }],
+      frequencies: [1.029],
+      impedances: [5.108],
+      phases: [4.975],
     };
     await impedanceRepoStub.save(existingImpedance);
     const existingcabinet: Cabinet = {
