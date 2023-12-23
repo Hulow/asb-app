@@ -60,7 +60,9 @@ describe('RegisterFrequencyService', () => {
       targetLevel: '75.0 dB',
       note: 'second measurement Mic is at 1m and almost align with tweeter',
       smoothing: '1/3 octave',
-      measurements: [{ frequency: 15.140533, spl: 44.493, phase: 86.8478 }],
+      frequencies: [15.140533],
+      spls: [44.493],
+      phases: [86.8478],
       cabinetUid: 'cabinet-uid',
     };
     expect(response).toEqual(expectedResponse);
@@ -121,7 +123,9 @@ describe('RegisterFrequencyService', () => {
       targetLevel: '75.0 dB',
       note: 'second measurement Mic is at 1m and almost align with tweeter',
       smoothing: '1/3 octave',
-      measurements: [{ frequency: 15.140533, spl: 44.493, phase: 86.8478 }],
+      frequencies: [15.140533],
+      spls: [44.493],
+      phases: [86.8478],
       updatedAt: new Date(),
       createdAt: new Date(),
       cabinetUid: 'cabinet-uid',
