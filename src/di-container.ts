@@ -108,6 +108,18 @@ import {
   ImpedanceMapperOutputPort,
 } from './impedance/core/application/ports/out/impedance.mapper.output-port';
 import { ImpedanceMapper } from './impedance/adapters/out/impedance.mapper';
+import {
+  MEASUREMENT_REPOSITORY_OUTPUT_PORT,
+  MeasurementRepositoryOutputPort,
+} from './measurement/core/application/ports/out/measurement-repository.output-port';
+import { SqlMeasurementRepository } from './measurement/adapters/out/persistence/measurement.repository';
+import {
+  MEASUREMENT_QUERY_MAPPER_OUTPUT_PORT,
+  MeasurementQueryMapperOutputPort,
+} from './measurement/core/application/ports/out/measurement-query.mapper.output-port';
+import { MeasurementQueryMapper } from './measurement/adapters/out/mappers/measurement-query.mapper';
+import { MeasurementQueryResultMapper } from './measurement/adapters/out/mappers/measurement-query-result.mapper';
+import { MEASUREMENT_QUERY_RESULT_MAPPER_OUTPUT_PORT } from './measurement/core/application/ports/out/measurement-query-result.mapper.output-port';
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -161,6 +173,11 @@ container.bind<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT).
 container.bind<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT).to(SqlImpulseRepository);
 container.bind<OwnerRepositoryOutputPort>(OWNER_REPOSITORY_OUTPUT_PORT).to(SqlOwnerRepository);
 container.bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT).to(SqlImpedanceRepository);
+container.bind<MeasurementRepositoryOutputPort>(MEASUREMENT_REPOSITORY_OUTPUT_PORT).to(SqlMeasurementRepository);
 container.bind<FrequencyMapperOutputPort>(FREQUENCY_MAPPER_OUTPUT_PORT).to(FrequencyMapper);
 container.bind<ImpulseMapperOutputPort>(IMPULSE_MAPPER_OUTPUT_PORT).to(ImpulseMapper);
 container.bind<ImpedanceMapperOutputPort>(IMPEDANCE_MAPPER_OUTPUT_PORT).to(ImpedanceMapper);
+container.bind<MeasurementQueryMapperOutputPort>(MEASUREMENT_QUERY_MAPPER_OUTPUT_PORT).to(MeasurementQueryMapper);
+container
+  .bind<MeasurementQueryResultMapper>(MEASUREMENT_QUERY_RESULT_MAPPER_OUTPUT_PORT)
+  .to(MeasurementQueryResultMapper);
