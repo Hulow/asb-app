@@ -8,10 +8,7 @@ import {
   GET_MEASUREMENT_PER_CABINET_INPUT_PORT,
   GetMeasurementPerCabinetInputPort,
 } from '../../../core/application/ports/in/get-measurement-per-cabinet.input-port';
-import { CabinetDoesNotExist } from '../../../../cabinet/core/domain/errors';
-import { DriversNotFound } from '../../../../driver/core/domain/errors';
-import { FrequencyNotFound } from '../../../../frequency/core/domain/errors';
-import { ImpedanceNotFound } from '../../../../impedance/core/domain/errors';
+import { MeasurementNotFound } from '../../../core/domain/errors';
 
 @injectable()
 export class GetMeasurementPerCabinetController implements ExpressController {
@@ -26,13 +23,10 @@ export class GetMeasurementPerCabinetController implements ExpressController {
     if (!isValidUuid(req.params.cabinetUid)) throw new httpErrors.BadRequest('cabinetUid must be an uuid');
 
     try {
-      const response = await this._getMeasurementsPerCabinetService.handler(req.params.cabinetUid);
-      res.json(response);
+      const resp = await this._getMeasurementsPerCabinetService.handler(req.params.cabinetUid);
+      res.json(resp);
     } catch (error) {
-      if (error instanceof FrequencyNotFound) throw new httpErrors.NotFound(error.message);
-      if (error instanceof DriversNotFound) throw new httpErrors.NotFound(error.message);
-      if (error instanceof CabinetDoesNotExist) throw new httpErrors.NotFound(error.message);
-      if (error instanceof ImpedanceNotFound) throw new httpErrors.NotFound(error.message);
+      if (error instanceof MeasurementNotFound) throw new httpErrors.NotFound(error.message);
       throw error;
     }
   }
