@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { Cabinet } from '../../../../cabinet/core/domain/cabinet';
-import { Impedance, ImpedanceMeasurement } from '../../../../impedance/core/domain/impedance';
+import { Impedance } from '../../../../impedance/core/domain/impedance';
 import { MeasurementQueryResultMapperOutputPort } from '../../../core/application/ports/out/measurement-query-result.mapper.output-port';
 import { Driver } from '../../../../driver/core/domain/driver';
 import { Measurement } from '../../../core/domain/measurement';
@@ -54,7 +54,9 @@ export interface MeasurementOutputQuery {
   impedance_ki: string;
   impedance_xi: string;
   impedance_cabinet_uid: string;
-  impedance_impedance_curve: ImpedanceMeasurement[];
+  impedance_frequencies: number[];
+  impedance_impedances: number[];
+  impedance_phases: number[];
   impedance_created_at: Date;
   impedance_updated_at: Date;
   string_agg: string;
@@ -109,7 +111,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
   readonly impedance_ki: string;
   readonly impedance_xi: string;
   readonly impedance_cabinet_uid: string;
-  readonly impedance_impedance_curve: ImpedanceMeasurement[];
+  readonly impedance_frequencies: number[];
+  readonly impedance_impedances: number[];
+  readonly impedance_phases: number[];
   readonly impedance_created_at: Date;
   readonly impedance_updated_at: Date;
   readonly string_agg: string;
@@ -162,7 +166,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
     this.impedance_ki = params.impedance_ki;
     this.impedance_xi = params.impedance_xi;
     this.impedance_cabinet_uid = params.impedance_cabinet_uid;
-    this.impedance_impedance_curve = params.impedance_impedance_curve;
+    this.impedance_frequencies = params.impedance_frequencies;
+    this.impedance_impedances = params.impedance_impedances;
+    this.impedance_phases = params.impedance_phases;
     this.impedance_created_at = params.impedance_created_at;
     this.impedance_updated_at = params.impedance_updated_at;
     this.string_agg = params.string_agg;
@@ -235,7 +241,9 @@ export class MeasurementQueryResultMapper implements MeasurementQueryResultMappe
       xR: this.impedance_xr,
       xI: this.impedance_xi,
       kI: this.impedance_ki,
-      impedanceCurve: this.impedance_impedance_curve,
+      frequencies: this.impedance_frequencies,
+      impedances: this.impedance_impedances,
+      phases: this.impedance_phases,
       cabinetUid: this.impedance_cabinet_uid,
       createdAt: this.impedance_created_at,
       updatedAt: this.impedance_updated_at,
