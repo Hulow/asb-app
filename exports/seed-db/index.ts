@@ -48,13 +48,13 @@ async function seedDatabase() {
   process.env.NODE_ENV = 'test';
   await database.clear();
   process.env.NODE_ENV = 'development';
-  let OWNER_COUNTER = 2;
+  let OWNER_COUNTER = 5;
   while (OWNER_COUNTER !== 0) {
     const ownerUid = faker.string.uuid();
     const newOwner = generateOwner(ownerUid);
     await ownerRepository.save(newOwner);
     logger.info(`Owner ${OWNER_COUNTER} has been stored into Db`);
-    let CABINETS_PER_OWNER_COUNTER = 3;
+    let CABINETS_PER_OWNER_COUNTER = 5;
     while (CABINETS_PER_OWNER_COUNTER !== 0) {
       const cabinetUid = faker.string.uuid();
       const newCabinet = generateCabinet(cabinetUid, ownerUid);
@@ -70,7 +70,7 @@ async function seedDatabase() {
       logger.info(`Frequency ${CABINETS_PER_OWNER_COUNTER} has been stored into Db`);
 
       CABINETS_PER_OWNER_COUNTER--;
-      let DRIVERS_PER_CABINET = 2;
+      let DRIVERS_PER_CABINET = 5;
       while (DRIVERS_PER_CABINET !== 0) {
         const driverUid = faker.string.uuid();
         const newDriver = generateDriver(driverUid, cabinetUid);
