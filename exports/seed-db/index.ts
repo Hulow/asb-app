@@ -167,7 +167,9 @@ function generateImpedance(cabinetUid: string): Impedance {
     kI: '0.04204',
     xI: '0.6239',
     cabinetUid: cabinetUid,
-    impedanceCurve: measurements,
+    frequencies: measurements.map((measurement) => Number(measurement.frequency)),
+    impedances: measurements.map((measurement) => Number(measurement.impedance)),
+    phases: measurements.map((measurement) => Number(measurement.phase)),
   };
 }
 

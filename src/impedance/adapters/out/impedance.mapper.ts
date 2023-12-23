@@ -38,15 +38,25 @@ export class ImpedanceMapper implements ImpedanceMapperOutputPort {
     return match?.length ? match[0].trim() : undefined;
   }
 
-  private mapImpedanceCurve(measurements: string): ImpedanceMeasurement[] {
+  private mapImpedanceCurve(measurements: string): {
+    frequencies: number[];
+    impedances: number[];
+    phases: number[];
+  } {
     const splitMeasurements: string[] = measurements.split(/\n/);
-    const impedanceCurveInMemory: ImpedanceMeasurement[] = [];
+    const frequencies: number[] = [];
+    const impedances: number[] = [];
+    const phases: number[] = [];
     for (const measurement of splitMeasurements) {
       const frequencyPhaseAndImpedance: ImpedanceMeasurement | undefined =
         this.mapFrequencyPhaseAndImpedance(measurement);
-      if (frequencyPhaseAndImpedance) impedanceCurveInMemory.push(frequencyPhaseAndImpedance);
+      if (frequencyPhaseAndImpedance) {
+        frequencies.push(frequencyPhaseAndImpedance.frequency);
+        impedances.push(frequencyPhaseAndImpedance.impedance);
+        phases.push(frequencyPhaseAndImpedance.phase);
+      }
     }
-    return impedanceCurveInMemory;
+    return { frequencies, impedances, phases };
   }
 
   private mapFrequencyPhaseAndImpedance(measurement: string): ImpedanceMeasurement | undefined {
@@ -77,9 +87,17 @@ export class ImpedanceMapper implements ImpedanceMapperOutputPort {
   private mapImpedanceObject(
     input: RegisterImpedanceInput,
     thieleSmallParameters: ThieleSmallParameters,
-    impedanceCurve: ImpedanceMeasurement[],
+    impedanceCurve: { frequencies: number[]; impedances: number[]; phases: number[] },
   ): ImpedanceProps {
-    return { ...thieleSmallParameters, ...{ cabinetUid: input.cabinetUid }, ...{ impedanceCurve } };
+    return {
+      ...thieleSmallParameters,
+      ...{ cabinetUid: input.cabinetUid },
+      ...{
+        frequencies: impedanceCurve.frequencies,
+        impedances: impedanceCurve.impedances,
+        phases: impedanceCurve.phases,
+      },
+    };
   }
 }
 

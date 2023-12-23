@@ -101,7 +101,9 @@ describe(`/api/impedance/register`, () => {
       kI: '0.04204',
       xI: '0.6239',
       cabinetUid: cabinetInput.uid,
-      impedanceCurve: [{ frequency: 1.029, impedance: 5.108, phase: 4.975 }],
+      frequencies: [1.029],
+      impedances: [5.108],
+      phases: [4.975],
     };
     const response: { body: { cabinetUid: string } } = await request(expressApp)
       .post('/api/impedance/register')

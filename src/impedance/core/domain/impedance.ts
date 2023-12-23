@@ -21,16 +21,18 @@ export interface ImpedanceProps {
   kI: string;
   xI: string;
   cabinetUid: string;
-  impedanceCurve: ImpedanceMeasurement[];
+  frequencies: number[];
+  impedances: number[];
+  phases: number[];
 }
-
-export type ThieleSmallParameters = Omit<ImpedanceProps, 'impedanceCurve' | 'cabinetUid'>;
 
 export interface ImpedanceMeasurement {
   frequency: number;
   impedance: number;
   phase: number;
 }
+
+export type ThieleSmallParameters = Omit<ImpedanceProps, 'frequencies' | 'cabinetUid' | 'impedances' | 'phases'>;
 
 export class Impedance extends DomainEntity {
   readonly source: string;
@@ -53,7 +55,9 @@ export class Impedance extends DomainEntity {
   readonly kI: string;
   readonly xI: string;
   readonly cabinetUid: string;
-  readonly impedanceCurve: ImpedanceMeasurement[];
+  readonly frequencies: number[];
+  readonly impedances: number[];
+  readonly phases: number[];
 
   constructor(props: ImpedanceProps & EntityProps) {
     super(props);
@@ -77,6 +81,8 @@ export class Impedance extends DomainEntity {
     this.kI = props.kI;
     this.xI = props.xI;
     this.cabinetUid = props.cabinetUid;
-    this.impedanceCurve = props.impedanceCurve;
+    this.frequencies = props.frequencies;
+    this.impedances = props.impedances;
+    this.phases = props.phases;
   }
 }
