@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
-import { Frequency, FrequencyResponse } from '../../../core/domain/frequency';
+import { Frequency } from '../../../core/domain/frequency';
 
 @Entity({ name: 'frequency' })
 export class FrequencyTypeormEntity {
@@ -31,8 +31,14 @@ export class FrequencyTypeormEntity {
   @Column({ name: 'smoothing', type: 'varchar' })
   smoothing!: string;
 
-  @Column({ name: 'measurements', type: 'jsonb' })
-  measurements!: FrequencyResponse[];
+  @Column({ name: 'frequencies', type: 'jsonb' })
+  frequencies!: number[];
+
+  @Column({ name: 'spls', type: 'jsonb' })
+  spls!: number[];
+
+  @Column({ name: 'phases', type: 'jsonb' })
+  phases!: number[];
 
   @Column({ name: 'cabinet_uid', type: 'uuid' })
   cabinetUid!: string;
@@ -54,7 +60,9 @@ export class FrequencyTypeormEntity {
       targetLevel: this.targetLevel,
       note: this.note,
       smoothing: this.smoothing,
-      measurements: this.measurements,
+      frequencies: this.frequencies,
+      spls: this.spls,
+      phases: this.phases,
       cabinetUid: this.cabinetUid,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
@@ -72,7 +80,9 @@ export class FrequencyTypeormEntity {
     entity.targetLevel = frequency.targetLevel;
     entity.note = frequency.note;
     entity.smoothing = frequency.smoothing;
-    entity.measurements = frequency.measurements;
+    entity.frequencies = frequency.frequencies;
+    entity.spls = frequency.spls;
+    entity.phases = frequency.phases;
     entity.cabinetUid = frequency.cabinetUid;
 
     return entity;
