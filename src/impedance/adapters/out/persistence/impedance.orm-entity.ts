@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
-import { Impedance, ImpedanceMeasurement } from '../../../core/domain/impedance';
+import { Impedance } from '../../../core/domain/impedance';
 
 @Entity({ name: 'impedance' })
 export class ImpedanceTypeormEntity {
@@ -66,8 +66,14 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'cabinet_uid', type: 'uuid' })
   cabinetUid!: string;
 
-  @Column({ name: 'impedance_curve', type: 'jsonb' })
-  impedanceCurve!: ImpedanceMeasurement[];
+  @Column({ name: 'frequencies', type: 'jsonb' })
+  frequencies!: number[];
+
+  @Column({ name: 'impedances', type: 'jsonb' })
+  impedances!: number[];
+
+  @Column({ name: 'phases', type: 'jsonb' })
+  phases!: number[];
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt!: Date;
@@ -98,7 +104,9 @@ export class ImpedanceTypeormEntity {
       kI: this.kI,
       xI: this.xI,
       cabinetUid: this.cabinetUid,
-      impedanceCurve: this.impedanceCurve,
+      frequencies: this.frequencies,
+      impedances: this.impedances,
+      phases: this.phases,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     });
@@ -127,7 +135,9 @@ export class ImpedanceTypeormEntity {
     entity.kI = impedance.kI;
     entity.xI = impedance.xI;
     entity.cabinetUid = impedance.cabinetUid;
-    entity.impedanceCurve = impedance.impedanceCurve;
+    entity.frequencies = impedance.frequencies;
+    entity.impedances = impedance.impedances;
+    entity.phases = impedance.phases;
     return entity;
   }
 }
