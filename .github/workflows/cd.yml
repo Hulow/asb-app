@@ -56,4 +56,4 @@ jobs:
             git clone https://github.com/Hulow/asb-app .
             fi
             git pull
-            docker-compose up
+            docker compose up
