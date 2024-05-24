@@ -30,14 +30,6 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/asb-service:app
           file: Dockerfile
 
-      - name: Build and push seed docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/asb-service:seed
-          file: seed.Dockerfile
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
