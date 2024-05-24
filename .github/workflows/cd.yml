@@ -52,8 +52,5 @@ jobs:
             sudo mkdir -p /var/www/backend
             sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
             cd /var/www/backend
-            if [ ! -d ".git" ]; then
-            git clone https://github.com/Hulow/asb-app .
-            fi
             git pull
             docker compose up
