@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS frequency (
+  frequency_uid UUID NOT NULL PRIMARY KEY,
+  measured_by VARCHAR NOT NULL,
+  source VARCHAR NOT NULL,
+  sweep_length VARCHAR NOT NULL,
+  measured_at VARCHAR,
+  frequency_weightings VARCHAR NOT NULL,
+  target_level VARCHAR NOT NULL,
+  note VARCHAR NOT NULL,
+  smoothing VARCHAR NOT NULL,
+  frequencies JSONB NOT NULL,
+  spls JSONB NOT NULL,
+  highest_spl FLOAT NOT NULL,
+  lowest_spl FLOAT NOT NULL,
+  phases JSONB NOT NULL,
+  cabinet_uid UUID NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  FOREIGN KEY (cabinet_uid) REFERENCES cabinet(cabinet_uid) ON DELETE CASCADE ON UPDATE CASCADE
+);

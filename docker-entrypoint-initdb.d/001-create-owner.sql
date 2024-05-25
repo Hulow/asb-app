@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS owner (
+  owner_uid UUID NOT NULL PRIMARY KEY,
+  first_name VARCHAR NOT NULL,
+  last_name VARCHAR NOT NULL,
+  ownername VARCHAR NOT NULL,
+  email VARCHAR NOT NULL,
+  phone_number VARCHAR NOT NULL,
+  city VARCHAR NOT NULL,
+  description VARCHAR NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);

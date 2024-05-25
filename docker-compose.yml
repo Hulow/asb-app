@@ -1,5 +1,15 @@
 version: '2.4'
 services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    env_file:
+      - .env
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - './postgres:/var/lib/postgresql/asb'
+    ports:
+      - '5432:5432'
   app:
     image: app:latest
     container_name: app
@@ -7,6 +17,11 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      -  /var/www/shared/env/.env
+      -  .env
+    depends_on:
+      - postgres
     ports:
       - '8000:8000'
+
+volumes:
+  postgres:
