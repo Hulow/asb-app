@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:14.5-alpine
     container_name: postgres
     env_file:
       - /var/www/shared/env/.env
