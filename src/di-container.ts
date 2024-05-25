@@ -3,8 +3,8 @@ import { Container } from 'inversify';
 import { config } from './config'
 import { ExpressController, ExpressWebServer } from './shared/adapters/in/express-web-server';
 
-import { LOGGER_OUTPUT_PORT, LoggerOutputPort } from './shared/ports/out/logger.output-port';
 import { PinoLogger } from './shared/adapters/out/pino-logger';
+import { LOGGER_OUTPUT_PORT, LoggerOutputPort } from './shared/ports/out/logger.output-port';
 
 export const container = new Container({
   autoBindInjectable: true,

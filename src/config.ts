@@ -1,6 +1,6 @@
 import path from 'path';
 import { ExpressConfig } from './shared/adapters/in/express-web-server';
-import { LoggerConfig, LogLevel } from './shared/ports/out/logger.output-port';
+import { LogLevel, LoggerConfig } from './shared/ports/out/logger.output-port';
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
