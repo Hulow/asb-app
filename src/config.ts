@@ -2,7 +2,7 @@ import path from 'path';
 import { ExpressConfig } from './shared/adapters/in/express-web-server';
 import { LogLevel, LoggerConfig } from './shared/ports/out/logger.output-port';
 
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../shared/env/.env') });
 
 interface Config {
   readonly logger: LoggerConfig;
