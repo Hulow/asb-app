@@ -51,6 +51,8 @@ jobs:
           script: |
             sudo mkdir -p /var/www/backend
             sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
+            sudo mkdir -p /var/www/backend/docker/sql
+            sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend/docker/sql
             cd /var/www/backend
             git pull origin deploy
             docker compose up
