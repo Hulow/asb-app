@@ -6,8 +6,7 @@ ENV PORT 8000
 COPY package*.json ./
 
 RUN npm cache clean --force && \
-    npm install --verbose && \
-    npm install --no-package-lock
+    npm install --verbose
 
 COPY . .
 
