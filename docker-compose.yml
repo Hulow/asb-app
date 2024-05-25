@@ -10,6 +10,7 @@ services:
       - 'postgres:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
+    user: "1000:112"
   app:
     image: app:latest
     container_name: app
