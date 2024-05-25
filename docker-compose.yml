@@ -6,7 +6,7 @@ services:
     env_file:
       - /var/www/shared/env/.env
     volumes:
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - /var/www/backend/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - './postgres:/var/lib/postgresql/asb'
     ports:
       - '5432:5432'
