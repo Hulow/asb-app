@@ -50,9 +50,9 @@ jobs:
           port: ${{ secrets.DROPLET_SSH_PORT }}
           script: |
             sudo mkdir -p /var/www/backend
-            sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var
-            sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www
-            sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
+            sudo chown  -R 777 ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var
+            sudo chown  -R 777 ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www
+            sudo chown  -R 777 ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
             cd /var/www/backend
             git fetch
             git pull origin deploy
