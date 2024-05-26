@@ -62,4 +62,3 @@ jobs:
             cd /var/www/backend
             git fetch
             git pull origin deploy
-            docker compose up
