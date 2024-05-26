@@ -52,5 +52,8 @@ jobs:
             sudo mkdir -p /var/www/backend
             sudo chown ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
             cd /var/www/backend
+            git fetch
             git pull origin deploy
+            sudo mkdir -p /var/www/backend/docker-entrypoint-initdb.d/
+            sudo mkdir -p /var/www/backend
             docker compose up
