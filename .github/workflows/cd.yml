@@ -60,5 +60,4 @@ jobs:
             sudo mkdir -p /var/www/backend
             sudo chown  -R 777 ${{ secrets.DROPLET_USER }}:$${{ secrets.DROPLET_USER }} /var/www/backend
             cd /var/www/backend
-            git fetch
             git pull origin deploy
