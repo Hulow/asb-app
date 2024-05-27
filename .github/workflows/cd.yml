@@ -27,7 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/asb-service:app
+          tags: ${{ secrets.DOCKER_USERNAME }}/asb-app:app
           file: Dockerfile
 
       - name: Build and push app docker db image
@@ -35,7 +35,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/asb-service:db
+          tags: ${{ secrets.DOCKER_USERNAME }}/asb-app:db
           file: db.Dockerfile
 
   deploy:
@@ -62,4 +62,4 @@ jobs:
             fi
             cd /var/www/backend
             git pull origin deploy
-            docker compose up --build -d
+            docker compose up -d
