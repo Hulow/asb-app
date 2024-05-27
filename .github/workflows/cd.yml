@@ -57,6 +57,9 @@ jobs:
           key: ${{ secrets.DROPLET_SSH_KEY }}
           port: ${{ secrets.DROPLET_SSH_PORT }}
           script: |
+            if [ ! -d "/var/www/backend/.git" ]; then
+            git clone https://github.com/Hulow/asb-app.git /var/www/backend
+            fi
             cd /var/www/backend
             git pull origin deploy
             docker compose up
