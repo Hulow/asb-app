@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm'
 
 import { LoggerOutputPort } from '../../ports/out/logger.output-port'
+import { OwnerTypeormEntity } from '../../../measurement/adapters/out/persistence/owner/owner.orm-entity'
 
 export interface PostgresConfig {
   readonly host: string
@@ -22,12 +23,10 @@ export class PostgresDataSource extends DataSource {
       username: config.username,
       password: config.password,
       database: config.database,
-      entities: [
-        `${process.cwd()}/src/*/adapters/out/persistence/*.orm-entity.@(js|ts)`,
-      ],
+      entities: [OwnerTypeormEntity],
     })
   }
-
+  
   async start() {
     await this.initialize()
     this._logger.info('Postgres database connection established')
