@@ -26,7 +26,7 @@ export class PostgresDataSource extends DataSource {
       entities: [OwnerTypeormEntity],
     })
   }
-  
+
   async start() {
     await this.initialize()
     this._logger.info('Postgres database connection established')

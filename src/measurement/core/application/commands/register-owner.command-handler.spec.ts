@@ -1,11 +1,11 @@
-import { RegisterOwnerCommand } from "./register-owner.command";
-import { RegisterOwnerCommandHandler } from "./register-owner.command-handler";
-import { OwnerAlreadyExists } from "../../domain/errors";
-import { Owner } from "../../domain/owner";
-import { UUID_V4_REGEX } from "../../../../shared/test/utils";
+import { RegisterOwnerCommand } from './register-owner.command'
+import { RegisterOwnerCommandHandler } from './register-owner.command-handler'
+import { UUID_V4_REGEX } from '../../../../shared/test/utils'
 
 import Constructable = jest.Constructable
-import { InMemoryOwnerRepository } from "../../../adapters/out/persistence/owner/owner.repository.in-memory";
+import { InMemoryOwnerRepository } from '../../../adapters/out/persistence/owner/owner.repository.in-memory'
+import { Owner } from '../../domain/owner/owner'
+import { OwnerAlreadyExists } from '../../domain/owner/errors'
 
 describe('Given a RegisterOwnerCommand to handle', () => {
   const OWNER_UID = 'owner-uid'
@@ -28,30 +28,29 @@ describe('Given a RegisterOwnerCommand to handle', () => {
     description: DESCRIPTION,
   }
 
-    
-  let ownerRepository: InMemoryOwnerRepository;
-  let handler: RegisterOwnerCommandHandler;
+  let ownerRepository: InMemoryOwnerRepository
+  let handler: RegisterOwnerCommandHandler
 
   const startDependenciesToInject = () => {
-      ownerRepository = new InMemoryOwnerRepository();
+    ownerRepository = new InMemoryOwnerRepository()
   }
 
   const startHandler = () => {
-      handler = new RegisterOwnerCommandHandler(ownerRepository);
+    handler = new RegisterOwnerCommandHandler(ownerRepository)
   }
 
   beforeAll(() => {
-      startDependenciesToInject()
-      startHandler()
+    startDependenciesToInject()
+    startHandler()
   })
 
   beforeEach(() => {
-      ownerRepository.clean()
-    })
-  
+    ownerRepository.clean()
+  })
+
   async function expectThrowError(
     command: RegisterOwnerCommand,
-    errorType: Constructable
+    errorType: Constructable,
   ) {
     await expect(handler.execute(command)).rejects.toThrow(errorType)
   }
@@ -67,15 +66,15 @@ describe('Given a RegisterOwnerCommand to handle', () => {
       city: CITY,
       description: DESCRIPTION,
       updatedAt: DATE,
-      createdAt: DATE
-    };
+      createdAt: DATE,
+    }
     ownerRepository.add(owner)
-    return owner 
+    return owner
   }
 
   describe('When the owner already exist', () => {
     let command: RegisterOwnerCommand
-    
+
     beforeEach(() => {
       startScenario()
     })
@@ -85,13 +84,13 @@ describe('Given a RegisterOwnerCommand to handle', () => {
       command = RegisterOwnerCommand.from(VALID_COMMAND)
     }
     it('Then it should throw an error', async () => {
-        await expectThrowError(command, OwnerAlreadyExists)
+      await expectThrowError(command, OwnerAlreadyExists)
     })
   })
 
   describe('When the owner already exist', () => {
     let command: RegisterOwnerCommand
-    
+
     beforeEach(() => {
       startScenario()
     })
@@ -111,7 +110,7 @@ describe('Given a RegisterOwnerCommand to handle', () => {
         city: CITY,
         description: DESCRIPTION,
         updatedAt: expect.any(Date) as Date,
-        createdAt: expect.any(Date) as Date
+        createdAt: expect.any(Date) as Date,
       })
     })
   })

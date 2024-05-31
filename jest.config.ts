@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import type { Config } from 'jest'
 
 const config: Config = {
   transform: {
@@ -6,6 +6,6 @@ const config: Config = {
   },
   setupFilesAfterEnv: ['./src/shared/test/jest-setup.ts', 'jest-extended/all'],
   watchPathIgnorePatterns: ['postgres', 'node_modules'],
-};
+}
 
-export default config;
+export default config
