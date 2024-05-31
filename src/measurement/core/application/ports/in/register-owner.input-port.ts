@@ -1,5 +1,5 @@
 import { Owner } from '../../../domain/owner/owner'
-import { RegisterOwnerCommand } from '../../commands/register-owner.command'
+import { RegisterOwnerCommand } from '../../commands/owner/register-owner.command'
 
 export const REGISTER_OWNER_INPUT_PORT = Symbol.for('RegisterOwnerInputPort')
 

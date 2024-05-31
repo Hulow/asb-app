@@ -1,11 +1,11 @@
 import { RegisterOwnerCommand } from './register-owner.command'
 import { RegisterOwnerCommandHandler } from './register-owner.command-handler'
-import { UUID_V4_REGEX } from '../../../../shared/test/utils'
+import { UUID_V4_REGEX } from '../../../../../shared/test/utils'
 
 import Constructable = jest.Constructable
-import { InMemoryOwnerRepository } from '../../../adapters/out/persistence/owner/owner.repository.in-memory'
-import { Owner } from '../../domain/owner/owner'
-import { OwnerAlreadyExists } from '../../domain/owner/errors'
+import { InMemoryOwnerRepository } from '../../../../adapters/out/persistence/owner/owner.repository.in-memory'
+import { Owner } from '../../../domain/owner/owner'
+import { OwnerAlreadyExists } from '../../../domain/owner/errors'
 
 describe('Given a RegisterOwnerCommand to handle', () => {
   const OWNER_UID = 'owner-uid'

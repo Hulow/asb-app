@@ -6,7 +6,7 @@ import {
   REGISTER_OWNER_INPUT_PORT,
   RegisterOwnerInputPort,
 } from '../../../core/application/ports/in/register-owner.input-port'
-import { RegisterOwnerCommand } from '../../../core/application/commands/register-owner.command'
+import { RegisterOwnerCommand } from '../../../core/application/commands/owner/register-owner.command'
 import { OwnerAlreadyExists } from '../../../core/domain/owner/errors'
 
 @injectable()

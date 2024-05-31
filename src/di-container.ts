@@ -13,7 +13,7 @@ import {
   REGISTER_OWNER_INPUT_PORT,
   RegisterOwnerInputPort,
 } from './measurement/core/application/ports/in/register-owner.input-port'
-import { RegisterOwnerCommandHandler } from './measurement/core/application/commands/register-owner.command-handler'
+import { RegisterOwnerCommandHandler } from './measurement/core/application/commands/owner/register-owner.command-handler'
 import {
   OWNER_REPOSITORY_OUTPUT_PORT,
   OwnerRepositoryOutputPort,

@@ -6,7 +6,6 @@ import { ExpressController } from '../../../../shared/adapters/in/express-web-se
 import {
   RegisterDriverInputPort,
   REGISTER_DRIVER_INPUT_PORT,
-  RegisterDriverInput,
 } from '../../../core/application/ports/in/register-driver.input-port'
 import { RegisterDriverCommand } from '../../../core/application/commands/register-driver.command'
 import { DriversAlreadyExists } from '../../../core/domain/driver/errors'
@@ -33,7 +32,7 @@ export class RegisterDriverController implements ExpressController {
       continuousPowerHandling,
       ownerUid,
       cabinetUid,
-    } = req.body as RegisterDriverInput
+    } = req.body
     try {
       const command = RegisterDriverCommand.from({
         brandName,
