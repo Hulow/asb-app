@@ -34,13 +34,13 @@ import {
   REGISTER_DRIVER_INPUT_PORT,
   RegisterDriverInputPort,
 } from './measurement/core/application/ports/in/register-driver.input-port'
-import { RegisterDriverCommandHandler } from './measurement/core/application/commands/register-driver.command-handler'
 import { RegisterDriverController } from './measurement/adapters/in/web/register-driver.controller'
 import {
   DRIVER_REPOSITORY_OUTPUT_PORT,
   DriverRepositoryOutputPort,
 } from './measurement/core/application/ports/out/driver-repository.output-port'
 import { SqlDriverRepository } from './measurement/adapters/out/persistence/driver/driver.repository.sql'
+import { RegisterDriverCommandHandler } from './measurement/core/application/commands/driver/register-driver.command-handler'
 
 export const container = new Container({
   autoBindInjectable: true,

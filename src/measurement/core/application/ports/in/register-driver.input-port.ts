@@ -1,5 +1,5 @@
 import { Driver } from '../../../domain/driver/driver'
-import { RegisterDriverCommand } from '../../commands/register-driver.command'
+import { RegisterDriverCommand } from '../../commands/driver/register-driver.command'
 
 export const REGISTER_DRIVER_INPUT_PORT = Symbol.for('RegisterDriverInputPort')
 

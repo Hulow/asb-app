@@ -7,10 +7,10 @@ import {
   RegisterDriverInputPort,
   REGISTER_DRIVER_INPUT_PORT,
 } from '../../../core/application/ports/in/register-driver.input-port'
-import { RegisterDriverCommand } from '../../../core/application/commands/register-driver.command'
 import { DriversAlreadyExists } from '../../../core/domain/driver/errors'
 import { CabinetDoesNotExist } from '../../../core/domain/cabinet/errors'
 import { OwnerDoesNotExist } from '../../../core/domain/owner/errors'
+import { RegisterDriverCommand } from '../../../core/application/commands/driver/register-driver.command'
 
 @injectable()
 export class RegisterDriverController implements ExpressController {
