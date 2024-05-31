@@ -6,19 +6,19 @@ export enum LogLevel {
 }
 
 export interface LogMethod {
-  (msg: string, meta: object): void;
-  (obj: unknown): void;
+  (msg: string, meta: object): void
+  (obj: unknown): void
 }
 
 export interface LoggerConfig {
-  readonly level: LogLevel;
+  readonly level: LogLevel
 }
 
-export const LOGGER_OUTPUT_PORT = Symbol.for('LoggerOutputPort');
+export const LOGGER_OUTPUT_PORT = Symbol.for('LoggerOutputPort')
 
 export interface LoggerOutputPort {
-  debug: LogMethod;
-  info: LogMethod;
-  warn: LogMethod;
-  error: LogMethod;
+  debug: LogMethod
+  info: LogMethod
+  warn: LogMethod
+  error: LogMethod
 }

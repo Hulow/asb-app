@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import path from 'path';
-import { ExpressConfig } from './shared/adapters/in/express-web-server';
-import { LogLevel, LoggerConfig } from './shared/ports/out/logger.output-port';
+import path from 'path'
+import { ExpressConfig } from './shared/adapters/in/express-web-server'
+import { LogLevel, LoggerConfig } from './shared/ports/out/logger.output-port'
 
-require('dotenv').config({ path: path.resolve(__dirname, '../../shared/env/.env') });
+require('dotenv').config({
+  path: path.resolve(__dirname, '../../shared/env/.env'),
+})
 
 interface Config {
-  readonly logger: LoggerConfig;
-  readonly express: ExpressConfig;
+  readonly logger: LoggerConfig
+  readonly express: ExpressConfig
 }
 
 export const config: Config = {
@@ -21,4 +23,4 @@ export const config: Config = {
     hostname: process.env.EXPRESS_SERVER_HOSTNAME as string,
     asbKeyUrl: process.env.ASB_KEY_URL as string,
   },
-};
+}

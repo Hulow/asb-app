@@ -2,7 +2,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "npm run build && cd ./dist && node ./index.js",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "license": "ISC",
   "dependencies": {
@@ -25,6 +26,7 @@
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
+    "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   }
 }
