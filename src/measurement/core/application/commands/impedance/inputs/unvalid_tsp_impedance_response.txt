@@ -1,0 +1,23 @@
+* This data was exported from the Dayton Audio Test System: DATS
+*
+* Piston Diameter = 393 mm
+* f(s)= 40.17 Hz
+* R(e)= 5.107 Ohms
+* Z(max)= 151.4 Ohms
+* Q(ms)= 13.14
+* Q(ts)= 0.4432
+* V(as)= 173 liters     (6.108 cubic feet)
+* L(e)= 1.473 mH
+* n(0)= 2.331 %
+* SPL= 95.78 1W/1m
+* M(ms)= 187.5 grams
+* C(ms)= 0.084 mm/N
+* BL= 22.95 
+* K(r)= 0.05354 
+* X(r)= 0.5762 
+* K(i)= 0.04204 
+* X(i)= 0.6239 
+*
+*
+Freq            Impedance       Phase
+1.029    	5.108    	4.975  
