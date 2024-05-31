@@ -1,4 +1,4 @@
-name: Deploy
+name: Continuous Deployment
 
 on:
   push:
@@ -62,4 +62,4 @@ jobs:
             fi
             cd /var/www/backend
             git pull origin deploy
-            docker compose up --build -d
+            docker compose up -d
