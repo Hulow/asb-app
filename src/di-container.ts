@@ -29,7 +29,7 @@ import {
   REGISTER_CABINET_INPUT_PORT,
   RegisterCabinetInputPort,
 } from './measurement/core/application/ports/in/register-cabinet.input-port'
-import { RegisterCabinetCommandHandler } from './measurement/core/application/commands/register-cabinet.command-handler'
+import { RegisterCabinetCommandHandler } from './measurement/core/application/commands/cabinet/register-cabinet.command-handler'
 import {
   REGISTER_DRIVER_INPUT_PORT,
   RegisterDriverInputPort,

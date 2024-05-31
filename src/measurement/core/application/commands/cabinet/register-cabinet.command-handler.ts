@@ -1,19 +1,19 @@
 import { inject, injectable } from 'inversify'
 
-import { RegisterCabinetInputPort } from '../ports/in/register-cabinet.input-port'
+import { RegisterCabinetInputPort } from '../../ports/in/register-cabinet.input-port'
 import {
   CabinetRepositoryOutputPort,
   CABINET_REPOSITORY_OUTPUT_PORT,
-} from '../ports/out/cabinet-repository.output-port'
+} from '../../ports/out/cabinet-repository.output-port'
 
 import { RegisterCabinetCommand } from './register-cabinet.command'
 import {
   OWNER_REPOSITORY_OUTPUT_PORT,
   OwnerRepositoryOutputPort,
-} from '../ports/out/owner-repository.output-port'
-import { Cabinet } from '../../domain/cabinet/cabinet'
-import { OwnerDoesNotExist } from '../../domain/owner/errors'
-import { CabinetAlreadyExists } from '../../domain/cabinet/errors'
+} from '../../ports/out/owner-repository.output-port'
+import { Cabinet } from '../../../domain/cabinet/cabinet'
+import { OwnerDoesNotExist } from '../../../domain/owner/errors'
+import { CabinetAlreadyExists } from '../../../domain/cabinet/errors'
 
 @injectable()
 export class RegisterCabinetCommandHandler implements RegisterCabinetInputPort {

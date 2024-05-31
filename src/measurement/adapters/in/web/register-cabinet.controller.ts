@@ -7,7 +7,7 @@ import {
   RegisterCabinetInputPort,
   REGISTER_CABINET_INPUT_PORT,
 } from '../../../core/application/ports/in/register-cabinet.input-port'
-import { RegisterCabinetCommand } from '../../../core/application/commands/register-cabinet.command'
+import { RegisterCabinetCommand } from '../../../core/application/commands/cabinet/register-cabinet.command'
 import { OwnerDoesNotExist } from '../../../core/domain/owner/errors'
 import { CabinetAlreadyExists } from '../../../core/domain/cabinet/errors'
 
