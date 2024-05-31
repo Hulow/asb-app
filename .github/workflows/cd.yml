@@ -62,4 +62,4 @@ jobs:
             fi
             cd /var/www/backend
             git pull origin deploy
-            docker compose up -d
+            docker compose up --build -d
