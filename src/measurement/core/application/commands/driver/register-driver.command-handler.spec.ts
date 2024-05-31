@@ -1,16 +1,15 @@
-
-import { Owner } from "../../../domain/owner/owner"
-import { Cabinet } from "../../../domain/cabinet/cabinet"
-import { Driver } from "../../../domain/driver/driver"
-import { RegisterDriverCommand } from "./register-driver.command"
-import { InMemoryCabinetRepository } from "../../../../adapters/out/persistence/cabinet/cabinet.repository.in-memory"
-import { InMemoryOwnerRepository } from "../../../../adapters/out/persistence/owner/owner.repository.in-memory"
-import { InMemoryDriverRepository } from "../../../../adapters/out/persistence/driver/driver.repository.in-memory"
-import { RegisterDriverCommandHandler } from "./register-driver.command-handler"
-import { OwnerDoesNotExist } from "../../../domain/owner/errors"
-import { CabinetDoesNotExist } from "../../../domain/cabinet/errors"
-import { DriversAlreadyExists } from "../../../domain/driver/errors"
-import { UUID_V4_REGEX } from "../../../../../shared/test/utils"
+import { Owner } from '../../../domain/owner/owner'
+import { Cabinet } from '../../../domain/cabinet/cabinet'
+import { Driver } from '../../../domain/driver/driver'
+import { RegisterDriverCommand } from './register-driver.command'
+import { InMemoryCabinetRepository } from '../../../../adapters/out/persistence/cabinet/cabinet.repository.in-memory'
+import { InMemoryOwnerRepository } from '../../../../adapters/out/persistence/owner/owner.repository.in-memory'
+import { InMemoryDriverRepository } from '../../../../adapters/out/persistence/driver/driver.repository.in-memory'
+import { RegisterDriverCommandHandler } from './register-driver.command-handler'
+import { OwnerDoesNotExist } from '../../../domain/owner/errors'
+import { CabinetDoesNotExist } from '../../../domain/cabinet/errors'
+import { DriversAlreadyExists } from '../../../domain/driver/errors'
+import { UUID_V4_REGEX } from '../../../../../shared/test/utils'
 
 import Constructable = jest.Constructable
 

@@ -2,9 +2,18 @@ import { inject, injectable } from 'inversify'
 
 import { RegisterDriverCommand } from './register-driver.command'
 import { RegisterDriverInputPort } from '../../ports/in/register-driver.input-port'
-import { DRIVER_REPOSITORY_OUTPUT_PORT, DriverRepositoryOutputPort } from '../../ports/out/driver-repository.output-port'
-import { CABINET_REPOSITORY_OUTPUT_PORT, CabinetRepositoryOutputPort } from '../../ports/out/cabinet-repository.output-port'
-import { OWNER_REPOSITORY_OUTPUT_PORT, OwnerRepositoryOutputPort } from '../../ports/out/owner-repository.output-port'
+import {
+  DRIVER_REPOSITORY_OUTPUT_PORT,
+  DriverRepositoryOutputPort,
+} from '../../ports/out/driver-repository.output-port'
+import {
+  CABINET_REPOSITORY_OUTPUT_PORT,
+  CabinetRepositoryOutputPort,
+} from '../../ports/out/cabinet-repository.output-port'
+import {
+  OWNER_REPOSITORY_OUTPUT_PORT,
+  OwnerRepositoryOutputPort,
+} from '../../ports/out/owner-repository.output-port'
 import { Driver } from '../../../domain/driver/driver'
 import { OwnerDoesNotExist } from '../../../domain/owner/errors'
 import { CabinetDoesNotExist } from '../../../domain/cabinet/errors'

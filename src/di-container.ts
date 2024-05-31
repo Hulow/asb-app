@@ -41,6 +41,17 @@ import {
 } from './measurement/core/application/ports/out/driver-repository.output-port'
 import { SqlDriverRepository } from './measurement/adapters/out/persistence/driver/driver.repository.sql'
 import { RegisterDriverCommandHandler } from './measurement/core/application/commands/driver/register-driver.command-handler'
+import { RegisterFrequencyController } from './measurement/adapters/in/web/register-frequency.controller'
+import {
+  REGISTER_FREQUENCY_INPUT_PORT,
+  RegisterFrequencyInputPort,
+} from './measurement/core/application/ports/in/register-frequency.input-port'
+import { RegisterFrequencyCommandHandler } from './measurement/core/application/commands/frequency/register-frequency.command-handler'
+import {
+  FREQUENCY_REPOSITORY_OUTPUT_PORT,
+  FrequencyRepositoryOutputPort,
+} from './measurement/core/application/ports/out/frequency-repository.output-port'
+import { SqlFrequencyRepository } from './measurement/adapters/out/persistence/frequency/frequency.repository.sql'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -56,6 +67,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterOwnerController),
     container.get(RegisterCabinetController),
     container.get(RegisterDriverController),
+    container.get(RegisterFrequencyController),
   ]
   return new ExpressWebServer(
     config.express,
@@ -80,6 +92,9 @@ container
 container
   .bind<RegisterDriverInputPort>(REGISTER_DRIVER_INPUT_PORT)
   .to(RegisterDriverCommandHandler)
+container
+  .bind<RegisterFrequencyInputPort>(REGISTER_FREQUENCY_INPUT_PORT)
+  .to(RegisterFrequencyCommandHandler)
 
 /**
  *  output/driven/secondary adapters
@@ -105,3 +120,6 @@ container
 container
   .bind<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT)
   .to(SqlDriverRepository)
+container
+  .bind<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT)
+  .to(SqlFrequencyRepository)
