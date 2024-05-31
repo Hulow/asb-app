@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm'
 
 import { LoggerOutputPort } from '../../ports/out/logger.output-port'
 import { OwnerTypeormEntity } from '../../../measurement/adapters/out/persistence/owner/owner.orm-entity'
+import { CabinetTypeormEntity } from '../../../measurement/adapters/out/persistence/cabinet/cabinet.orm-entity'
 
 export interface PostgresConfig {
   readonly host: string
@@ -23,7 +24,7 @@ export class PostgresDataSource extends DataSource {
       username: config.username,
       password: config.password,
       database: config.database,
-      entities: [OwnerTypeormEntity],
+      entities: [OwnerTypeormEntity, CabinetTypeormEntity],
     })
   }
 
