@@ -1,91 +1,117 @@
-
-import { ImpedanceParameterNotFound } from "../../../domain/impedance/errors";
-import { ImpedanceMeasurement, ImpedanceProps, ThieleSmallParameters } from "../../../domain/impedance/impedance";
-import { RegisterImpedanceCommand } from "./register-impedance.command";
+import { ImpedanceParameterNotFound } from '../../../domain/impedance/errors'
+import {
+  ImpedanceMeasurement,
+  ImpedanceProps,
+  ThieleSmallParameters,
+} from '../../../domain/impedance/impedance'
+import { RegisterImpedanceCommand } from './register-impedance.command'
 
 export class RegisterImpedanceMapper {
   mapImpedance(command: RegisterImpedanceCommand): ImpedanceProps {
-    const [parameters, data] = command.measurements.split(/Freq.*/);
-    const tsp = this.mapTSP(parameters);
-    const impedanceResponse = this.mapImpedanceCurve(data);
-    return this.mapImpedanceObject(command, tsp, impedanceResponse);
+    const [parameters, data] = command.measurements.split(/Freq.*/)
+    const tsp = this.mapTSP(parameters)
+    const impedanceResponse = this.mapImpedanceCurve(data)
+    return this.mapImpedanceObject(command, tsp, impedanceResponse)
   }
 
   private mapTSP(data: string): ThieleSmallParameters {
-    const parameters = data.split('\n');
-    const matchingParametersInMemory: [TSPName, string][] = [];
+    const parameters = data.split('\n')
+    const matchingParametersInMemory: [TSPName, string][] = []
     for (const parameterAndPattern of PARAMETERS_AND_PATTERNS) {
-      const matchingParameter = this.mapSingleParameter(parameters, parameterAndPattern);
-      matchingParametersInMemory.push(matchingParameter);
+      const matchingParameter = this.mapSingleParameter(
+        parameters,
+        parameterAndPattern,
+      )
+      matchingParametersInMemory.push(matchingParameter)
     }
-    return Object.fromEntries(new Map(matchingParametersInMemory)) as ThieleSmallParameters;
+    return Object.fromEntries(
+      new Map(matchingParametersInMemory),
+    ) as ThieleSmallParameters
   }
 
-  private mapSingleParameter(parametersList: string[], parameterAndPattern: ParameterAndPattern): [TSPName, string] {
+  private mapSingleParameter(
+    parametersList: string[],
+    parameterAndPattern: ParameterAndPattern,
+  ): [TSPName, string] {
     for (const parameter of parametersList) {
-      const matchingParameter = this.matchParameter(parameter, parameterAndPattern.pattern);
+      const matchingParameter = this.matchParameter(
+        parameter,
+        parameterAndPattern.pattern,
+      )
       if (matchingParameter) {
-        return [parameterAndPattern.name, matchingParameter];
+        return [parameterAndPattern.name, matchingParameter]
       }
     }
-    throw new ImpedanceParameterNotFound(parameterAndPattern.name);
+    throw new ImpedanceParameterNotFound(parameterAndPattern.name)
   }
 
-  private matchParameter(parameter: string, pattern: RegExp): string | undefined {
-    const match = parameter.match(pattern);
-    return match?.length ? match[0].trim() : undefined;
+  private matchParameter(
+    parameter: string,
+    pattern: RegExp,
+  ): string | undefined {
+    const match = parameter.match(pattern)
+    return match?.length ? match[0].trim() : undefined
   }
 
   private mapImpedanceCurve(measurements: string): {
-    frequencies: number[];
-    impedances: number[];
-    phases: number[];
+    frequencies: number[]
+    impedances: number[]
+    phases: number[]
   } {
-    const splitMeasurements: string[] = measurements.split(/\n/);
-    const frequencies: number[] = [];
-    const impedances: number[] = [];
-    const phases: number[] = [];
+    const splitMeasurements: string[] = measurements.split(/\n/)
+    const frequencies: number[] = []
+    const impedances: number[] = []
+    const phases: number[] = []
     for (const measurement of splitMeasurements) {
       const frequencyPhaseAndImpedance: ImpedanceMeasurement | undefined =
-        this.mapFrequencyPhaseAndImpedance(measurement);
+        this.mapFrequencyPhaseAndImpedance(measurement)
       if (frequencyPhaseAndImpedance) {
-        frequencies.push(frequencyPhaseAndImpedance.frequency);
-        impedances.push(frequencyPhaseAndImpedance.impedance);
-        phases.push(frequencyPhaseAndImpedance.phase);
+        frequencies.push(frequencyPhaseAndImpedance.frequency)
+        impedances.push(frequencyPhaseAndImpedance.impedance)
+        phases.push(frequencyPhaseAndImpedance.phase)
       }
     }
-    return { frequencies, impedances, phases };
+    return { frequencies, impedances, phases }
   }
 
-  private mapFrequencyPhaseAndImpedance(measurement: string): ImpedanceMeasurement | undefined {
-    const extractedFrequencyPhaseAndImpedance = measurement.trim().split(/\s+/);
-    if (!this.isValidMeasurement(extractedFrequencyPhaseAndImpedance)) return;
+  private mapFrequencyPhaseAndImpedance(
+    measurement: string,
+  ): ImpedanceMeasurement | undefined {
+    const extractedFrequencyPhaseAndImpedance = measurement.trim().split(/\s+/)
+    if (!this.isValidMeasurement(extractedFrequencyPhaseAndImpedance)) return
     return {
       frequency: Number(extractedFrequencyPhaseAndImpedance[0]),
       impedance: Number(extractedFrequencyPhaseAndImpedance[1]),
       phase: Number(extractedFrequencyPhaseAndImpedance[2]),
-    };
+    }
   }
 
   private isValidMeasurement(measurement: string[]): boolean {
-    return this.doPhaseImpedanceAndFrequencyExist(measurement) && this.areValidValues(measurement) ? true : false;
+    return this.doPhaseImpedanceAndFrequencyExist(measurement) &&
+      this.areValidValues(measurement)
+      ? true
+      : false
   }
 
   private doPhaseImpedanceAndFrequencyExist(measurement: string[]): boolean {
-    return measurement.length === 3 ? true : false;
+    return measurement.length === 3 ? true : false
   }
 
   private areValidValues(measurement: string[]): boolean {
     for (const value of measurement) {
-      if (value.length === 0) return false;
+      if (value.length === 0) return false
     }
-    return true;
+    return true
   }
 
   private mapImpedanceObject(
     command: RegisterImpedanceCommand,
     thieleSmallParameters: ThieleSmallParameters,
-    impedanceCurve: { frequencies: number[]; impedances: number[]; phases: number[] },
+    impedanceCurve: {
+      frequencies: number[]
+      impedances: number[]
+      phases: number[]
+    },
   ): ImpedanceProps {
     return {
       ...thieleSmallParameters,
@@ -95,7 +121,7 @@ export class RegisterImpedanceMapper {
         impedances: impedanceCurve.impedances,
         phases: impedanceCurve.phases,
       },
-    };
+    }
   }
 }
 
@@ -119,7 +145,7 @@ const TSPPatterns = {
   xR: /(?<=(X[(]r[)]=)).*/,
   kI: /(?<=(K[(]i[)]=)).*/,
   xI: /(?<=(X[(]i[)]=)).*/,
-};
+}
 
 enum TSPName {
   Source = 'source',
@@ -144,8 +170,8 @@ enum TSPName {
 }
 
 interface ParameterAndPattern {
-  name: TSPName;
-  pattern: RegExp;
+  name: TSPName
+  pattern: RegExp
 }
 
 const PARAMETERS_AND_PATTERNS: ParameterAndPattern[] = [
@@ -157,15 +183,24 @@ const PARAMETERS_AND_PATTERNS: ParameterAndPattern[] = [
   { name: TSPName.MechanicalDamping, pattern: TSPPatterns.mechanicalDamping },
   { name: TSPName.ElectricalDamping, pattern: TSPPatterns.electricalDamping },
   { name: TSPName.TotalDamping, pattern: TSPPatterns.totalDamping },
-  { name: TSPName.EquivalenceCompliance, pattern: TSPPatterns.equivalenceCompliance },
-  { name: TSPName.VoiceCoilInductance, pattern: TSPPatterns.voiceCoilInductance },
+  {
+    name: TSPName.EquivalenceCompliance,
+    pattern: TSPPatterns.equivalenceCompliance,
+  },
+  {
+    name: TSPName.VoiceCoilInductance,
+    pattern: TSPPatterns.voiceCoilInductance,
+  },
   { name: TSPName.Efficiency, pattern: TSPPatterns.efficiency },
   { name: TSPName.Sensitivity, pattern: TSPPatterns.sensitivity },
   { name: TSPName.ConeMass, pattern: TSPPatterns.coneMass },
-  { name: TSPName.SuspensionCompliance, pattern: TSPPatterns.suspensionCompliance },
+  {
+    name: TSPName.SuspensionCompliance,
+    pattern: TSPPatterns.suspensionCompliance,
+  },
   { name: TSPName.ForceFactor, pattern: TSPPatterns.forceFactor },
   { name: TSPName.Kr, pattern: TSPPatterns.kR },
   { name: TSPName.Xr, pattern: TSPPatterns.xR },
   { name: TSPName.Ki, pattern: TSPPatterns.kI },
   { name: TSPName.Xi, pattern: TSPPatterns.xI },
-];
+]

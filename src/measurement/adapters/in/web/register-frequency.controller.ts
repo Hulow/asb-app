@@ -6,7 +6,6 @@ import { ExpressController } from '../../../../shared/adapters/in/express-web-se
 import {
   RegisterFrequencyInputPort,
   REGISTER_FREQUENCY_INPUT_PORT,
-  RegisterFrequencyInput,
 } from '../../../core/application/ports/in/register-frequency.input-port'
 import { RegisterFrequencyCommand } from '../../../core/application/commands/frequency/register-frequency.command'
 import {
@@ -25,8 +24,7 @@ export class RegisterFrequencyController implements ExpressController {
     private readonly _RegisterFrequencyCommandHandler: RegisterFrequencyInputPort,
   ) {}
   async handler(req: Request<unknown, unknown>, res: Response) {
-    const { ownerUid, cabinetUid, driverUid, measurements } =
-      req.body as RegisterFrequencyInput
+    const { ownerUid, cabinetUid, driverUid, measurements } = req.body
     try {
       const command = RegisterFrequencyCommand.from({
         ownerUid,

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { injectable } from 'inversify';
-import { ImpedanceRepositoryOutputPort } from '../../../../core/application/ports/out/impedance-repository.output-port';
-import { Impedance } from '../../../../core/domain/impedance/impedance';
+import { injectable } from 'inversify'
+import { ImpedanceRepositoryOutputPort } from '../../../../core/application/ports/out/impedance-repository.output-port'
+import { Impedance } from '../../../../core/domain/impedance/impedance'
 
 @injectable()
-export class InMemoryImpedanceRepository implements ImpedanceRepositoryOutputPort {
-  public impedances: Impedance[] = [];
+export class InMemoryImpedanceRepository
+  implements ImpedanceRepositoryOutputPort
+{
+  public impedances: Impedance[] = []
   public storedImpedances: Impedance[] = []
 
   clean(): void {
@@ -22,11 +24,11 @@ export class InMemoryImpedanceRepository implements ImpedanceRepositoryOutputPor
   }
 
   save(impedance: Impedance) {
-    this.storedImpedances.push(impedance);
-    return Promise.resolve(this.impedances[0]);
+    this.storedImpedances.push(impedance)
+    return Promise.resolve(this.impedances[0])
   }
 
   async getByCabinetUid(cabinetUid: string) {
-    return Promise.resolve(this.impedances[0]);
+    return Promise.resolve(this.impedances[0])
   }
 }

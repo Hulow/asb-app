@@ -1,11 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import Constructable = jest.Constructable
 import { InMemoryCabinetRepository } from '../../../../adapters/out/persistence/cabinet/cabinet.repository.in-memory'
 import { InMemoryFrequencyRepository } from '../../../../adapters/out/persistence/frequency/frequency.repository.in-memory'
 import { RegisterFrequencyCommandHandler } from './register-frequency.command-handler'
-import { RegisterFrequencyMapper } from './register-frequency.mapper'
 import { RegisterFrequencyCommand } from './register-frequency.command'
 import { Cabinet } from '../../../domain/cabinet/cabinet'
 import { Frequency } from '../../../domain/frequency/frequency'
@@ -15,6 +13,8 @@ import {
   FrequencyParameterNotFound,
 } from '../../../domain/frequency/errors'
 import { UUID_V4_REGEX } from '../../../../../shared/test/utils'
+
+import Constructable = jest.Constructable
 
 describe('Given a RegisterFrequencyCommandHandler to handle', () => {
   const FREQUENCY_UID = 'frequency-uid'
@@ -57,12 +57,10 @@ describe('Given a RegisterFrequencyCommandHandler to handle', () => {
   let cabinetRepoStub: InMemoryCabinetRepository
   let frequencyRepoStub: InMemoryFrequencyRepository
   let handler: RegisterFrequencyCommandHandler
-  let registerFrequencyMapper: RegisterFrequencyMapper
 
   const startDependenciesToInject = () => {
     cabinetRepoStub = new InMemoryCabinetRepository()
     frequencyRepoStub = new InMemoryFrequencyRepository()
-    registerFrequencyMapper = new RegisterFrequencyMapper()
   }
 
   const startHandler = () => {

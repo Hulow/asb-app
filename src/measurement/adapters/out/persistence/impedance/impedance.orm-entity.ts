@@ -1,85 +1,91 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
-import { Impedance } from '../../../../core/domain/impedance/impedance';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm'
+import { Impedance } from '../../../../core/domain/impedance/impedance'
 
 @Entity({ name: 'impedance' })
 export class ImpedanceTypeormEntity {
   @PrimaryColumn({ name: 'impedance_uid', type: 'uuid', update: false })
-  uid!: string;
+  uid!: string
 
   @Column({ name: 'source', type: 'varchar' })
-  source!: string;
+  source!: string
 
   @Column({ name: 'piston_diameter', type: 'varchar' })
-  pistonDiameter!: string;
+  pistonDiameter!: string
 
   @Column({ name: 'resonance_frequency', type: 'varchar' })
-  resonanceFrequency!: string;
+  resonanceFrequency!: string
 
   @Column({ name: 'dc_resistance', type: 'varchar' })
-  dcResistance!: string;
+  dcResistance!: string
 
   @Column({ name: 'ac_resistance', type: 'varchar' })
-  acResistance!: string;
+  acResistance!: string
 
   @Column({ name: 'mechanical_damping', type: 'varchar' })
-  mechanicalDamping!: string;
+  mechanicalDamping!: string
 
   @Column({ name: 'electrical_damping', type: 'varchar' })
-  electricalDamping!: string;
+  electricalDamping!: string
 
   @Column({ name: 'total_damping', type: 'varchar' })
-  totalDamping!: string;
+  totalDamping!: string
 
   @Column({ name: 'equivalence_compliance', type: 'varchar' })
-  equivalenceCompliance!: string;
+  equivalenceCompliance!: string
 
   @Column({ name: 'voice_coil_inductance', type: 'varchar' })
-  voiceCoilInductance!: string;
+  voiceCoilInductance!: string
 
   @Column({ name: 'efficiency', type: 'varchar' })
-  efficiency!: string;
+  efficiency!: string
 
   @Column({ name: 'sensitivity', type: 'varchar' })
-  sensitivity!: string;
+  sensitivity!: string
 
   @Column({ name: 'cone_mass', type: 'varchar' })
-  coneMass!: string;
+  coneMass!: string
 
   @Column({ name: 'suspension_compliance', type: 'varchar' })
-  suspensionCompliance!: string;
+  suspensionCompliance!: string
 
   @Column({ name: 'force_factor', type: 'varchar' })
-  forceFactor!: string;
+  forceFactor!: string
 
   @Column({ name: 'kr', type: 'varchar' })
-  kR!: string;
+  kR!: string
 
   @Column({ name: 'xr', type: 'varchar' })
-  xR!: string;
+  xR!: string
 
   @Column({ name: 'ki', type: 'varchar' })
-  kI!: string;
+  kI!: string
 
   @Column({ name: 'xi', type: 'varchar' })
-  xI!: string;
+  xI!: string
 
   @Column({ name: 'cabinet_uid', type: 'uuid' })
-  cabinetUid!: string;
+  cabinetUid!: string
 
   @Column({ name: 'frequencies', type: 'jsonb' })
-  frequencies!: number[];
+  frequencies!: number[]
 
   @Column({ name: 'impedances', type: 'jsonb' })
-  impedances!: number[];
+  impedances!: number[]
 
   @Column({ name: 'phases', type: 'jsonb' })
-  phases!: number[];
+  phases!: number[]
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
-  createdAt!: Date;
+  createdAt!: Date
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
-  updatedAt!: Date;
+  updatedAt!: Date
 
   toDomain(): Impedance {
     return new Impedance({
@@ -109,35 +115,35 @@ export class ImpedanceTypeormEntity {
       phases: this.phases,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
-    });
+    })
   }
 
   static fromDomain(impedance: Impedance): ImpedanceTypeormEntity {
-    const entity = new ImpedanceTypeormEntity();
-    entity.uid = impedance.uid;
-    entity.source = impedance.source;
-    entity.pistonDiameter = impedance.pistonDiameter;
-    entity.resonanceFrequency = impedance.resonanceFrequency;
-    entity.dcResistance = impedance.dcResistance;
-    entity.acResistance = impedance.acResistance;
-    entity.mechanicalDamping = impedance.mechanicalDamping;
-    entity.electricalDamping = impedance.electricalDamping;
-    entity.totalDamping = impedance.totalDamping;
-    entity.equivalenceCompliance = impedance.equivalenceCompliance;
-    entity.voiceCoilInductance = impedance.voiceCoilInductance;
-    entity.efficiency = impedance.efficiency;
-    entity.sensitivity = impedance.sensitivity;
-    entity.coneMass = impedance.coneMass;
-    entity.suspensionCompliance = impedance.suspensionCompliance;
-    entity.forceFactor = impedance.forceFactor;
-    entity.kR = impedance.kR;
-    entity.xR = impedance.xR;
-    entity.kI = impedance.kI;
-    entity.xI = impedance.xI;
-    entity.cabinetUid = impedance.cabinetUid;
-    entity.frequencies = impedance.frequencies;
-    entity.impedances = impedance.impedances;
-    entity.phases = impedance.phases;
-    return entity;
+    const entity = new ImpedanceTypeormEntity()
+    entity.uid = impedance.uid
+    entity.source = impedance.source
+    entity.pistonDiameter = impedance.pistonDiameter
+    entity.resonanceFrequency = impedance.resonanceFrequency
+    entity.dcResistance = impedance.dcResistance
+    entity.acResistance = impedance.acResistance
+    entity.mechanicalDamping = impedance.mechanicalDamping
+    entity.electricalDamping = impedance.electricalDamping
+    entity.totalDamping = impedance.totalDamping
+    entity.equivalenceCompliance = impedance.equivalenceCompliance
+    entity.voiceCoilInductance = impedance.voiceCoilInductance
+    entity.efficiency = impedance.efficiency
+    entity.sensitivity = impedance.sensitivity
+    entity.coneMass = impedance.coneMass
+    entity.suspensionCompliance = impedance.suspensionCompliance
+    entity.forceFactor = impedance.forceFactor
+    entity.kR = impedance.kR
+    entity.xR = impedance.xR
+    entity.kI = impedance.kI
+    entity.xI = impedance.xI
+    entity.cabinetUid = impedance.cabinetUid
+    entity.frequencies = impedance.frequencies
+    entity.impedances = impedance.impedances
+    entity.phases = impedance.phases
+    return entity
   }
 }

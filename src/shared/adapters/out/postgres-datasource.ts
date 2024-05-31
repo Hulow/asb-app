@@ -26,7 +26,12 @@ export class PostgresDataSource extends DataSource {
       username: config.username,
       password: config.password,
       database: config.database,
-      entities: [OwnerTypeormEntity, CabinetTypeormEntity, DriverTypeormEntity, FrequencyTypeormEntity],
+      entities: [
+        OwnerTypeormEntity,
+        CabinetTypeormEntity,
+        DriverTypeormEntity,
+        FrequencyTypeormEntity,
+      ],
     })
   }
 

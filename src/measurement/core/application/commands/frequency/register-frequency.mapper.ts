@@ -1,5 +1,4 @@
 import { injectable } from 'inversify'
-import { RegisterFrequencyInput } from '../../ports/in/register-frequency.input-port'
 import { RegisterFrequencyCommand } from './register-frequency.command'
 import { FrequencyProps } from '../../../domain/frequency/frequency'
 import { FrequencyParameterNotFound } from '../../../domain/frequency/errors'

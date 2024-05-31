@@ -1,25 +1,25 @@
-import { DomainError } from "../../../../shared/domain/error";
+import { DomainError } from '../../../../shared/domain/error'
 
 export class ImpedanceAlreadyExists extends DomainError {
   constructor(cabinetUid: string) {
-    super(`Impedance from cabinet ${cabinetUid} already exists`);
+    super(`Impedance from cabinet ${cabinetUid} already exists`)
   }
 }
 
 export class ImpedanceNotFound extends DomainError {
   constructor(cabinetUid: string) {
-    super(`Unable to find impedance from cabinet ${cabinetUid}`);
+    super(`Unable to find impedance from cabinet ${cabinetUid}`)
   }
 }
 
 export class ImpedanceParameterNotFound extends DomainError {
   constructor(parameter: string) {
-    super(`${parameter} parameter from impedance not found`);
+    super(`${parameter} parameter from impedance not found`)
   }
 }
 
 export class UnableToExtractImpedanceData extends DomainError {
   constructor() {
-    super('Unable to extract impedance data');
+    super('Unable to extract impedance data')
   }
 }
