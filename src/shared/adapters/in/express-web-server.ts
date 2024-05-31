@@ -95,7 +95,7 @@ export class ExpressWebServer {
   }
 
   private _setupErrorHandler() {
-    this.app.use((err: Error | HttpError, _request: Request, response: Response, _next: NextFunction) => {
+    this.app.use((err: Error | HttpError, _request: Request, response: Response) => {
       this._logger.error(err);
       if (response.headersSent) {
         return;

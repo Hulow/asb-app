@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "start": "npm run build && cd ./dist && node ./index.js"
+    "start": "npm run build && cd ./dist && node ./index.js",
+    "lint": "eslint . --ext .ts"
   },
   "license": "ISC",
   "dependencies": {
@@ -22,6 +23,8 @@
     "@types/http-errors": "^2.0.4",
     "@types/node": "^20.12.12",
     "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
     "typescript": "^5.4.5"
   }
 }
