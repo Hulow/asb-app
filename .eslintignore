@@ -1,2 +1,9 @@
 node_modules
-/dist
+dist
+tmp
+.eslintrc.cjs
+.env
+postgres
+jest.config.ts
+ormconfig.js
+src/config.ts
