@@ -30,6 +30,17 @@ import {
   RegisterCabinetInputPort,
 } from './measurement/core/application/ports/in/register-cabinet.input-port'
 import { RegisterCabinetCommandHandler } from './measurement/core/application/commands/register-cabinet.command-handler'
+import {
+  REGISTER_DRIVER_INPUT_PORT,
+  RegisterDriverInputPort,
+} from './measurement/core/application/ports/in/register-driver.input-port'
+import { RegisterDriverCommandHandler } from './measurement/core/application/commands/register-driver.command-handler'
+import { RegisterDriverController } from './measurement/adapters/in/web/register-driver.controller'
+import {
+  DRIVER_REPOSITORY_OUTPUT_PORT,
+  DriverRepositoryOutputPort,
+} from './measurement/core/application/ports/out/driver-repository.output-port'
+import { SqlDriverRepository } from './measurement/adapters/out/persistence/driver/driver.repository.sql'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -44,6 +55,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
   const controllers = [
     container.get(RegisterOwnerController),
     container.get(RegisterCabinetController),
+    container.get(RegisterDriverController),
   ]
   return new ExpressWebServer(
     config.express,
@@ -59,13 +71,15 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
 /**
  *  application commands
  */
-
 container
   .bind<RegisterOwnerInputPort>(REGISTER_OWNER_INPUT_PORT)
   .to(RegisterOwnerCommandHandler)
 container
   .bind<RegisterCabinetInputPort>(REGISTER_CABINET_INPUT_PORT)
   .to(RegisterCabinetCommandHandler)
+container
+  .bind<RegisterDriverInputPort>(REGISTER_DRIVER_INPUT_PORT)
+  .to(RegisterDriverCommandHandler)
 
 /**
  *  output/driven/secondary adapters
@@ -88,3 +102,6 @@ container
 container
   .bind<CabinetRepositoryOutputPort>(CABINET_REPOSITORY_OUTPUT_PORT)
   .to(SqlCabinetRepository)
+container
+  .bind<DriverRepositoryOutputPort>(DRIVER_REPOSITORY_OUTPUT_PORT)
+  .to(SqlDriverRepository)
