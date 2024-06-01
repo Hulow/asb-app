@@ -6,7 +6,6 @@ import { ExpressController } from '../../../../shared/adapters/in/express-web-se
 import {
   RegisterImpedanceInputPort,
   REGISTER_IMPEDANCE_INPUT_PORT,
-  RegisterImpedanceInput,
 } from '../../../core/application/ports/in/register-impedance.input-port'
 import { RegisterImpedanceCommand } from '../../../core/application/commands/impedance/register-impedance.command'
 import {
@@ -26,7 +25,7 @@ export class RegisterImpedanceController implements ExpressController {
   ) {}
   async handler(req: Request<unknown, unknown>, res: Response) {
     const { ownerUid, cabinetUid, driverUid, measurements } =
-      req.body as RegisterImpedanceInput
+      req.body
     try {
       const command = RegisterImpedanceCommand.from({
         ownerUid,
