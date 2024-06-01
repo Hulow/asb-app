@@ -58,12 +58,24 @@ import {
   RegisterImpedanceInputPort,
 } from './measurement/core/application/ports/in/register-impedance.input-port'
 import { RegisterImpedanceCommandHandler } from './measurement/core/application/commands/impedance/register-impedance.command-handler'
-import { IMPEDANCE_REPOSITORY_OUTPUT_PORT, ImpedanceRepositoryOutputPort } from './measurement/core/application/ports/out/impedance-repository.output-port'
+import {
+  IMPEDANCE_REPOSITORY_OUTPUT_PORT,
+  ImpedanceRepositoryOutputPort,
+} from './measurement/core/application/ports/out/impedance-repository.output-port'
 import { SqlImpedanceRepository } from './measurement/adapters/out/persistence/impedance/impedance.repository.sql'
 import { RegisterImpulseController } from './measurement/adapters/in/web/register-impulse.controller'
 import { REGISTER_IMPULSE_INPUT_PORT } from './measurement/core/application/ports/in/register-impulse.input-port'
-import { IMPULSE_REPOSITORY_OUTPUT_PORT, ImpulseRepositoryOutputPort } from './measurement/core/application/ports/out/impulse-repository.output-port'
+import {
+  IMPULSE_REPOSITORY_OUTPUT_PORT,
+  ImpulseRepositoryOutputPort,
+} from './measurement/core/application/ports/out/impulse-repository.output-port'
 import { SqlImpulseRepository } from './measurement/adapters/out/persistence/impulse/impulse.repository.sql'
+import { GetCabinetsController } from './measurement/adapters/in/web/get-cabinets.controller'
+import {
+  GET_CABINETS_INPUT_PORT,
+  GetCabinetsInputPort,
+} from './measurement/core/application/ports/in/get-cabinets.input-port'
+import { GetCabinetQueryHandler } from './measurement/core/application/queries/cabinet/get-cabinets.query-handler'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -81,7 +93,8 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
     container.get(RegisterImpedanceController),
-    container.get(RegisterImpulseController)
+    container.get(RegisterImpulseController),
+    container.get(GetCabinetsController),
   ]
   return new ExpressWebServer(
     config.express,
@@ -93,6 +106,10 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
 /**
  *  application queries
  */
+
+container
+  .bind<GetCabinetsInputPort>(GET_CABINETS_INPUT_PORT)
+  .to(GetCabinetQueryHandler)
 
 /**
  *  application commands
