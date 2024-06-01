@@ -1,55 +1,61 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
-import { Impulse, ImpulseGraph } from '../../../../core/domain/impulse/impulse';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm'
+import { Impulse, ImpulseGraph } from '../../../../core/domain/impulse/impulse'
 
 @Entity({ name: 'impulse' })
 export class ImpulseTypeormEntity {
   @PrimaryColumn({ name: 'impulse_uid', type: 'uuid', update: false })
-  uid!: string;
+  uid!: string
 
   @Column({ name: 'measured_by', type: 'varchar' })
-  measuredBy!: string;
+  measuredBy!: string
 
   @Column({ name: 'note', type: 'varchar' })
-  note!: string;
+  note!: string
 
   @Column({ name: 'source', type: 'varchar' })
-  source!: string;
+  source!: string
 
   @Column({ name: 'measured_at', type: 'varchar' })
-  measuredAt!: string;
+  measuredAt!: string
 
   @Column({ name: 'sweep_length', type: 'varchar' })
-  sweepLength!: string;
+  sweepLength!: string
 
   @Column({ name: 'response_window', type: 'varchar' })
-  responseWindow!: string;
+  responseWindow!: string
 
   @Column({ name: 'measurements', type: 'jsonb' })
-  measurements!: ImpulseGraph[];
+  measurements!: ImpulseGraph[]
 
   @Column({ name: 'peak_value_before_initialization', type: 'varchar' })
-  peakValueBeforeInitialization!: string;
+  peakValueBeforeInitialization!: string
 
   @Column({ name: 'peak_index', type: 'varchar' })
-  peakIndex!: string;
+  peakIndex!: string
 
   @Column({ name: 'response_length', type: 'varchar' })
-  responseLength!: string;
+  responseLength!: string
 
   @Column({ name: 'sample_interval', type: 'varchar' })
-  sampleInterval!: string;
+  sampleInterval!: string
 
   @Column({ name: 'start_time', type: 'varchar' })
-  startTime!: string;
+  startTime!: string
 
   @Column({ name: 'cabinet_uid', type: 'uuid' })
-  cabinetUid!: string;
+  cabinetUid!: string
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
-  createdAt!: Date;
+  createdAt!: Date
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
-  updatedAt!: Date;
+  updatedAt!: Date
 
   toDomain(): Impulse {
     return new Impulse({
@@ -69,25 +75,25 @@ export class ImpulseTypeormEntity {
       cabinetUid: this.cabinetUid,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
-    });
+    })
   }
 
   static fromDomain(impulse: Impulse): ImpulseTypeormEntity {
-    const entity = new ImpulseTypeormEntity();
-    entity.uid = impulse.uid;
-    entity.measuredBy = impulse.measuredBy;
-    entity.note = impulse.note;
-    entity.source = impulse.source;
-    entity.measuredAt = impulse.measuredAt;
-    entity.sweepLength = impulse.sweepLength;
-    entity.responseWindow = impulse.responseWindow;
-    entity.measurements = impulse.measurements;
-    entity.peakValueBeforeInitialization = impulse.peakValueBeforeInitialization;
-    entity.peakIndex = impulse.peakIndex;
-    entity.responseLength = impulse.responseLength;
-    entity.sampleInterval = impulse.sampleInterval;
-    entity.startTime = impulse.startTime;
-    entity.cabinetUid = impulse.cabinetUid;
-    return entity;
+    const entity = new ImpulseTypeormEntity()
+    entity.uid = impulse.uid
+    entity.measuredBy = impulse.measuredBy
+    entity.note = impulse.note
+    entity.source = impulse.source
+    entity.measuredAt = impulse.measuredAt
+    entity.sweepLength = impulse.sweepLength
+    entity.responseWindow = impulse.responseWindow
+    entity.measurements = impulse.measurements
+    entity.peakValueBeforeInitialization = impulse.peakValueBeforeInitialization
+    entity.peakIndex = impulse.peakIndex
+    entity.responseLength = impulse.responseLength
+    entity.sampleInterval = impulse.sampleInterval
+    entity.startTime = impulse.startTime
+    entity.cabinetUid = impulse.cabinetUid
+    return entity
   }
 }

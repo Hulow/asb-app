@@ -34,7 +34,7 @@ export class PostgresDataSource extends DataSource {
         DriverTypeormEntity,
         FrequencyTypeormEntity,
         ImpedanceTypeormEntity,
-        ImpulseTypeormEntity
+        ImpulseTypeormEntity,
       ],
     })
   }

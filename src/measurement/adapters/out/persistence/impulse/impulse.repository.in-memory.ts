@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { injectable } from 'inversify';
-import { ImpulseRepositoryOutputPort } from '../../../../core/application/ports/out/impulse-repository.output-port';
-import { Impulse } from '../../../../core/domain/impulse/impulse';
+import { injectable } from 'inversify'
+import { ImpulseRepositoryOutputPort } from '../../../../core/application/ports/out/impulse-repository.output-port'
+import { Impulse } from '../../../../core/domain/impulse/impulse'
 
 @injectable()
 export class InMemoryImpulseRepository implements ImpulseRepositoryOutputPort {
-  public impulses: Impulse[] = [];
-  public storedImpulses: Impulse[] = [];
+  public impulses: Impulse[] = []
+  public storedImpulses: Impulse[] = []
 
   clean(): void {
     this.impulses = []
@@ -23,11 +23,11 @@ export class InMemoryImpulseRepository implements ImpulseRepositoryOutputPort {
   }
 
   save(impulse: Impulse) {
-    this.storedImpulses.push(impulse);
-    return Promise.resolve(this.impulses[0]);
+    this.storedImpulses.push(impulse)
+    return Promise.resolve(this.impulses[0])
   }
 
   async getByCabinetUid(cabinetUid: string) {
-    return Promise.resolve(this.impulses[0]);
+    return Promise.resolve(this.impulses[0])
   }
 }

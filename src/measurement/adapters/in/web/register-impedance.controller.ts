@@ -24,8 +24,7 @@ export class RegisterImpedanceController implements ExpressController {
     private readonly commandHandler: RegisterImpedanceInputPort,
   ) {}
   async handler(req: Request<unknown, unknown>, res: Response) {
-    const { ownerUid, cabinetUid, driverUid, measurements } =
-      req.body
+    const { ownerUid, cabinetUid, driverUid, measurements } = req.body
     try {
       const command = RegisterImpedanceCommand.from({
         ownerUid,
