@@ -60,6 +60,10 @@ import {
 import { RegisterImpedanceCommandHandler } from './measurement/core/application/commands/impedance/register-impedance.command-handler'
 import { IMPEDANCE_REPOSITORY_OUTPUT_PORT, ImpedanceRepositoryOutputPort } from './measurement/core/application/ports/out/impedance-repository.output-port'
 import { SqlImpedanceRepository } from './measurement/adapters/out/persistence/impedance/impedance.repository.sql'
+import { RegisterImpulseController } from './measurement/adapters/in/web/register-impulse.controller'
+import { REGISTER_IMPULSE_INPUT_PORT } from './measurement/core/application/ports/in/register-impulse.input-port'
+import { IMPULSE_REPOSITORY_OUTPUT_PORT, ImpulseRepositoryOutputPort } from './measurement/core/application/ports/out/impulse-repository.output-port'
+import { SqlImpulseRepository } from './measurement/adapters/out/persistence/impulse/impulse.repository.sql'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -77,6 +81,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
     container.get(RegisterImpedanceController),
+    container.get(RegisterImpulseController)
   ]
   return new ExpressWebServer(
     config.express,
@@ -106,6 +111,9 @@ container
   .to(RegisterFrequencyCommandHandler)
 container
   .bind<RegisterImpedanceInputPort>(REGISTER_IMPEDANCE_INPUT_PORT)
+  .to(RegisterImpedanceCommandHandler)
+container
+  .bind<RegisterImpedanceInputPort>(REGISTER_IMPULSE_INPUT_PORT)
   .to(RegisterImpedanceCommandHandler)
 
 /**
@@ -138,3 +146,6 @@ container
 container
   .bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT)
   .to(SqlImpedanceRepository)
+container
+  .bind<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT)
+  .to(SqlImpulseRepository)

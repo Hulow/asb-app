@@ -6,6 +6,7 @@ import { CabinetTypeormEntity } from '../../../measurement/adapters/out/persiste
 import { DriverTypeormEntity } from '../../../measurement/adapters/out/persistence/driver/driver.orm-entity'
 import { FrequencyTypeormEntity } from '../../../measurement/adapters/out/persistence/frequency/frequency.orm-entity'
 import { ImpedanceTypeormEntity } from '../../../measurement/adapters/out/persistence/impedance/impedance.orm-entity'
+import { ImpulseTypeormEntity } from '../../../measurement/adapters/out/persistence/impulse/impulse.orm-entity'
 
 export interface PostgresConfig {
   readonly host: string
@@ -32,7 +33,8 @@ export class PostgresDataSource extends DataSource {
         CabinetTypeormEntity,
         DriverTypeormEntity,
         FrequencyTypeormEntity,
-        ImpedanceTypeormEntity
+        ImpedanceTypeormEntity,
+        ImpulseTypeormEntity
       ],
     })
   }
