@@ -52,6 +52,12 @@ import {
   FrequencyRepositoryOutputPort,
 } from './measurement/core/application/ports/out/frequency-repository.output-port'
 import { SqlFrequencyRepository } from './measurement/adapters/out/persistence/frequency/frequency.repository.sql'
+import { RegisterImpedanceController } from './measurement/adapters/in/web/register-impedance.controller'
+import {
+  REGISTER_IMPEDANCE_INPUT_PORT,
+  RegisterImpedanceInputPort,
+} from './measurement/core/application/ports/in/register-impedance.input-port'
+import { RegisterImpedanceCommandHandler } from './measurement/core/application/commands/impedance/register-impedance.command-handler'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -68,6 +74,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterCabinetController),
     container.get(RegisterDriverController),
     container.get(RegisterFrequencyController),
+    container.get(RegisterImpedanceController),
   ]
   return new ExpressWebServer(
     config.express,
@@ -95,6 +102,9 @@ container
 container
   .bind<RegisterFrequencyInputPort>(REGISTER_FREQUENCY_INPUT_PORT)
   .to(RegisterFrequencyCommandHandler)
+container
+  .bind<RegisterImpedanceInputPort>(REGISTER_IMPEDANCE_INPUT_PORT)
+  .to(RegisterImpedanceCommandHandler)
 
 /**
  *  output/driven/secondary adapters
