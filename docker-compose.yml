@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - 'postgres:/var/lib/postgresql/asb-data'
+      - 'asb-data:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
   app:
@@ -26,4 +26,4 @@ services:
       - '8000:8000'
 
 volumes:
-  postgres:
+  asb-data:
