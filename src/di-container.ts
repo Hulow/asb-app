@@ -58,6 +58,8 @@ import {
   RegisterImpedanceInputPort,
 } from './measurement/core/application/ports/in/register-impedance.input-port'
 import { RegisterImpedanceCommandHandler } from './measurement/core/application/commands/impedance/register-impedance.command-handler'
+import { IMPEDANCE_REPOSITORY_OUTPUT_PORT, ImpedanceRepositoryOutputPort } from './measurement/core/application/ports/out/impedance-repository.output-port'
+import { SqlImpedanceRepository } from './measurement/adapters/out/persistence/impedance/impedance.repository.sql'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -133,3 +135,6 @@ container
 container
   .bind<FrequencyRepositoryOutputPort>(FREQUENCY_REPOSITORY_OUTPUT_PORT)
   .to(SqlFrequencyRepository)
+container
+  .bind<ImpedanceRepositoryOutputPort>(IMPEDANCE_REPOSITORY_OUTPUT_PORT)
+  .to(SqlImpedanceRepository)
