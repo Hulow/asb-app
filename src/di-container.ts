@@ -76,6 +76,17 @@ import {
   GetCabinetsInputPort,
 } from './measurement/core/application/ports/in/get-cabinets.input-port'
 import { GetCabinetQueryHandler } from './measurement/core/application/queries/cabinet/get-cabinets.query-handler'
+import { GetMeasurementController } from './measurement/adapters/in/web/get-measurement.controller'
+import {
+  GET_MEASUREMENT_INPUT_PORT,
+  GetMeasurementInputPort,
+} from './measurement/core/application/ports/in/get-measurement.input-port'
+import { GetMeasurementQueryHandler } from './measurement/core/application/queries/measurement/get-measurement.query-handler'
+import {
+  MEASUREMENT_REPOSITORY_OUTPUT_PORT,
+  MeasurementRepositoryOutputPort,
+} from './measurement/core/application/ports/out/measurement-repository.output-port'
+import { SqlMeasurementRepository } from './measurement/adapters/out/persistence/measurement/measurement.repository.sql'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -95,6 +106,7 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
     container.get(RegisterImpedanceController),
     container.get(RegisterImpulseController),
     container.get(GetCabinetsController),
+    container.get(GetMeasurementController),
   ]
   return new ExpressWebServer(
     config.express,
@@ -110,6 +122,9 @@ container.bind(ExpressWebServer).toDynamicValue(() => {
 container
   .bind<GetCabinetsInputPort>(GET_CABINETS_INPUT_PORT)
   .to(GetCabinetQueryHandler)
+container
+  .bind<GetMeasurementInputPort>(GET_MEASUREMENT_INPUT_PORT)
+  .to(GetMeasurementQueryHandler)
 
 /**
  *  application commands
@@ -166,3 +181,6 @@ container
 container
   .bind<ImpulseRepositoryOutputPort>(IMPULSE_REPOSITORY_OUTPUT_PORT)
   .to(SqlImpulseRepository)
+container
+  .bind<MeasurementRepositoryOutputPort>(MEASUREMENT_REPOSITORY_OUTPUT_PORT)
+  .to(SqlMeasurementRepository)
