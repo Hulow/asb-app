@@ -62,6 +62,3 @@ jobs:
             fi
             cd /var/www/backend
             git pull origin deploy
-            docker compose -f docker-compose.prod.yml down
-            docker compose -f docker-compose.prod.yml build
-            docker compose -f docker-compose.prod.yml up -d
