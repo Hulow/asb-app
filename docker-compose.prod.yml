@@ -45,7 +45,7 @@ services:
   #   volumes:
   #     - ./backend/certbot/conf:/etc/letsencrypt # same volume than nginx, so they can communicate with each other
   #     - ./backend/certbot/www:/var/www/certbot
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email victor@anechoic-station-berlin.com -d anechoic-station-berlin.com --agree-tos
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email victor@anechoic-station-berlin.com -d anechoic-station-berlin.com -d www.anechoic-station-berlin.com --agree-tos
 
 volumes:
   postgres:
