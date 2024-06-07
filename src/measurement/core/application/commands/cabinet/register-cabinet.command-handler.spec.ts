@@ -1,14 +1,14 @@
 import { RegisterCabinetCommand } from './register-cabinet.command'
 import { RegisterCabinetCommandHandler } from './register-cabinet.command-handler'
 import { UUID_V4_REGEX } from '../../../../../shared/test/utils'
-
-import Constructable = jest.Constructable
 import { Owner } from '../../../domain/owner/owner'
 import { Cabinet } from '../../../domain/cabinet/cabinet'
 import { InMemoryCabinetRepository } from '../../../../adapters/out/persistence/cabinet/cabinet.repository.in-memory'
 import { InMemoryOwnerRepository } from '../../../../adapters/out/persistence/owner/owner.repository.in-memory'
 import { OwnerDoesNotExist } from '../../../domain/owner/errors'
 import { CabinetAlreadyExists } from '../../../domain/cabinet/errors'
+
+import Constructable = jest.Constructable
 
 describe('Given a RegisterFrequencyCommand to handle', () => {
   const CABINET_UID = 'cabinet-uid'
