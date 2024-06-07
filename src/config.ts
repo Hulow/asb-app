@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 import path from 'path'
 import { ExpressConfig } from './shared/adapters/in/express-web-server'
 import { LogLevel, LoggerConfig } from './shared/ports/out/logger.output-port'
@@ -33,3 +31,6 @@ export const config: Config = {
     database: process.env.POSTGRES_DB!,
   },
 }
+
+console.log('backend')
+console.log(config)
