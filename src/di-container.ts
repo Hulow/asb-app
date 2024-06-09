@@ -64,7 +64,10 @@ import {
 } from './measurement/core/application/ports/out/impedance-repository.output-port'
 import { SqlImpedanceRepository } from './measurement/adapters/out/persistence/impedance/impedance.repository.sql'
 import { RegisterImpulseController } from './measurement/adapters/in/web/register-impulse.controller'
-import { REGISTER_IMPULSE_INPUT_PORT, RegisterImpulseInputPort } from './measurement/core/application/ports/in/register-impulse.input-port'
+import {
+  REGISTER_IMPULSE_INPUT_PORT,
+  RegisterImpulseInputPort,
+} from './measurement/core/application/ports/in/register-impulse.input-port'
 import {
   IMPULSE_REPOSITORY_OUTPUT_PORT,
   ImpulseRepositoryOutputPort,
