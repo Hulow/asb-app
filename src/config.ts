@@ -31,6 +31,3 @@ export const config: Config = {
     database: process.env.POSTGRES_DB!,
   },
 }
-
-console.log('backend')
-console.log(config)
