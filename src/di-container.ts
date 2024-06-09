@@ -64,7 +64,7 @@ import {
 } from './measurement/core/application/ports/out/impedance-repository.output-port'
 import { SqlImpedanceRepository } from './measurement/adapters/out/persistence/impedance/impedance.repository.sql'
 import { RegisterImpulseController } from './measurement/adapters/in/web/register-impulse.controller'
-import { REGISTER_IMPULSE_INPUT_PORT } from './measurement/core/application/ports/in/register-impulse.input-port'
+import { REGISTER_IMPULSE_INPUT_PORT, RegisterImpulseInputPort } from './measurement/core/application/ports/in/register-impulse.input-port'
 import {
   IMPULSE_REPOSITORY_OUTPUT_PORT,
   ImpulseRepositoryOutputPort,
@@ -87,6 +87,7 @@ import {
   MeasurementRepositoryOutputPort,
 } from './measurement/core/application/ports/out/measurement-repository.output-port'
 import { SqlMeasurementRepository } from './measurement/adapters/out/persistence/measurement/measurement.repository.sql'
+import { RegisterImpulseCommandHandler } from './measurement/core/application/commands/impulse/register-impulse.command-handler'
 
 export const container = new Container({
   autoBindInjectable: true,
@@ -145,8 +146,8 @@ container
   .bind<RegisterImpedanceInputPort>(REGISTER_IMPEDANCE_INPUT_PORT)
   .to(RegisterImpedanceCommandHandler)
 container
-  .bind<RegisterImpedanceInputPort>(REGISTER_IMPULSE_INPUT_PORT)
-  .to(RegisterImpedanceCommandHandler)
+  .bind<RegisterImpulseInputPort>(REGISTER_IMPULSE_INPUT_PORT)
+  .to(RegisterImpulseCommandHandler)
 
 /**
  *  output/driven/secondary adapters
