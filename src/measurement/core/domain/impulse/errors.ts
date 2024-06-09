@@ -15,7 +15,7 @@ export class ImpulseSettingNotFound extends DomainError {
 export class MissingImpulseGraphDataFound extends DomainError {
   constructor(responseLength: string, impulseGraphLength: number) {
     super(
-      `expecting ${responseLength} entries from Impulse graph Response, only found ${impulseGraphLength}`,
+      `expecting ${responseLength} entries from Impulse graph Response, found ${impulseGraphLength}`,
     )
   }
 }
