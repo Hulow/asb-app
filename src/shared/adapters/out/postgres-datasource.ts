@@ -48,17 +48,4 @@ export class PostgresDataSource extends DataSource {
     await this.destroy()
     this._logger.info('Postgres database connection closed')
   }
-
-  async clear() {
-    if (process.env.NODE_ENV !== 'test') {
-      return this._logger.info('Unable to truncate database tables')
-    }
-    for (const entity of this.entityMetadatas) {
-      const repository = this.getRepository(entity.name)
-      await repository.query(
-        `TRUNCATE ${entity.tableName} RESTART IDENTITY CASCADE;`,
-      )
-      this._logger.info(`Table ${entity.tableName} has been truncated`)
-    }
-  }
 }
