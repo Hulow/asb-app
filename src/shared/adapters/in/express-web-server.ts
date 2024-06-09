@@ -32,6 +32,8 @@ export class ExpressWebServer {
   ) {
     this.app = express()
 
+    this.app.use(express.json({ limit: '20mb' }))
+
     this.app.use(cors({ origin: this._config.corsOrigin }))
 
     this._setupAuthorization()
