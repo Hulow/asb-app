@@ -95,6 +95,8 @@ export class FrequencyTypeormEntity {
     entity.smoothing = frequency.smoothing
     entity.frequencies = frequency.frequencies
     entity.spls = frequency.spls
+    entity.highestSpl = frequency.highestSpl
+    entity.lowestSpl = frequency.lowestSpl
     entity.phases = frequency.phases
     entity.cabinetUid = frequency.cabinetUid
 
