@@ -32,7 +32,7 @@ export class GetMeasurementController implements ExpressController {
       res.json(resp)
     } catch (error) {
       if (error instanceof MeasurementNotFound)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }

@@ -36,11 +36,11 @@ export class RegisterFrequencyController implements ExpressController {
       res.json({ resp: 'OK' })
     } catch (error) {
       if (error instanceof FrequencyAlreadyExists)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof FrequencyParameterNotFound)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof CabinetDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }

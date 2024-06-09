@@ -24,7 +24,7 @@ export class GetCabinetsController implements ExpressController {
       res.json(response)
     } catch (error) {
       if (error instanceof CabinetsNotFound)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }

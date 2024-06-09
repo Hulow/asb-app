@@ -49,11 +49,11 @@ export class RegisterDriverController implements ExpressController {
       res.json(response)
     } catch (error) {
       if (error instanceof DriversAlreadyExists)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof CabinetDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof OwnerDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }

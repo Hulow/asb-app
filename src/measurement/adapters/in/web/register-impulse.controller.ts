@@ -33,17 +33,18 @@ export class RegisterImpulseController implements ExpressController {
         driverUid,
         measurements,
       })
+
       const response = await this.commandHandler.execute(command)
       res.json(response)
     } catch (error) {
       if (error instanceof ImpulseAlreadyExists)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof ImpulseSettingNotFound)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof CabinetDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof MissingImpulseGraphDataFound)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
     }
   }
 }

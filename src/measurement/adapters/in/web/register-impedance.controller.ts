@@ -36,11 +36,11 @@ export class RegisterImpedanceController implements ExpressController {
       res.json(response)
     } catch (error) {
       if (error instanceof ImpedanceAlreadyExists)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof CabinetDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof UnableToExtractImpedanceData)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }

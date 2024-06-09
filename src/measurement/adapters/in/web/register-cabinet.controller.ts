@@ -46,9 +46,9 @@ export class RegisterCabinetController implements ExpressController {
       res.json(response)
     } catch (error) {
       if (error instanceof OwnerDoesNotExist)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       if (error instanceof CabinetAlreadyExists)
-        throw new httpErrors.NotFound(error.message)
+        throw new httpErrors[500](error.message)
       throw error
     }
   }
