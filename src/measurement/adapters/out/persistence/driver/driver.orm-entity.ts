@@ -21,9 +21,6 @@ export class DriverTypeormEntity {
   @Column({ name: 'driver_type', type: 'varchar' })
   driverType!: string
 
-  @Column({ name: 'manufacturing_year', type: 'integer' })
-  manufacturingYear!: number
-
   @Column({ name: 'nominal_diameter', type: 'float' })
   nominalDiameter!: number
 
@@ -48,7 +45,6 @@ export class DriverTypeormEntity {
       brandName: this.brandName,
       productName: this.productName,
       driverType: this.driverType,
-      manufacturingYear: this.manufacturingYear,
       nominalDiameter: this.nominalDiameter,
       nominalImpedance: this.nominalImpedance,
       continuousPowerHandling: this.continuousPowerHandling,
@@ -64,7 +60,6 @@ export class DriverTypeormEntity {
     entity.brandName = driver.brandName
     entity.productName = driver.productName
     entity.driverType = driver.driverType
-    entity.manufacturingYear = driver.manufacturingYear
     entity.nominalDiameter = driver.nominalDiameter
     entity.nominalImpedance = driver.nominalImpedance
     entity.continuousPowerHandling = driver.continuousPowerHandling

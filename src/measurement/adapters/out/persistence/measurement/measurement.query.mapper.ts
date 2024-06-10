@@ -26,7 +26,6 @@ export enum DriverColumnNames {
   brandName = 'brand_name',
   productName = 'product_name',
   driverType = 'driver_type',
-  manufacturingYear = 'manufacturing_year',
   nominalDiameter = 'nominal_diameter',
   nominalImpedance = 'nominal_impedance',
   continuousPowerHandling = 'continuous_power_handling',

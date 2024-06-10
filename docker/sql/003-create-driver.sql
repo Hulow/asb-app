@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS driver (
   brand_name VARCHAR NOT NULL,
   product_name VARCHAR NOT NULL,
   driver_type VARCHAR NOT NULL,
-  manufacturing_year INTEGER NOT NULL,
   nominal_diameter FLOAT NOT NULL,
   nominal_impedance FLOAT NOT NULL,
   continuous_power_handling FLOAT NOT NULL,
