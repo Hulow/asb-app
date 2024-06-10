@@ -27,9 +27,6 @@ export class CabinetTypeormEntity {
   @Column({ name: 'dimension', type: 'varchar' })
   dimension!: string
 
-  @Column({ name: 'manufacturing_year', type: 'integer' })
-  manufacturingYear!: number
-
   @Column({ name: 'description', type: 'varchar' })
   description!: string
 
@@ -50,7 +47,6 @@ export class CabinetTypeormEntity {
       enclosureType: this.enclosureType,
       weight: this.weight,
       dimension: this.dimension,
-      manufacturingYear: this.manufacturingYear,
       description: this.description,
       ownerUid: this.ownerUid,
       createdAt: this.createdAt,
@@ -66,7 +62,6 @@ export class CabinetTypeormEntity {
     entity.enclosureType = cabinet.enclosureType
     entity.weight = cabinet.weight
     entity.dimension = cabinet.dimension
-    entity.manufacturingYear = cabinet.manufacturingYear
     entity.description = cabinet.description
     entity.ownerUid = cabinet.ownerUid
     return entity

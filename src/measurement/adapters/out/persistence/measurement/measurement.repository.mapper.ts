@@ -197,7 +197,6 @@ export class MeasurementRepositoryMapper {
       enclosureType: this.cabinet_enclosure_type,
       weight: this.cabinet_weight,
       dimension: this.cabinet_dimension,
-      manufacturingYear: this.cabinet_manufacturing_year,
       description: this.cabinet_description,
       ownerUid: this.cabinet_owner_uid,
       createdAt: new Date(this.cabinet_created_at),
