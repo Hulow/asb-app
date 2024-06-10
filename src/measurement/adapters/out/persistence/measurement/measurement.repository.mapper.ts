@@ -11,7 +11,6 @@ export interface MeasurementRepositoryMapperProps {
   cabinet_enclosure_type: string
   cabinet_weight: number
   cabinet_dimension: string
-  cabinet_manufacturing_year: number
   cabinet_description: string
   cabinet_owner_uid: string
   cabinet_created_at: Date
@@ -69,7 +68,6 @@ export class MeasurementRepositoryMapper {
   readonly cabinet_enclosure_type: string
   readonly cabinet_weight: number
   readonly cabinet_dimension: string
-  readonly cabinet_manufacturing_year: number
   readonly cabinet_description: string
   readonly cabinet_owner_uid: string
   readonly cabinet_created_at: Date
@@ -126,7 +124,6 @@ export class MeasurementRepositoryMapper {
     this.cabinet_enclosure_type = params.cabinet_enclosure_type
     this.cabinet_weight = params.cabinet_weight
     this.cabinet_dimension = params.cabinet_dimension
-    this.cabinet_manufacturing_year = params.cabinet_manufacturing_year
     this.cabinet_description = params.cabinet_description
     this.cabinet_owner_uid = params.cabinet_owner_uid
     this.cabinet_created_at = params.cabinet_created_at

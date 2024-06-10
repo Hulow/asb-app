@@ -42,7 +42,6 @@ export enum CabinetColumnNames {
   EnclosureType = 'enclosure_type',
   Weight = 'weight',
   Dimension = 'dimension',
-  ManufacturingYear = 'manufacturing_year',
   Description = 'description',
   OwnerUid = 'owner_uid',
   CreatedAt = 'created_at',
