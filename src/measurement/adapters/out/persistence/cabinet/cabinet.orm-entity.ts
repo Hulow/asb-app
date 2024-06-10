@@ -27,8 +27,8 @@ export class CabinetTypeormEntity {
   @Column({ name: 'dimension', type: 'varchar' })
   dimension!: string
 
-  @Column({ name: 'description', type: 'varchar' })
-  description!: string
+  @Column({ name: 'description', type: 'varchar', nullable: true })
+  description?: string
 
   @Column({ name: 'owner_uid', type: 'uuid' })
   ownerUid!: string

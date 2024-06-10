@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS cabinet (
   enclosure_type VARCHAR NOT NULL,
   weight FLOAT NOT NULL,
   dimension VARCHAR NOT NULL,
-  description VARCHAR NOT NULL,
+  description VARCHAR NULL,
   owner_uid UUID NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),

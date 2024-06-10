@@ -6,7 +6,7 @@ export interface CabinetProps {
   enclosureType: string
   weight: number
   dimension: string
-  description: string
+  description?: string
   ownerUid: string
 }
 
@@ -16,7 +16,7 @@ export class Cabinet extends DomainEntity {
   readonly enclosureType: string
   readonly weight: number
   readonly dimension: string
-  readonly description: string
+  readonly description?: string
   readonly ownerUid: string
 
   constructor(props: CabinetProps & EntityProps) {
