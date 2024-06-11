@@ -8,10 +8,7 @@ import {
   REGISTER_IMPEDANCE_INPUT_PORT,
 } from '../../../core/application/ports/in/register-impedance.input-port'
 import { RegisterImpedanceCommand } from '../../../core/application/commands/impedance/register-impedance.command'
-import {
-  ImpedanceAlreadyExists,
-  UnableToExtractImpedanceData,
-} from '../../../core/domain/impedance/errors'
+import { UnableToExtractImpedanceData } from '../../../core/domain/impedance/errors'
 import { CabinetDoesNotExist } from '../../../core/domain/cabinet/errors'
 
 @injectable()
@@ -35,8 +32,6 @@ export class RegisterImpedanceController implements ExpressController {
       const response = await this.commandHandler.execute(command)
       res.json(response)
     } catch (error) {
-      if (error instanceof ImpedanceAlreadyExists)
-        throw new httpErrors[500](error.message)
       if (error instanceof CabinetDoesNotExist)
         throw new httpErrors[500](error.message)
       if (error instanceof UnableToExtractImpedanceData)

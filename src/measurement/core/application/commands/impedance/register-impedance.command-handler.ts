@@ -13,7 +13,6 @@ import {
 } from '../../ports/out/cabinet-repository.output-port'
 import { Impedance } from '../../../domain/impedance/impedance'
 import { CabinetDoesNotExist } from '../../../domain/cabinet/errors'
-import { ImpedanceAlreadyExists } from '../../../domain/impedance/errors'
 
 @injectable()
 export class RegisterImpedanceCommandHandler
@@ -32,11 +31,6 @@ export class RegisterImpedanceCommandHandler
     )
 
     if (!existingCabinet) throw new CabinetDoesNotExist(command.cabinetUid)
-    const existingImpedance = await this.impedanceRepository.getByCabinetUid(
-      command.cabinetUid,
-    )
-
-    if (existingImpedance) throw new ImpedanceAlreadyExists(command.cabinetUid)
     const newImpedance = new RegisterImpedanceMapper().mapImpedance(command)
 
     return await this.impedanceRepository.save(new Impedance(newImpedance))
