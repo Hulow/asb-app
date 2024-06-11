@@ -8,19 +8,6 @@ export enum EntityTable {
   Driver = 'driver',
 }
 
-export enum OwnerColumnNames {
-  Uid = 'owner_uid',
-  FirstName = 'first_name',
-  LastName = 'last_name',
-  Ownername = 'ownername',
-  Email = 'email',
-  PhoneNumber = 'phone_number',
-  City = 'city',
-  Description = 'description',
-  CreatedAt = 'created_at',
-  UpdatedAt = 'updated_at',
-}
-
 export enum DriverColumnNames {
   uid = 'driver_uid',
   brandName = 'brand_name',
@@ -105,7 +92,6 @@ export enum ImpedanceColumnNames {
 }
 
 type ColumnesNames =
-  | OwnerColumnNames
   | DriverColumnNames
   | CabinetColumnNames
   | FrequencyColumnNames
