@@ -7,5 +7,5 @@ export interface Measurement {
   cabinet: Cabinet
   drivers: Driver[]
   frequency: Frequency
-  impedance: Impedance
+  impedances: Impedance[]
 }

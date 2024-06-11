@@ -1,4 +1,3 @@
-import { Measurement } from '../../../../core/domain/measurement/measurement'
 import { Cabinet } from '../../../../core/domain/cabinet/cabinet'
 import { Frequency } from '../../../../core/domain/frequency/frequency'
 import { Driver } from '../../../../core/domain/driver/driver'
@@ -15,6 +14,16 @@ export interface MeasurementRepositoryMapperProps {
   cabinet_owner_uid: string
   cabinet_created_at: Date
   cabinet_updated_at: Date
+  driver_driver_uid: string
+  driver_brand_name: string
+  driver_product_name: string
+  driver_driver_type: string
+  driver_nominal_diameter: number
+  driver_nominal_impedance: number
+  driver_continuous_power_handling: number
+  driver_cabinet_uid: string
+  driver_created_at: Date
+  driver_updated_at: Date
   frequency_frequency_uid: string
   frequency_measured_by: string
   frequency_source: string
@@ -81,6 +90,16 @@ export class MeasurementRepositoryMapper {
   readonly cabinet_owner_uid: string
   readonly cabinet_created_at: Date
   readonly cabinet_updated_at: Date
+  readonly driver_driver_uid: string
+  readonly driver_brand_name: string
+  readonly driver_product_name: string
+  readonly driver_driver_type: string
+  readonly driver_nominal_diameter: number
+  readonly driver_nominal_impedance: number
+  readonly driver_continuous_power_handling: number
+  readonly driver_cabinet_uid: string
+  readonly driver_created_at: Date
+  readonly driver_updated_at: Date
   readonly frequency_frequency_uid: string
   readonly frequency_measured_by: string
   readonly frequency_source: string
@@ -133,7 +152,6 @@ export class MeasurementRepositoryMapper {
   readonly impedance_highest_phase: number
   readonly impedance_created_at: Date
   readonly impedance_updated_at: Date
-  readonly string_agg: string
 
   constructor(params: MeasurementRepositoryMapperProps) {
     this.cabinet_cabinet_uid = params.cabinet_cabinet_uid
@@ -146,6 +164,16 @@ export class MeasurementRepositoryMapper {
     this.cabinet_owner_uid = params.cabinet_owner_uid
     this.cabinet_created_at = params.cabinet_created_at
     this.cabinet_updated_at = params.cabinet_updated_at
+    this.driver_driver_uid = params.driver_driver_uid
+    this.driver_brand_name= params.driver_brand_name
+    this.driver_product_name= params.driver_product_name
+    this.driver_driver_type= params.driver_driver_type
+    this.driver_nominal_diameter= params.driver_nominal_diameter
+    this.driver_nominal_impedance= params.driver_nominal_impedance
+    this.driver_continuous_power_handling= params.driver_continuous_power_handling
+    this.driver_cabinet_uid = params.driver_cabinet_uid
+    this.driver_created_at= params.driver_created_at
+    this.driver_updated_at= params.driver_updated_at
     this.frequency_frequency_uid = params.frequency_frequency_uid
     this.frequency_measured_by = params.frequency_measured_by
     this.frequency_source = params.frequency_source
@@ -201,19 +229,13 @@ export class MeasurementRepositoryMapper {
     this.impedance_highest_phase = params.impedance_highest_phase
     this.impedance_created_at = params.impedance_created_at
     this.impedance_updated_at = params.impedance_updated_at
-    this.string_agg = params.string_agg
   }
 
-  mapMeasurement(): Measurement {
-    return {
-      cabinet: this._mapCabinet(),
-      frequency: this._mapFrequency(),
-      impedance: this._mapImpedance(),
-      drivers: this._mapDrivers(),
-    }
+  static map(params: MeasurementRepositoryMapperProps): MeasurementRepositoryMapper {
+    return new MeasurementRepositoryMapper(params)
   }
 
-  private _mapCabinet(): Cabinet {
+  mapCabinet(): Cabinet {
     return {
       uid: this.cabinet_cabinet_uid,
       brandName: this.cabinet_brand_name,
@@ -228,7 +250,7 @@ export class MeasurementRepositoryMapper {
     }
   }
 
-  private _mapFrequency(): Frequency {
+  mapFrequency(): Frequency {
     return {
       uid: this.frequency_frequency_uid,
       measuredBy: this.frequency_measured_by,
@@ -252,7 +274,7 @@ export class MeasurementRepositoryMapper {
     }
   }
 
-  private _mapImpedance(): Impedance {
+  mapImpedance(): Impedance {
     return {
       uid: this.impedance_impedance_uid,
       source: this.impedance_source,
@@ -290,19 +312,18 @@ export class MeasurementRepositoryMapper {
     }
   }
 
-  private _mapDrivers(): Driver[] {
-    const driverlist: Driver[] = []
-    const drivers: string[] = this.string_agg.split('},')
-    for (const driver of drivers) {
-      const driverProps = driver.split(',')
-      const keyAndValues = driverProps.map(prop => prop.split(': '))
-      const d = new Map()
-      for (const keyAndValue of keyAndValues) {
-        if (keyAndValue.length === 2)
-          d.set(keyAndValue[0].trim(), keyAndValue[1])
-      }
-      driverlist.push(Object.fromEntries(d) as Driver)
+  mapDriver(): Driver {
+    return {
+      uid: this.driver_driver_uid,
+      brandName: this.driver_brand_name,
+      productName: this.driver_product_name,
+      driverType: this.driver_driver_type,
+      nominalDiameter: this.driver_nominal_diameter,
+      nominalImpedance: this.driver_nominal_impedance,
+      continuousPowerHandling: this.driver_continuous_power_handling,
+      cabinetUid: this.driver_cabinet_uid,
+      createdAt: this.driver_created_at,
+      updatedAt: this.driver_updated_at,
     }
-    return driverlist
   }
 }

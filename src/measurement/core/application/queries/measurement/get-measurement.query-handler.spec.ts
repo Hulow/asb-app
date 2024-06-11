@@ -111,7 +111,7 @@ describe('Given a GetMeasurementQuery to handle', () => {
       createdAt: new Date(),
       cabinetUid: CABINET_UID,
     },
-    impedance: {
+    impedances: [{
       uid: IMPEDANCE_UID,
       createdAt: CREATED_AT,
       updatedAt: UPDATED_AT,
@@ -145,7 +145,7 @@ describe('Given a GetMeasurementQuery to handle', () => {
       phases: [4, 4.975],
       lowestPhase: 4,
       highestPhase: 4.975,
-    },
+    }],
   }
 
   function addMeasurementToRepository(): Measurement {
