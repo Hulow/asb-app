@@ -141,6 +141,7 @@ export class RegisterImpedanceMapper {
     return {
       ...thieleSmallParameters,
       ...{ cabinetUid: command.cabinetUid },
+      ...{ driverUid: command.driverUid },
       ...{
         frequencies: impedanceCurve.frequencies,
         highestFrequency: impedanceCurve.highestFrequency,

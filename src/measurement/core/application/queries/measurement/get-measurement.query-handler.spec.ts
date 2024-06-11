@@ -135,6 +135,7 @@ describe('Given a GetMeasurementQuery to handle', () => {
       kI: KI,
       xI: XI,
       cabinetUid: CABINET_UID,
+      driverUid: DRIVER_UID,
       frequencies: [1, 1.029],
       highestFrequency: 1.029,
       lowestFrequency: 1,

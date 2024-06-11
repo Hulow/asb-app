@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS impedance (
   ki VARCHAR NOT NULL,
   xi VARCHAR NOT NULL,
   cabinet_uid UUID NOT NULL,
+  driver_uid UUID NOT NULL,
   frequencies JSONB NOT NULL,
   highest_frequency FLOAT NOT NULL,
   lowest_frequency FLOAT NOT NULL,
@@ -31,5 +32,6 @@ CREATE TABLE IF NOT EXISTS impedance (
   lowest_phase FLOAT NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-  FOREIGN KEY (cabinet_uid) REFERENCES cabinet(cabinet_uid) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (cabinet_uid) REFERENCES cabinet(cabinet_uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (driver_uid) REFERENCES driver(driver_uid) ON DELETE CASCADE ON UPDATE CASCADE
 );

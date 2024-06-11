@@ -72,6 +72,9 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'cabinet_uid', type: 'uuid' })
   cabinetUid!: string
 
+  @Column({ name: 'driver_uid', type: 'uuid' })
+  driverUid!: string
+
   @Column({ name: 'frequencies', type: 'jsonb' })
   frequencies!: number[]
 
@@ -128,6 +131,7 @@ export class ImpedanceTypeormEntity {
       kI: this.kI,
       xI: this.xI,
       cabinetUid: this.cabinetUid,
+      driverUid: this.driverUid,
       frequencies: this.frequencies,
       highestFrequency: this.highestFrequency,
       lowestFrequency: this.lowestFrequency,
@@ -165,6 +169,7 @@ export class ImpedanceTypeormEntity {
     entity.kI = impedance.kI
     entity.xI = impedance.xI
     entity.cabinetUid = impedance.cabinetUid
+    entity.driverUid = impedance.driverUid
     entity.frequencies = impedance.frequencies
     entity.highestFrequency = impedance.highestFrequency
     entity.lowestFrequency = impedance.lowestFrequency

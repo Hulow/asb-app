@@ -21,6 +21,7 @@ export interface ImpedanceProps {
   kI: string
   xI: string
   cabinetUid: string
+  driverUid: string
   frequencies: number[]
   lowestFrequency: number
   highestFrequency: number
@@ -73,6 +74,7 @@ export class Impedance extends DomainEntity {
   readonly kI: string
   readonly xI: string
   readonly cabinetUid: string
+  readonly driverUid: string
   readonly frequencies: number[]
   readonly lowestFrequency: number
   readonly highestFrequency: number
@@ -105,6 +107,7 @@ export class Impedance extends DomainEntity {
     this.kI = props.kI
     this.xI = props.xI
     this.cabinetUid = props.cabinetUid
+    this.driverUid = props.driverUid
     this.frequencies = props.frequencies
     this.lowestFrequency = props.lowestFrequency
     this.highestFrequency = props.highestFrequency
@@ -116,3 +119,4 @@ export class Impedance extends DomainEntity {
     this.lowestPhase = props.lowestPhase
   }
 }
+

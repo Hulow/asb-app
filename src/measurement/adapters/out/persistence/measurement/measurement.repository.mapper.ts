@@ -55,6 +55,7 @@ export interface MeasurementRepositoryMapperProps {
   impedance_ki: string
   impedance_xi: string
   impedance_cabinet_uid: string
+  impedance_driver_uid: string
   impedance_frequencies: number[]
   impedance_highest_frequency: number
   impedance_lowest_frequency: number
@@ -120,6 +121,7 @@ export class MeasurementRepositoryMapper {
   readonly impedance_ki: string
   readonly impedance_xi: string
   readonly impedance_cabinet_uid: string
+  readonly impedance_driver_uid: string
   readonly impedance_frequencies: number[]
   readonly impedance_highest_frequency: number
   readonly impedance_lowest_frequency: number
@@ -187,6 +189,7 @@ export class MeasurementRepositoryMapper {
     this.impedance_ki = params.impedance_ki
     this.impedance_xi = params.impedance_xi
     this.impedance_cabinet_uid = params.impedance_cabinet_uid
+    this.impedance_driver_uid = params.impedance_driver_uid
     this.impedance_frequencies = params.impedance_frequencies
     this.impedance_highest_frequency = params.impedance_highest_frequency
     this.impedance_lowest_frequency = params.impedance_lowest_frequency
@@ -281,6 +284,7 @@ export class MeasurementRepositoryMapper {
       lowestPhase: this.impedance_lowest_phase,
       highestPhase: this.impedance_highest_phase,
       cabinetUid: this.impedance_cabinet_uid,
+      driverUid: this.impedance_driver_uid,
       createdAt: this.impedance_created_at,
       updatedAt: this.impedance_updated_at,
     }
