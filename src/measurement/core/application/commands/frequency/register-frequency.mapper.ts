@@ -91,11 +91,9 @@ export class RegisterFrequencyMapper {
     }
 
     const lowestFrequency = frequencies[0]
-    const highestFrequency = frequencies[frequencies.length -1]
+    const highestFrequency = frequencies[frequencies.length - 1]
 
-
-
-    return { frequencies, highestFrequency, lowestFrequency,  spls, phases }
+    return { frequencies, highestFrequency, lowestFrequency, spls, phases }
   }
 
   private getExtremSpls(spls: number[]): extremSpls {

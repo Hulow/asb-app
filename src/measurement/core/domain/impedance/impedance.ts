@@ -36,7 +36,12 @@ export interface ImpedanceMeasurement {
 
 export type ThieleSmallParameters = Omit<
   ImpedanceProps,
-  'frequencies' | 'cabinetUid' | 'impedances' | 'phases' | 'highestFrequency' | 'lowestFrequency'
+  | 'frequencies'
+  | 'cabinetUid'
+  | 'impedances'
+  | 'phases'
+  | 'highestFrequency'
+  | 'lowestFrequency'
 >
 
 export class Impedance extends DomainEntity {

@@ -146,7 +146,7 @@ export class MeasurementRepositoryMapper {
     this.frequency_note = params.frequency_note
     this.frequency_smoothing = params.frequency_smoothing
     this.frequency_frequencies = params.frequency_frequencies
-    this.frequency_highest_frequency =  params.frequency_highest_frequency
+    this.frequency_highest_frequency = params.frequency_highest_frequency
     this.frequency_lowest_frequency = params.frequency_lowest_frequency
     this.frequency_spls = params.frequency_spls
     this.frequency_highest_spl = params.frequency_highest_spl
@@ -180,7 +180,7 @@ export class MeasurementRepositoryMapper {
     this.impedance_xi = params.impedance_xi
     this.impedance_cabinet_uid = params.impedance_cabinet_uid
     this.impedance_frequencies = params.impedance_frequencies
-    this.impedance_highest_frequency =  params.impedance_highest_frequency
+    this.impedance_highest_frequency = params.impedance_highest_frequency
     this.impedance_lowest_frequency = params.impedance_lowest_frequency
     this.impedance_impedances = params.impedance_impedances
     this.impedance_phases = params.impedance_phases

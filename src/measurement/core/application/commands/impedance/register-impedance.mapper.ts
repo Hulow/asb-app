@@ -77,7 +77,13 @@ export class RegisterImpedanceMapper {
     }
     const lowestFrequency = frequencies[0]
     const highestFrequency = frequencies[frequencies.length - 1]
-    return { frequencies, lowestFrequency, highestFrequency, impedances, phases }
+    return {
+      frequencies,
+      lowestFrequency,
+      highestFrequency,
+      impedances,
+      phases,
+    }
   }
 
   private mapFrequencyPhaseAndImpedance(
@@ -113,7 +119,7 @@ export class RegisterImpedanceMapper {
   private mapImpedanceObject(
     command: RegisterImpedanceCommand,
     thieleSmallParameters: ThieleSmallParameters,
-    impedanceCurve: ImpedanceCurve
+    impedanceCurve: ImpedanceCurve,
   ): ImpedanceProps {
     return {
       ...thieleSmallParameters,
