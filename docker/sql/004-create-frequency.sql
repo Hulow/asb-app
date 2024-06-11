@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS frequency (
   note VARCHAR NOT NULL,
   smoothing VARCHAR NOT NULL,
   frequencies JSONB NOT NULL,
+  highest_frequency FLOAT NOT NULL,
+  lowest_frequency FLOAT NOT NULL,
   spls JSONB NOT NULL,
   highest_spl FLOAT NOT NULL,
   lowest_spl FLOAT NOT NULL,

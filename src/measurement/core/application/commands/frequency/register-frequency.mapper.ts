@@ -5,6 +5,8 @@ import { FrequencyParameterNotFound } from '../../../domain/frequency/errors'
 
 interface FrequencyResponse {
   frequencies: number[]
+  highestFrequency: number
+  lowestFrequency: number
   spls: number[]
   phases: number[]
 }
@@ -88,7 +90,12 @@ export class RegisterFrequencyMapper {
       }
     }
 
-    return { frequencies, spls, phases }
+    const lowestFrequency = frequencies[0]
+    const highestFrequency = frequencies[frequencies.length -1]
+
+
+
+    return { frequencies, highestFrequency, lowestFrequency,  spls, phases }
   }
 
   private getExtremSpls(spls: number[]): extremSpls {
@@ -121,6 +128,8 @@ export class RegisterFrequencyMapper {
       note: mappedParameters.note,
       smoothing: mappedParameters.smoothing,
       frequencies: frequencyResponse.frequencies,
+      highestFrequency: frequencyResponse.highestFrequency,
+      lowestFrequency: frequencyResponse.lowestFrequency,
       spls: frequencyResponse.spls,
       highestSpl: extremSpls.highestSpl,
       lowestSpl: extremSpls.lowestSpl,

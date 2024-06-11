@@ -29,8 +29,8 @@ describe('Given a RegisterFrequencyCommandHandler to handle', () => {
   const TARGET_LEVEL = '75.0 dB'
   const NOTE = 'second measurement Mic is at 1m and almost align with tweeter'
   const SMOOTHING = '1/3 octave'
-  const FREQUENCIES = [15.140533]
-  const SPLS = [44.493]
+  const FREQUENCIES = [10, 15.140533]
+  const SPLS = [40, 44.493]
   const MEASUREMENTS = fs.readFileSync(
     path.join(__dirname, './inputs/frequency_response.txt'),
     'utf8',
@@ -116,7 +116,9 @@ describe('Given a RegisterFrequencyCommandHandler to handle', () => {
       targetLevel: TARGET_LEVEL,
       note: NOTE,
       smoothing: SMOOTHING,
-      frequencies: [15.140533],
+      frequencies: [10, 15.140533],
+      highestFrequency: 15.140533,
+      lowestFrequency: 10,
       spls: [44.493],
       highestSpl: 44.493,
       lowestSpl: 44.493,
@@ -194,13 +196,15 @@ describe('Given a RegisterFrequencyCommandHandler to handle', () => {
         cabinetUid: CABINET_UID,
         createdAt: expect.any(Date) as Date,
         frequencies: FREQUENCIES,
+        highestFrequency: 15.140533,
+        lowestFrequency: 10,
         frequencyWeightings: FREQUENCY_WEIGHTINGS,
         highestSpl: 44.493,
-        lowestSpl: 44.493,
+        lowestSpl: 40,
         measuredAt: MEASURED_AT,
         measuredBy: MEASURED_BY,
         note: NOTE,
-        phases: [86.8478],
+        phases: [60, 86.8478],
         smoothing: SMOOTHING,
         source: SOURCE,
         spls: SPLS,

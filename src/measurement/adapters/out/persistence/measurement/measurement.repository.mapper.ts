@@ -25,6 +25,8 @@ export interface MeasurementRepositoryMapperProps {
   frequency_note: string
   frequency_smoothing: string
   frequency_frequencies: number[]
+  frequency_highest_frequency: number
+  frequency_lowest_frequency: number
   frequency_spls: number[]
   frequency_highest_spl: number
   frequency_lowest_spl: number
@@ -82,6 +84,8 @@ export class MeasurementRepositoryMapper {
   readonly frequency_note: string
   readonly frequency_smoothing: string
   readonly frequency_frequencies: number[]
+  readonly frequency_highest_frequency: number
+  readonly frequency_lowest_frequency: number
   readonly frequency_spls: number[]
   readonly frequency_highest_spl: number
   readonly frequency_lowest_spl: number
@@ -138,6 +142,8 @@ export class MeasurementRepositoryMapper {
     this.frequency_note = params.frequency_note
     this.frequency_smoothing = params.frequency_smoothing
     this.frequency_frequencies = params.frequency_frequencies
+    this.frequency_highest_frequency =  params.frequency_highest_frequency
+    this.frequency_lowest_frequency = params.frequency_lowest_frequency
     this.frequency_spls = params.frequency_spls
     this.frequency_highest_spl = params.frequency_highest_spl
     this.frequency_lowest_spl = params.frequency_lowest_spl
@@ -213,6 +219,8 @@ export class MeasurementRepositoryMapper {
       note: this.frequency_note,
       smoothing: this.frequency_smoothing,
       frequencies: this.frequency_frequencies,
+      highestFrequency: this.frequency_highest_frequency,
+      lowestFrequency: this.frequency_lowest_frequency,
       spls: this.frequency_spls,
       highestSpl: this.frequency_highest_spl,
       lowestSpl: this.frequency_lowest_spl,

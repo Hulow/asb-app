@@ -58,6 +58,8 @@ export enum FrequencyColumnNames {
   Note = 'note',
   Smoothing = 'smoothing',
   Frequencies = 'frequencies',
+  HighestFrequency = 'highest_frequency',
+  LowestFrequency = 'lowest_frequency',
   Spls = 'spls',
   HighestSpl = 'highest_spl',
   LowestSpl = 'lowest_spl',

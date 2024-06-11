@@ -39,6 +39,12 @@ export class FrequencyTypeormEntity {
   @Column({ name: 'frequencies', type: 'jsonb' })
   frequencies!: number[]
 
+  @Column({ name: 'highest_frequency', type: 'float' })
+  highestFrequency!: number
+
+  @Column({ name: 'lowest_frequency', type: 'float' })
+  lowestFrequency!: number
+
   @Column({ name: 'spls', type: 'jsonb' })
   spls!: number[]
 
@@ -72,6 +78,8 @@ export class FrequencyTypeormEntity {
       note: this.note,
       smoothing: this.smoothing,
       frequencies: this.frequencies,
+      highestFrequency: this.highestFrequency,
+      lowestFrequency: this.lowestFrequency,
       spls: this.spls,
       highestSpl: this.highestSpl,
       lowestSpl: this.lowestSpl,
@@ -94,6 +102,8 @@ export class FrequencyTypeormEntity {
     entity.note = frequency.note
     entity.smoothing = frequency.smoothing
     entity.frequencies = frequency.frequencies
+    entity.highestFrequency = frequency.highestFrequency
+    entity.lowestFrequency = frequency.lowestFrequency
     entity.spls = frequency.spls
     entity.highestSpl = frequency.highestSpl
     entity.lowestSpl = frequency.lowestSpl

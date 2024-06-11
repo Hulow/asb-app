@@ -10,6 +10,8 @@ export interface FrequencyProps {
   note: string
   smoothing: string
   frequencies: number[]
+  highestFrequency: number
+  lowestFrequency: number
   spls: number[]
   highestSpl: number
   lowestSpl: number
@@ -27,6 +29,8 @@ export class Frequency extends DomainEntity {
   readonly note: string
   readonly smoothing: string
   readonly frequencies: number[]
+  readonly highestFrequency: number
+  readonly lowestFrequency: number
   readonly spls: number[]
   readonly highestSpl: number
   readonly lowestSpl: number
@@ -45,6 +49,8 @@ export class Frequency extends DomainEntity {
     this.note = props.note
     this.smoothing = props.smoothing
     this.frequencies = props.frequencies
+    this.highestFrequency = props.highestFrequency
+    this.lowestFrequency = props.lowestFrequency
     this.spls = props.spls
     this.highestSpl = props.highestSpl
     this.lowestSpl = props.lowestSpl
