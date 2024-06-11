@@ -172,6 +172,8 @@ export class ImpedanceTypeormEntity {
     entity.lowestImpedance = impedance.lowestImpedance
     entity.highestImpedance = impedance.highestImpedance
     entity.phases = impedance.phases
+    entity.lowestPhase = impedance.lowestPhase
+    entity.highestPhase = impedance.highestPhase
     return entity
   }
 }
