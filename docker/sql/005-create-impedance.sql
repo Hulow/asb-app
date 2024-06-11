@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS impedance (
   xi VARCHAR NOT NULL,
   cabinet_uid UUID NOT NULL,
   frequencies JSONB NOT NULL,
+  highest_frequency FLOAT NOT NULL,
+  lowest_frequency FLOAT NOT NULL,
   impedances JSONB NOT NULL,
   phases JSONB NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),

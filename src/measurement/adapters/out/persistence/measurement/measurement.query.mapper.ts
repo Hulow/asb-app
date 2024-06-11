@@ -92,6 +92,8 @@ export enum ImpedanceColumnNames {
   XI = 'xi',
   CabinetUid = 'cabinet_uid',
   Frequencies = 'frequencies',
+  HighestFrequency = 'highest_frequency',
+  LowestFrequency = 'lowest_frequency',
   Impedances = 'impedances',
   Phases = 'phases',
   CreatedAt = 'created_at',

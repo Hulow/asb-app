@@ -21,4 +21,5 @@
 *
 *
 Freq            Impedance       Phase
+1    	    5  	        4
 1.029    	5.108    	4.975  

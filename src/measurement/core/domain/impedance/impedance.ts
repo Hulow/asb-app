@@ -22,6 +22,8 @@ export interface ImpedanceProps {
   xI: string
   cabinetUid: string
   frequencies: number[]
+  lowestFrequency: number
+  highestFrequency: number
   impedances: number[]
   phases: number[]
 }
@@ -34,7 +36,7 @@ export interface ImpedanceMeasurement {
 
 export type ThieleSmallParameters = Omit<
   ImpedanceProps,
-  'frequencies' | 'cabinetUid' | 'impedances' | 'phases'
+  'frequencies' | 'cabinetUid' | 'impedances' | 'phases' | 'highestFrequency' | 'lowestFrequency'
 >
 
 export class Impedance extends DomainEntity {
@@ -59,6 +61,8 @@ export class Impedance extends DomainEntity {
   readonly xI: string
   readonly cabinetUid: string
   readonly frequencies: number[]
+  readonly lowestFrequency: number
+  readonly highestFrequency: number
   readonly impedances: number[]
   readonly phases: number[]
 
@@ -85,6 +89,8 @@ export class Impedance extends DomainEntity {
     this.xI = props.xI
     this.cabinetUid = props.cabinetUid
     this.frequencies = props.frequencies
+    this.lowestFrequency = props.lowestFrequency
+    this.highestFrequency = props.highestFrequency
     this.impedances = props.impedances
     this.phases = props.phases
   }

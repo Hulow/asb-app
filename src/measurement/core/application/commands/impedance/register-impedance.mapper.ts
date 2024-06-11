@@ -6,6 +6,14 @@ import {
 } from '../../../domain/impedance/impedance'
 import { RegisterImpedanceCommand } from './register-impedance.command'
 
+interface ImpedanceCurve {
+  frequencies: number[]
+  highestFrequency: number
+  lowestFrequency: number
+  impedances: number[]
+  phases: number[]
+}
+
 export class RegisterImpedanceMapper {
   mapImpedance(command: RegisterImpedanceCommand): ImpedanceProps {
     const [parameters, data] = command.measurements.split(/Freq.*/)
@@ -53,11 +61,7 @@ export class RegisterImpedanceMapper {
     return match?.length ? match[0].trim() : undefined
   }
 
-  private mapImpedanceCurve(measurements: string): {
-    frequencies: number[]
-    impedances: number[]
-    phases: number[]
-  } {
+  private mapImpedanceCurve(measurements: string): ImpedanceCurve {
     const splitMeasurements: string[] = measurements.split(/\n/)
     const frequencies: number[] = []
     const impedances: number[] = []
@@ -71,7 +75,9 @@ export class RegisterImpedanceMapper {
         phases.push(frequencyPhaseAndImpedance.phase)
       }
     }
-    return { frequencies, impedances, phases }
+    const lowestFrequency = frequencies[0]
+    const highestFrequency = frequencies[frequencies.length - 1]
+    return { frequencies, lowestFrequency, highestFrequency, impedances, phases }
   }
 
   private mapFrequencyPhaseAndImpedance(
@@ -107,17 +113,15 @@ export class RegisterImpedanceMapper {
   private mapImpedanceObject(
     command: RegisterImpedanceCommand,
     thieleSmallParameters: ThieleSmallParameters,
-    impedanceCurve: {
-      frequencies: number[]
-      impedances: number[]
-      phases: number[]
-    },
+    impedanceCurve: ImpedanceCurve
   ): ImpedanceProps {
     return {
       ...thieleSmallParameters,
       ...{ cabinetUid: command.cabinetUid },
       ...{
         frequencies: impedanceCurve.frequencies,
+        highestFrequency: impedanceCurve.highestFrequency,
+        lowestFrequency: impedanceCurve.lowestFrequency,
         impedances: impedanceCurve.impedances,
         phases: impedanceCurve.phases,
       },

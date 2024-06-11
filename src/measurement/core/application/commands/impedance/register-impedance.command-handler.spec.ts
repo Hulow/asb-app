@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import Constructable = jest.Constructable
 import { Cabinet } from '../../../domain/cabinet/cabinet'
 import { Impedance } from '../../../domain/impedance/impedance'
 import { RegisterImpedanceCommand } from './register-impedance.command'
@@ -13,6 +12,9 @@ import {
   ImpedanceAlreadyExists,
   ImpedanceParameterNotFound,
 } from '../../../domain/impedance/errors'
+
+import Constructable = jest.Constructable
+
 
 describe('Given a RegisterImpedanceCommand to handle', () => {
   const CABINET_UID = 'cabinet-uid'
@@ -115,9 +117,11 @@ describe('Given a RegisterImpedanceCommand to handle', () => {
       kI: KI,
       xI: XI,
       cabinetUid: CABINET_UID,
-      frequencies: [1.029],
-      impedances: [5.108],
-      phases: [4.975],
+      frequencies: [1, 1.029],
+      highestFrequency:  1.029,
+      lowestFrequency: 1,
+      impedances: [5, 5.108],
+      phases: [4, 4.975],
     }
     impedanceRepository.add(impedance)
     return impedance
