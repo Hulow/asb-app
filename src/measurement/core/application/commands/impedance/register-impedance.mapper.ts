@@ -14,6 +14,8 @@ interface ImpedanceCurve {
   highestImpedance: number
   lowestImpedance: number
   phases: number[]
+  highestPhase: number
+  lowestPhase: number
 }
 
 export class RegisterImpedanceMapper {
@@ -78,9 +80,12 @@ export class RegisterImpedanceMapper {
       }
     }
     const lowestFrequency = frequencies[0]
-    const highestFrequency = frequencies[frequencies.length - 1]
+    const highestFrequency = this.getLastInput(frequencies)
     const lowestImpedance = impedances[0]
-    const highestImpedance = impedances[impedances.length - 1]
+    const highestImpedance = this.getLastInput(impedances)
+    const highestPhase = phases[0]
+    const lowestPhase = this.getLastInput(phases)
+
     return {
       frequencies,
       lowestFrequency,
@@ -89,7 +94,13 @@ export class RegisterImpedanceMapper {
       lowestImpedance,
       highestImpedance,
       phases,
+      highestPhase,
+      lowestPhase,
     }
+  }
+
+  private getLastInput(inputs: number[]): number {
+    return inputs[inputs.length - 1]
   }
 
   private mapFrequencyPhaseAndImpedance(
@@ -138,6 +149,8 @@ export class RegisterImpedanceMapper {
         highestImpedance: impedanceCurve.highestImpedance,
         lowestImpedance: impedanceCurve.lowestImpedance,
         phases: impedanceCurve.phases,
+        lowestPhase: impedanceCurve.lowestPhase,
+        highestPhase: impedanceCurve.highestPhase,
       },
     }
   }

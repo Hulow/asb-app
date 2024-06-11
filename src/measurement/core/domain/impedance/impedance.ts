@@ -28,6 +28,8 @@ export interface ImpedanceProps {
   lowestImpedance: number
   highestImpedance: number
   phases: number[]
+  lowestPhase: number
+  highestPhase: number
 }
 
 export interface ImpedanceMeasurement {
@@ -46,6 +48,8 @@ export type ThieleSmallParameters = Omit<
   | 'lowestFrequency'
   | 'highestImpedance'
   | 'lowestImpedance'
+  | 'lowestPhase'
+  | 'highestPhase'
 >
 
 export class Impedance extends DomainEntity {
@@ -76,6 +80,8 @@ export class Impedance extends DomainEntity {
   readonly lowestImpedance: number
   readonly highestImpedance: number
   readonly phases: number[]
+  readonly highestPhase: number
+  readonly lowestPhase: number
 
   constructor(props: ImpedanceProps & EntityProps) {
     super(props)
@@ -106,5 +112,7 @@ export class Impedance extends DomainEntity {
     this.highestImpedance = props.highestImpedance
     this.lowestImpedance = props.lowestImpedance
     this.phases = props.phases
+    this.highestPhase = props.highestPhase
+    this.lowestPhase = props.lowestPhase
   }
 }

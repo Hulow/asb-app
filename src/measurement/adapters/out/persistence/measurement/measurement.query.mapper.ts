@@ -98,6 +98,8 @@ export enum ImpedanceColumnNames {
   HighestImpedance = 'highest_impedance',
   LowestImpedance = 'lowest_impedance',
   Phases = 'phases',
+  LowestPhase = 'lowest_phase',
+  HighestPhase = 'highest_phase',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
 }

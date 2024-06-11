@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS impedance (
   highest_impedance FLOAT NOT NULL,
   lowest_impedance FLOAT NOT NULL,
   phases JSONB NOT NULL,
+  highest_phase FLOAT NOT NULL,
+  lowest_phase FLOAT NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   FOREIGN KEY (cabinet_uid) REFERENCES cabinet(cabinet_uid) ON DELETE CASCADE ON UPDATE CASCADE

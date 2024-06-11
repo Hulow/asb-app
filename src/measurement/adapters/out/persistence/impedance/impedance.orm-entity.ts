@@ -93,6 +93,12 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'phases', type: 'jsonb' })
   phases!: number[]
 
+  @Column({ name: 'lowest_phase', type: 'float' })
+  lowestPhase!: number
+
+  @Column({ name: 'highest_phase', type: 'float' })
+  highestPhase!: number
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt!: Date
 
@@ -129,6 +135,8 @@ export class ImpedanceTypeormEntity {
       highestImpedance: this.highestImpedance,
       lowestImpedance: this.lowestImpedance,
       phases: this.phases,
+      lowestPhase: this.lowestPhase,
+      highestPhase: this.highestPhase,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     })

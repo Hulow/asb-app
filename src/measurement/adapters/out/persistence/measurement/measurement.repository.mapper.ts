@@ -62,6 +62,8 @@ export interface MeasurementRepositoryMapperProps {
   impedance_highest_impedance: number
   impedance_lowest_impedance: number
   impedance_phases: number[]
+  impedance_lowest_phase: number
+  impedance_highest_phase: number
   impedance_created_at: Date
   impedance_updated_at: Date
   string_agg: string
@@ -125,6 +127,8 @@ export class MeasurementRepositoryMapper {
   readonly impedance_highest_impedance: number
   readonly impedance_lowest_impedance: number
   readonly impedance_phases: number[]
+  readonly impedance_lowest_phase: number
+  readonly impedance_highest_phase: number
   readonly impedance_created_at: Date
   readonly impedance_updated_at: Date
   readonly string_agg: string
@@ -190,6 +194,8 @@ export class MeasurementRepositoryMapper {
     this.impedance_highest_impedance = params.impedance_highest_impedance
     this.impedance_lowest_impedance = params.impedance_lowest_impedance
     this.impedance_phases = params.impedance_phases
+    this.impedance_lowest_phase = params.impedance_lowest_phase
+    this.impedance_highest_phase = params.impedance_highest_phase
     this.impedance_created_at = params.impedance_created_at
     this.impedance_updated_at = params.impedance_updated_at
     this.string_agg = params.string_agg
@@ -272,6 +278,8 @@ export class MeasurementRepositoryMapper {
       lowestImpedance: this.impedance_lowest_impedance,
       highestImpedance: this.impedance_highest_impedance,
       phases: this.impedance_phases,
+      lowestPhase: this.impedance_lowest_phase,
+      highestPhase: this.impedance_highest_phase,
       cabinetUid: this.impedance_cabinet_uid,
       createdAt: this.impedance_created_at,
       updatedAt: this.impedance_updated_at,

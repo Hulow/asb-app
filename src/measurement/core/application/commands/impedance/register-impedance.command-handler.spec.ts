@@ -123,6 +123,8 @@ describe('Given a RegisterImpedanceCommand to handle', () => {
       lowestImpedance: 5,
       highestImpedance: 5.108,
       phases: [4, 4.975],
+      highestPhase: 4.975,
+      lowestPhase: 4,
     }
     impedanceRepository.add(impedance)
     return impedance
