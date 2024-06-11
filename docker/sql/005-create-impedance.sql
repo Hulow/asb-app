@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS impedance (
   highest_frequency FLOAT NOT NULL,
   lowest_frequency FLOAT NOT NULL,
   impedances JSONB NOT NULL,
+  highest_impedance FLOAT NOT NULL,
+  lowest_impedance FLOAT NOT NULL,
   phases JSONB NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),

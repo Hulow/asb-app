@@ -11,6 +11,8 @@ interface ImpedanceCurve {
   highestFrequency: number
   lowestFrequency: number
   impedances: number[]
+  highestImpedance: number
+  lowestImpedance: number
   phases: number[]
 }
 
@@ -77,11 +79,15 @@ export class RegisterImpedanceMapper {
     }
     const lowestFrequency = frequencies[0]
     const highestFrequency = frequencies[frequencies.length - 1]
+    const lowestImpedance = impedances[0]
+    const highestImpedance = impedances[impedances.length - 1]
     return {
       frequencies,
       lowestFrequency,
       highestFrequency,
       impedances,
+      lowestImpedance,
+      highestImpedance,
       phases,
     }
   }
@@ -129,6 +135,8 @@ export class RegisterImpedanceMapper {
         highestFrequency: impedanceCurve.highestFrequency,
         lowestFrequency: impedanceCurve.lowestFrequency,
         impedances: impedanceCurve.impedances,
+        highestImpedance: impedanceCurve.highestImpedance,
+        lowestImpedance: impedanceCurve.lowestImpedance,
         phases: impedanceCurve.phases,
       },
     }

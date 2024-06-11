@@ -59,6 +59,8 @@ export interface MeasurementRepositoryMapperProps {
   impedance_highest_frequency: number
   impedance_lowest_frequency: number
   impedance_impedances: number[]
+  impedance_highest_impedance: number
+  impedance_lowest_impedance: number
   impedance_phases: number[]
   impedance_created_at: Date
   impedance_updated_at: Date
@@ -120,6 +122,8 @@ export class MeasurementRepositoryMapper {
   readonly impedance_highest_frequency: number
   readonly impedance_lowest_frequency: number
   readonly impedance_impedances: number[]
+  readonly impedance_highest_impedance: number
+  readonly impedance_lowest_impedance: number
   readonly impedance_phases: number[]
   readonly impedance_created_at: Date
   readonly impedance_updated_at: Date
@@ -183,6 +187,8 @@ export class MeasurementRepositoryMapper {
     this.impedance_highest_frequency = params.impedance_highest_frequency
     this.impedance_lowest_frequency = params.impedance_lowest_frequency
     this.impedance_impedances = params.impedance_impedances
+    this.impedance_highest_impedance = params.impedance_highest_impedance
+    this.impedance_lowest_impedance = params.impedance_lowest_impedance
     this.impedance_phases = params.impedance_phases
     this.impedance_created_at = params.impedance_created_at
     this.impedance_updated_at = params.impedance_updated_at
@@ -263,6 +269,8 @@ export class MeasurementRepositoryMapper {
       highestFrequency: this.frequency_highest_frequency,
       lowestFrequency: this.frequency_lowest_frequency,
       impedances: this.impedance_impedances,
+      lowestImpedance: this.impedance_lowest_impedance,
+      highestImpedance: this.impedance_highest_impedance,
       phases: this.impedance_phases,
       cabinetUid: this.impedance_cabinet_uid,
       createdAt: this.impedance_created_at,

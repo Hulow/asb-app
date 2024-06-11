@@ -138,7 +138,9 @@ describe('Given a GetMeasurementQuery to handle', () => {
       frequencies: [1, 1.029],
       highestFrequency: 1.029,
       lowestFrequency: 1,
-      impedances: [5.108],
+      impedances: [5, 5.108],
+      lowestImpedance: 5,
+      highestImpedance: 5.108,
       phases: [4.975],
     },
   }

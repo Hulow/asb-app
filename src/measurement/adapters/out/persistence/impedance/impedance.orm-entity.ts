@@ -84,6 +84,12 @@ export class ImpedanceTypeormEntity {
   @Column({ name: 'impedances', type: 'jsonb' })
   impedances!: number[]
 
+  @Column({ name: 'highest_impedance', type: 'float' })
+  highestImpedance!: number
+
+  @Column({ name: 'lowest_impedance', type: 'float' })
+  lowestImpedance!: number
+
   @Column({ name: 'phases', type: 'jsonb' })
   phases!: number[]
 
@@ -120,6 +126,8 @@ export class ImpedanceTypeormEntity {
       highestFrequency: this.highestFrequency,
       lowestFrequency: this.lowestFrequency,
       impedances: this.impedances,
+      highestImpedance: this.highestImpedance,
+      lowestImpedance: this.lowestImpedance,
       phases: this.phases,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
@@ -153,6 +161,8 @@ export class ImpedanceTypeormEntity {
     entity.highestFrequency = impedance.highestFrequency
     entity.lowestFrequency = impedance.lowestFrequency
     entity.impedances = impedance.impedances
+    entity.lowestImpedance = impedance.lowestImpedance
+    entity.highestImpedance = impedance.highestImpedance
     entity.phases = impedance.phases
     return entity
   }

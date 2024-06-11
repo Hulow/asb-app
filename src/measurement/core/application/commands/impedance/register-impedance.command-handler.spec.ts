@@ -120,6 +120,8 @@ describe('Given a RegisterImpedanceCommand to handle', () => {
       highestFrequency: 1.029,
       lowestFrequency: 1,
       impedances: [5, 5.108],
+      lowestImpedance: 5,
+      highestImpedance: 5.108,
       phases: [4, 4.975],
     }
     impedanceRepository.add(impedance)
