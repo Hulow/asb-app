@@ -86,7 +86,6 @@ describe('Given a RegisterImpulseCommand to handle', () => {
       enclosureType: ENCLOSURE_TYPE,
       weight: WEIGHT,
       dimension: DIMENSION,
-      manufacturingYear: MANUFACTURING_YEAR,
       description: DESCRIPTION,
       ownerUid: OWNER_UID,
       createdAt: CREATED_AT,

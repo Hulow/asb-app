@@ -27,7 +27,6 @@ export class RegisterCabinetController implements ExpressController {
       enclosureType,
       weight,
       dimension,
-      manufacturingYear,
       description,
       ownerUid,
     } = req.body
@@ -38,7 +37,6 @@ export class RegisterCabinetController implements ExpressController {
         enclosureType,
         weight,
         dimension,
-        manufacturingYear,
         description,
         ownerUid,
       })

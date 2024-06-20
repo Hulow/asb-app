@@ -5,7 +5,6 @@ export class RegisterCabinetCommand {
     public readonly enclosureType: string,
     public readonly weight: number,
     public readonly dimension: string,
-    public readonly manufacturingYear: number,
     public readonly description: string,
     public readonly ownerUid: string,
   ) {}
@@ -16,7 +15,6 @@ export class RegisterCabinetCommand {
     enclosureType: string
     weight: number
     dimension: string
-    manufacturingYear: number
     description: string
     ownerUid: string
   }): RegisterCabinetCommand {
@@ -26,7 +24,6 @@ export class RegisterCabinetCommand {
       data.enclosureType,
       data.weight,
       data.dimension,
-      data.manufacturingYear,
       data.description,
       data.ownerUid,
     )

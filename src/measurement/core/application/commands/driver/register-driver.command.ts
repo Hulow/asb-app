@@ -3,7 +3,6 @@ export class RegisterDriverCommand {
     public readonly brandName: string,
     public readonly productName: string,
     public readonly driverType: string,
-    public readonly manufacturingYear: number,
     public readonly nominalDiameter: number,
     public readonly nominalImpedance: number,
     public readonly continuousPowerHandling: number,
@@ -15,7 +14,6 @@ export class RegisterDriverCommand {
     brandName: string
     productName: string
     driverType: string
-    manufacturingYear: number
     nominalDiameter: number
     nominalImpedance: number
     continuousPowerHandling: number
@@ -26,7 +24,6 @@ export class RegisterDriverCommand {
       data.brandName,
       data.productName,
       data.driverType,
-      data.manufacturingYear,
       data.nominalDiameter,
       data.nominalImpedance,
       data.continuousPowerHandling,

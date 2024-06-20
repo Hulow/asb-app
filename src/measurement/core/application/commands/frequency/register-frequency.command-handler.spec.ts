@@ -95,7 +95,6 @@ describe('Given a RegisterFrequencyCommandHandler to handle', () => {
       enclosureType: 'string',
       weight: 100,
       dimension: 'string',
-      manufacturingYear: 2023,
       description: 'string',
       ownerUid: OWNER_UID,
       updatedAt: new Date(),
