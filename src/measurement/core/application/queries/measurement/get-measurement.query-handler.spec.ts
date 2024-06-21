@@ -13,7 +13,6 @@ describe('Given a GetMeasurementQuery to handle', () => {
   const ENCLOSURE_TYPE = 'enclosure-type'
   const WEIGHT = 100
   const DIMENSION = 'dimension'
-  const MANUFACTURING_YEAR = 2024
   const DESCRIPTION = 'description'
   const CREATED_AT = new Date()
   const UPDATED_AT = new Date()
