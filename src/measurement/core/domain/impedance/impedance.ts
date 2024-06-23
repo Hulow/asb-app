@@ -119,4 +119,3 @@ export class Impedance extends DomainEntity {
     this.lowestPhase = props.lowestPhase
   }
 }
-

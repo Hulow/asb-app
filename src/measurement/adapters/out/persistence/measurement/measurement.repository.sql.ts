@@ -17,7 +17,7 @@ export class SqlMeasurementRepository
   implements MeasurementRepositoryOutputPort
 {
   constructor(
-    private readonly _datasource = container.get(PostgresDataSource)
+    private readonly _datasource = container.get(PostgresDataSource),
   ) {}
 
   async getMeasurementByCabinetUid(
@@ -105,22 +105,24 @@ export class SqlMeasurementRepository
     `)
 
     if (!records.length) return undefined
-    let cabinet: Cabinet  | undefined
+    let cabinet: Cabinet | undefined
     let frequency: Frequency | undefined
     const drivers: Driver[] = []
     const impedances: Impedance[] = []
 
     for (const record of records) {
-      const data =  MeasurementRepositoryMapper.map(record)
+      const data = MeasurementRepositoryMapper.map(record)
       if (!cabinet) cabinet = data.mapCabinet()
       if (!frequency) frequency = data.mapFrequency()
       drivers.push(data.mapDriver())
       impedances.push(data.mapImpedance())
     }
-  
-    return {
-      cabinet, drivers, frequency, impedances
-    } as Measurement
 
+    return {
+      cabinet,
+      drivers,
+      frequency,
+      impedances,
+    } as Measurement
   }
 }

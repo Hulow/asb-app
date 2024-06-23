@@ -165,15 +165,16 @@ export class MeasurementRepositoryMapper {
     this.cabinet_created_at = params.cabinet_created_at
     this.cabinet_updated_at = params.cabinet_updated_at
     this.driver_driver_uid = params.driver_driver_uid
-    this.driver_brand_name= params.driver_brand_name
-    this.driver_product_name= params.driver_product_name
-    this.driver_driver_type= params.driver_driver_type
-    this.driver_nominal_diameter= params.driver_nominal_diameter
-    this.driver_nominal_impedance= params.driver_nominal_impedance
-    this.driver_continuous_power_handling= params.driver_continuous_power_handling
+    this.driver_brand_name = params.driver_brand_name
+    this.driver_product_name = params.driver_product_name
+    this.driver_driver_type = params.driver_driver_type
+    this.driver_nominal_diameter = params.driver_nominal_diameter
+    this.driver_nominal_impedance = params.driver_nominal_impedance
+    this.driver_continuous_power_handling =
+      params.driver_continuous_power_handling
     this.driver_cabinet_uid = params.driver_cabinet_uid
-    this.driver_created_at= params.driver_created_at
-    this.driver_updated_at= params.driver_updated_at
+    this.driver_created_at = params.driver_created_at
+    this.driver_updated_at = params.driver_updated_at
     this.frequency_frequency_uid = params.frequency_frequency_uid
     this.frequency_measured_by = params.frequency_measured_by
     this.frequency_source = params.frequency_source
@@ -231,7 +232,9 @@ export class MeasurementRepositoryMapper {
     this.impedance_updated_at = params.impedance_updated_at
   }
 
-  static map(params: MeasurementRepositoryMapperProps): MeasurementRepositoryMapper {
+  static map(
+    params: MeasurementRepositoryMapperProps,
+  ): MeasurementRepositoryMapper {
     return new MeasurementRepositoryMapper(params)
   }
 
