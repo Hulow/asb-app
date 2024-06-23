@@ -103,7 +103,7 @@ export class RegisterFrequencyMapper {
       if (spl <= lowestSpl) {
         lowestSpl = spl
       }
-      if (spl >= lowestSpl) {
+      if (spl >= highestSpl) {
         highestSpl = spl
       }
     }
