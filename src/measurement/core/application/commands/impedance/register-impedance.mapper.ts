@@ -6,6 +6,11 @@ import {
 } from '../../../domain/impedance/impedance'
 import { RegisterImpedanceCommand } from './register-impedance.command'
 
+interface ExtremImpedance {
+  highestImpedance: number
+  lowestImpedance: number
+}
+
 interface ImpedanceCurve {
   frequencies: number[]
   highestFrequency: number
@@ -81,8 +86,8 @@ export class RegisterImpedanceMapper {
     }
     const lowestFrequency = frequencies[0]
     const highestFrequency = this.getLastInput(frequencies)
-    const lowestImpedance = impedances[0]
-    const highestImpedance = this.getLastInput(impedances)
+    const { highestImpedance, lowestImpedance } =
+      this.getExtremImpedances(impedances)
     const highestPhase = phases[0]
     const lowestPhase = this.getLastInput(phases)
 
@@ -101,6 +106,20 @@ export class RegisterImpedanceMapper {
 
   private getLastInput(inputs: number[]): number {
     return inputs[inputs.length - 1]
+  }
+
+  private getExtremImpedances(impedances: number[]): ExtremImpedance {
+    let lowestImpedance = impedances[0]
+    let highestImpedance = impedances[0]
+    for (const impedance of impedances) {
+      if (impedance <= lowestImpedance) {
+        lowestImpedance = impedance
+      }
+      if (impedance >= highestImpedance) {
+        highestImpedance = impedance
+      }
+    }
+    return { lowestImpedance, highestImpedance }
   }
 
   private mapFrequencyPhaseAndImpedance(
