@@ -92,7 +92,9 @@ export class SqlMeasurementRepository
     i.highest_phase AS impedance_highest_phase,
     i.lowest_phase AS impedance_lowest_phase,
     i.created_at AS impedance_created_at,
-    i.updated_at AS impedance_updated_at
+    i.updated_at AS impedance_updated_at,
+    i.driver_uid as impedance_driver_uid,
+    i.cabinet_uid as impedance_cabinet_uid
   FROM 
     cabinet c
     LEFT JOIN driver d ON c.cabinet_uid = d.cabinet_uid
@@ -115,7 +117,10 @@ export class SqlMeasurementRepository
       if (!cabinet) cabinet = data.mapCabinet()
       if (!frequency) frequency = data.mapFrequency()
       drivers.push(data.mapDriver())
-      impedances.push(data.mapImpedance())
+      const newImpedance = data.mapImpedance()
+      if (this.isAllFieldsNotNull(newImpedance)) {
+        impedances.push(data.mapImpedance())
+      }
     }
 
     return {
@@ -124,5 +129,9 @@ export class SqlMeasurementRepository
       frequency,
       impedances,
     } as Measurement
+  }
+
+  private isAllFieldsNotNull(measurement: Impedance) {
+    return Object.values(measurement).every(value => value !== null)
   }
 }

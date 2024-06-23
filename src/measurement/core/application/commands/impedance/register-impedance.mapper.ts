@@ -6,9 +6,9 @@ import {
 } from '../../../domain/impedance/impedance'
 import { RegisterImpedanceCommand } from './register-impedance.command'
 
-interface ExtremImpedance {
-  highestImpedance: number
-  lowestImpedance: number
+interface ExtremDataSet {
+  highestData: number
+  lowestData: number
 }
 
 interface ImpedanceCurve {
@@ -86,10 +86,10 @@ export class RegisterImpedanceMapper {
     }
     const lowestFrequency = frequencies[0]
     const highestFrequency = this.getLastInput(frequencies)
-    const { highestImpedance, lowestImpedance } =
-      this.getExtremImpedances(impedances)
-    const highestPhase = phases[0]
-    const lowestPhase = this.getLastInput(phases)
+    const { lowestData: lowestImpedance, highestData: highestImpedance } =
+      this.getExtremDataSet(impedances)
+    const { lowestData: lowestPhase, highestData: highestPhase } =
+      this.getExtremDataSet(phases)
 
     return {
       frequencies,
@@ -108,18 +108,18 @@ export class RegisterImpedanceMapper {
     return inputs[inputs.length - 1]
   }
 
-  private getExtremImpedances(impedances: number[]): ExtremImpedance {
-    let lowestImpedance = impedances[0]
-    let highestImpedance = impedances[0]
-    for (const impedance of impedances) {
-      if (impedance <= lowestImpedance) {
-        lowestImpedance = impedance
+  private getExtremDataSet(datasets: number[]): ExtremDataSet {
+    let lowestData = datasets[0]
+    let highestData = datasets[0]
+    for (const data of datasets) {
+      if (data <= lowestData) {
+        lowestData = data
       }
-      if (impedance >= highestImpedance) {
-        highestImpedance = impedance
+      if (data >= highestData) {
+        highestData = data
       }
     }
-    return { lowestImpedance, highestImpedance }
+    return { lowestData, highestData }
   }
 
   private mapFrequencyPhaseAndImpedance(
