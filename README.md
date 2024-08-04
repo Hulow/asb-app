@@ -1,7 +1,7 @@
 # Anechoic Station Berlin
 
 - Here is a side project related to Acoustic. I am currently building an anechoic chamber in a Soviet bunker somewhere in Berlin.
-- This control room is focused on making electroacoustic measurements on sound systems.
+- This control room is focused on making electroacoustic measurements on loudspeakers.
 - This application is going to process all data recorded from this room such as:
   - Impulse response
   - Frequency response
